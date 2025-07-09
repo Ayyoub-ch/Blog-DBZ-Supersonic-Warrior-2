@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="image/title.png">
+  <title>Accueil Dragon Ball Z Supersonic Warriors</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+    }
+
+    header img {
+      width: 200px;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 20px 0 30px 0;
+      font-size: 32px;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 15px 0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, auto); /* largeur auto = colle au contenu */
+        grid-template-rows: repeat(2, auto);
+        column-gap: 30px;   /* écart horizontal contrôlé */
+        row-gap: 30px;      /* écart vertical */
+        justify-content: center; /* centre tout le bloc dans la page */
+        padding: 40px 0;
+    }
+
+
+
+    .button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .button img {
+      width: 500px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .button span {
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+    }
+
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="image/title.png" alt="Logo Dragon Ball Z">
+    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="soluce.html">Solutions</a></li>
+      <li><a href="persos.html">Personnages</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <a href="story.html" class="button">
+      <img src="image/story_mode.png" alt="Mode Histoire" style="width: 800px;">
+      <span>Mode Histoire</span>
+    </a>
+    <a href="training.html" class="button">
+      <img src="image/training.png" alt="Mode Entraînement" style="width: 800px;">
+      <span>Entraînement</span>
+    </a>
+    <a href="persos.html" class="button">
+      <img src="image/data2.png" alt="Données des Personnages" style="width: 800px;">
+      <span>Données des Personnages</span>
+    </a>
+    <a href="maximum.html" class="button">
+      <img src="image/mode_maximum.png" alt="Mode Maximum" style="width: 800px;">
+      <span>Mode Maximum</span>
+    </a>
+  </div>
+
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+</body>
+</html>

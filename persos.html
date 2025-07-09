@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Choisissez votre personnage</title>
+  <link rel="icon" type="image/png" href="image/title.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color:  #fff;
+      text-align: center;
+    }
+
+    /* Header */
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
+
+    header img {
+      width: 200px;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 20px 0 30px 0;
+      font-size: 32px;
+    }
+
+    /* Menu */
+    nav {
+      background-color: #333;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-block; /* rend le UL compact */
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    /* Grille personnages */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: left; /* texte dans les blocs à gauche */
+    }
+
+    .character {
+      text-decoration: none;
+      color: #fff;
+      background: #333;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: block;
+    }
+
+    .character:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .character img {
+      width: 100%;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      display: block;
+    }
+
+    .character span {
+      display: block;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* BOUTON RETOUR */
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="image/title.png" alt="Logo Dragon Ball Z">
+    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+  </header>
+
+  <!-- Menu -->
+  <nav>
+    <ul>
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="soluce.html">Solutions</a></li>
+      <li><a href="persos.html">Personnages</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <h1>Choisissez votre personnage</h1>
+
+  <h2>Personnages jouables</h2>
+
+  <div class="grid">
+    <a href="persos/goku.html" class="character">
+      <img src="image/perso/goku.png" alt="Goku">
+      <span>Goku</span>
+    </a>
+
+    <a href="persos/goku_ss.html" class="character">
+      <img src="image/perso/goku_ss.png" alt="Goku">
+      <span>Goku Super Saiyan</span>
+    </a>
+
+    <a href="persos/gohan.html" class="character">
+      <img src="image/perso/gohan.png" alt="Gohan">
+      <span>Gohan</span>
+    </a>
+
+    <a href="persos/gohan_ss2.html" class="character">
+      <img src="image/perso/gohan_ss2.png" alt="Gohan">
+      <span>Gohan Super Saiyan 2</span>
+    </a>
+
+    <a href="persos/gohan_ado.html" class="character">
+      <img src="image/perso/gohan_ado.png" alt="Gohan Adulte">
+      <span>Gohan Adulte</span>
+    </a>
+
+    <a href="persos/krilin.html" class="character">
+      <img src="image/perso/krilin.png" alt="Krilin">
+      <span>Krilin</span>
+    </a>
+
+    <a href="persos/piccolo.html" class="character">
+      <img src="image/perso/piccolo.png" alt="Piccolo">
+      <span>Piccolo</span>
+    </a>
+
+    <a href="persos/vegeta.html" class="character">
+      <img src="image/perso/vegeta.png" alt="Vegeta">
+      <span>Vegeta</span>
+    </a>
+
+    <a href="persos/vegeta_ss.html" class="character">
+      <img src="image/perso/vegeta_ss.png" alt="Vegeta Super Saiyan">
+      <span>Vegeta Super Saiyan</span>
+    </a>
+
+    <a href="persos/vegeta_mauvais.html" class="character">
+      <img src="image/perso/vegeta_mauvais.png" alt="Vegeta (Mauvais)">
+      <span>Vegeta (Mauvais)</span>
+    </a>
+
+    <a href="persos/trunks.html" class="character">
+      <img src="image/perso/trunks.png" alt="Trunks">
+      <span>Trunks</span>
+    </a>
+
+    <a href="persos/trunks_ss.html" class="character">
+      <img src="image/perso/trunks_ss.png" alt="Trunks Super Saiyan">
+      <span>Trunks Super Saiyan</span>
+    </a>
+
+    <a href="persos/gotenks.html" class="character">
+      <img src="image/perso/gotenks.png" alt="Gotenks">
+      <span>Gotenks</span>
+    </a>
+
+    <a href="persos/gotenks_ss3.html" class="character">
+      <img src="image/perso/gotenks_ss3.png" alt="Gotenks Super Saiyan 3">
+      <span>Gotenks Super Saiyan 3</span>
+    </a>
+
+    <a href="persos/ginyu.html" class="character">
+      <img src="image/perso/ginyu.png" alt="Ginyu">
+      <span>Ginyu</span>
+    </a>
+
+    <a href="persos/freezer.html" class="character">
+      <img src="image/perso/freezer.png" alt="Freezer">
+      <span>Freezer</span>
+    </a>
+
+    <a href="persos/mecha_freezer.html" class="character">
+      <img src="image/perso/mecha_freezer.png" alt="Mecha Freezer">
+      <span>Mecha Freezer</span>
+    </a>
+
+    <a href="persos/gero.html" class="character">
+      <img src="image/perso/gero.png" alt="Dr Gero">
+      <span>Dr Gero</span>
+    </a>
+
+    <a href="persos/c18.html" class="character">
+      <img src="image/perso/c18.png" alt="C18">
+      <span>C18</span>
+    </a>
+
+    <a href="persos/cell_2e_forme.html" class="character">
+      <img src="image/perso/cell_2e_forme.png" alt="Cell">
+      <span>Cell 2e Forme</span>
+    </a>
+
+    <a href="persos/cell.html" class="character">
+      <img src="image/perso/cell.png" alt="Cell Parfait">
+      <span>Cell Parfait</span>
+    </a>
+
+    <a href="persos/boo.html" class="character">
+      <img src="image/perso/boo.png" alt="Majin Boo">
+      <span>Majin Boo</span>
+    </a>
+
+    <a href="persos/boo_mauvais.html" class="character">
+      <img src="image/perso/boo_mauvais.png" alt="Majin Boo (Mauvais)">
+      <span>Majin Boo (Mauvais)</span>
+    </a>
+
+    <a href="persos/cooler.html" class="character">
+      <img src="image/perso/cooler.png" alt="Cooler">
+      <span>Cooler</span>
+    </a>
+
+    <a href="persos/metal_cooler.html" class="character">
+      <img src="image/perso/metal_cooler.png" alt="Metal Cooler">
+      <span>Metal Cooler</span>
+    </a>
+
+    <a href="persos/broly.html" class="character">
+      <img src="image/perso/broly.png" alt="Broly">
+      <span>Broly</span>
+    </a>
+
+    <!-- Ajoute d'autres personnages ici -->  
+
+  </div>
+
+  <h2>Personnages supports</h2>
+
+  <div class="grid">
+    <a href="persos/mr_satan.html" class="character">
+      <img src="image/card/mr_satan_card.png" alt="Mr Satan">
+      <span>Mr Satan</span>
+    </a>
+
+    <a href="persos/yamcha_tien.html" class="character">
+      <img src="image/card/yamcha_tien_card.png" alt="Yamcha / Ten Shin Han">
+      <span>Yamcha / Ten Shin Han</span>
+    </a>
+
+    <a href="persos/babidi.html" class="character">
+      <img src="image/card/babidi_card.png" alt="Babidi">
+      <span>Babidi</span>
+    </a>
+
+    <a href="persos/dende.html" class="character">
+      <img src="image/card/dende_card.png" alt="Dende">
+      <span>Dende</span>
+    </a>
+
+    <a href="persos/zarbon_dodoria.html" class="character">
+      <img src="image/card/zarbon_dodoria_card.png" alt="Zarbon / Dodoria">
+      <span>Zarbon / Dodoria</span>
+    </a>
+
+    <a href="persos/c17_c16.html" class="character">
+      <img src="image/card/c17_c16_card.png" alt="C17 / C16">
+      <span>C17 / C16</span>
+    </a>
+
+    <a href="persos/dabra.html" class="character">
+      <img src="image/card/dabra_card.png" alt="Dabra">
+      <span>Dabra</span>
+    </a>
+
+    <a href="persos/cell_jr.html" class="character">
+      <img src="image/card/cell_jr_card.png" alt="Cell Jr">
+      <span>Cell Jr</span>
+    </a>
+
+    <a href="persos/bardock.html" class="character">
+      <img src="image/card/bardock_card.png" alt="Goku">
+      <span>Bardock</span>
+    </a>
+
+    <a href="persos/shenron.html" class="character">
+      <img src="image/card/shenron_card.png" alt="Shenron">
+      <span>Shenron</span>
+    </a>
+
+    <a href="persos/neko_majin_z.html" class="character">
+      <img src="image/card/neko_majin_z_card.png" alt="Trunks">
+      <span>Neko Majin Z</span>
+    </a>
+  </div>
+
+  <!-- BOUTON RETOUR -->
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+</body>
+</html>

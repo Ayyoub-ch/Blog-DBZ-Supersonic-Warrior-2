@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Choisissez votre histoire</title>
+  <link rel="icon" type="image/png" href="image/title.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color:  #fff;
+      text-align: center;
+    }
+
+    /* Header */
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
+
+    header img {
+      width: 200px;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 20px 0 30px 0;
+      font-size: 32px;
+    }
+
+    /* Menu */
+    nav {
+      background-color: #333;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-block; /* rend le UL compact */
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    /* Grille personnages */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* ⬅️ 3 colonnes fixes */
+      gap: 30px; /* écart entre blocs */
+      max-width: 2000px; /* largeur globale de la grille */
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .character {
+      text-decoration: none;
+      color: #fff;
+      background: #333;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: block;
+      overflow: hidden;
+    }
+
+    .character:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .character img {
+      width: 100%;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      display: block;
+    }
+
+    .character span {
+      display: block;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+
+
+
+
+    /* BOUTON RETOUR */
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="image/title.png" alt="Logo Dragon Ball Z">
+    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+  </header>
+
+  <!-- Menu -->
+  <nav>
+    <ul>
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="soluce.html">Solutions</a></li>
+      <li><a href="persos.html">Personnages</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <h1>Choisissez votre histoire</h1>
+
+
+  <div class="grid">
+    <a href="story_mode_perso/goku.html" class="character">
+      <img src="image/mode/mode_histoire/story_goku.png" alt="Goku">
+      <span>Mode Histoire :  Goku</span>
+    </a>
+
+
+    <a href="story_mode_perso/gohan.html" class="character">
+      <img src="image/mode/mode_histoire/story_gohan.png" alt="Gohan">
+      <span>Mode Histoire :  Gohan</span>
+    </a>
+
+
+    <a href="story_mode_perso/krilin.html" class="character">
+      <img src="image/mode/mode_histoire/story_krilin.png" alt="Krilin">
+      <span>Mode Histoire :  Krilin</span>
+    </a>
+
+
+    <a href="story_mode_perso/piccolo.html" class="character">
+      <img src="image/mode/mode_histoire/story_piccolo.png" alt="Piccolo">
+      <span>Mode Histoire :  Piccolo</span>
+    </a>
+
+
+    <a href="story_mode_perso/vegeta.html" class="character">
+      <img src="image/mode/mode_histoire/story_vegeta.png" alt="Vegeta">
+      <span>Mode Histoire :  Vegeta</span>
+    </a>
+
+
+    <a href="story_mode_perso/trunks.html" class="character">
+      <img src="image/mode/mode_histoire/story_trunks.png" alt="Trunks">
+      <span>Mode Histoire :  Trunks</span>
+    </a>
+
+
+    <a href="story_mode_perso/gotenks.html" class="character">
+      <img src="image/mode/mode_histoire/story_gotenks.png" alt="Gotenks">
+      <span>Mode Histoire :  Gotenks</span>
+    </a>
+
+
+    <a href="story_mode_perso/ginyu.html" class="character">
+      <img src="image/mode/mode_histoire/story_ginyu.png" alt="Ginyu">
+      <span>Mode Histoire :  Ginyu</span>
+    </a>
+
+
+    <a href="story_mode_perso/freezer.html" class="character">
+      <img src="image/mode/mode_histoire/story_freezer.png" alt="Freezer">
+      <span>Mode Histoire :  Freezer</span>
+    </a>
+
+
+    <a href="story_mode_perso/gero.html" class="character">
+      <img src="image/mode/mode_histoire/story_gero.png" alt="Dr Gero">
+      <span>Mode Histoire :  Dr Gero</span>
+    </a>
+
+    <a href="story_mode_perso/c18.html" class="character">
+      <img src="image/mode/mode_histoire/story_c18.png" alt="C18">
+      <span>Mode Histoire :  C18</span>
+    </a>
+
+
+    <a href="story_mode_perso/cell.html" class="character">
+      <img src="image/mode/mode_histoire/story_cell.png" alt="Cell Parfait">
+      <span>Mode Histoire :  Cell Parfait</span>
+    </a>
+
+
+    <a href="story_mode_perso/boo.html" class="character">
+      <img src="image/mode/mode_histoire/story_boo.png" alt="Majin Boo">
+      <span>Mode Histoire :  Majin Boo</span>
+    </a>
+
+
+    <a href="story_mode_perso/cooler.html" class="character">
+      <img src="image/mode/mode_histoire/story_cooler.png" alt="Cooler">
+      <span>Mode Histoire :  Cooler</span>
+    </a>
+
+
+    <a href="story_mode_perso/broly.html" class="character">
+      <img src="image/mode/mode_histoire/story_broly.png" alt="Broly">
+      <span>Mode Histoire :  Broly</span>
+    </a>
+
+    <!-- Ajoute d'autres personnages ici -->  
+
+  </div>
+
+  <!-- BOUTON RETOUR -->
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
