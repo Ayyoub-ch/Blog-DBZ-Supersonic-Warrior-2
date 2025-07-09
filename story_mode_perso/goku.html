@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fiche Goku — Supersonic Warriors 2</title>
+  <link rel="icon" type="image/png" href="../image/title.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #f2f2f2;
+    }
+
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
+
+    header img {
+      width: 200px;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 20px 0 30px 0;
+      font-size: 32px;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 800px;
+      padding: 20px 0;
+    }
+
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px;
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+
+    .branche-gauche {
+      left: 0;
+    }
+
+    .branche-droite {
+      left: 50%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+
+      .frise::before {
+        left: 20px;
+      }
+
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+    }
+
+    /* BOUTON RETOUR */
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="../accueil.html">Accueil</a></li>
+      <li><a href="soluce.html">Solutions</a></li>
+      <li><a href="../persos.html">Personnages</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="frise">
+
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>Niveau 1 — Saiyan Arrival</h4>
+        <p>Goku affronte Raditz pour protéger la Terre. Débloque l'attaque Kaioken.</p>
+        <img src="../image/goku/histoire1.png" alt="Niveau 1">
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>Niveau 2 — Face à Vegeta</h4>
+        <p>Combat contre Vegeta en pleine lune. Débloque Vegeta comme personnage jouable.</p>
+        <img src="../image/goku/histoire2.png" alt="Niveau 2">
+      </div>
+    </div>
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>What If — Négociation</h4>
+        <p>Et si Goku avait négocié avec Vegeta ? Alliance au lieu du combat.</p>
+        <img src="../image/goku/whatif1.png" alt="What If 1">
+      </div>
+    </div>
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>Niveau 3 — Freezer sur Namek</h4>
+        <p>Affrontez Freezer dans sa forme finale. Débloque la transformation Super Saiyan.</p>
+        <img src="../image/goku/histoire3.png" alt="Niveau 3">
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>What If — Alliance improbable</h4>
+        <p>Goku et Vegeta unissent leurs forces plus tôt pour vaincre Freezer ensemble.</p>
+        <img src="../image/goku/whatif2.png" alt="What If 2">
+      </div>
+    </div>
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>Niveau 4 — Cell Game</h4>
+        <p>Goku affronte Cell. Débloque Gohan SSJ2.</p>
+        <img src="../image/goku/histoire4.png" alt="Niveau 4">
+      </div>
+    </div>
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>What If — Trahison de Vegeta</h4>
+        <p>Vegeta trahit Goku et tente de s’emparer seul des Dragon Balls.</p>
+        <img src="../image/goku/whatif3.png" alt="What If 3">
+      </div>
+    </div>
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>Niveau 5 — Majin Buu</h4>
+        <p>Affrontez Buu pour sauver l’univers. Débloque l’attaque ultime Kaioken X20.</p>
+        <img src="../image/goku/histoire5.png" alt="Niveau 5">
+      </div>
+    </div>
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <h4>What If — Fin alternative</h4>
+        <p>Goku devient Super Saiyan plus tôt ou reste allié à Vegeta pour vaincre un ennemi plus puissant.</p>
+        <img src="../image/goku/whatif4.png" alt="What If 4">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOUTON RETOUR -->
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+</body>
+</html>
