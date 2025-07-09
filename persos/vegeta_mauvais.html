@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Fiche Vegeta (Mauvais) — Supersonic Warriors 2</title>
+  <link rel="icon" type="image/png" href="../image/title.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #f2f2f2;
+    }
+
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
+
+    header img {
+      width: 200px;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 20px 0 30px 0;
+      font-size: 32px;
+    }
+
+    .fiche {
+      max-width: 1200px;
+      margin: 40px auto 60px auto;
+      background: #222;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .fiche h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .fiche ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .fiche ul li {
+      margin-bottom: 8px;
+    }
+
+    .fiche table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .fiche th,
+    .fiche td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .fiche th {
+      background: #333;
+    }
+
+    .fiche img {
+      width: 100%;
+      height: auto;
+      display: block; /* enlève l'espace sous l'image */
+      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
+    }
+
+
+    /* Menu */
+    nav {
+      background-color: #333;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-block; /* rend le UL compact */
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    .cartes-combo {
+      display: flex;
+      gap: 8px; /* espace entre les images */
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cartes-combo img {
+      width: 120px; /* ajuste selon ton besoin */
+      height: auto;
+      align-items: center;
+    }
+
+    /* BOUTON RETOUR */
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z">
+    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+  </header>
+
+  <!-- Menu -->
+  <nav>
+    <ul>
+      <li><a href="../accueil.html">Accueil</a></li>
+      <li><a href="soluce.html">Solutions</a></li>
+      <li><a href="../persos.html">Personnages</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="fiche">
+    <img src="../image/vegeta_mauvais/vegeta_mauvais.png" alt="Vegeta (Mauvais)">
+    <h2>Vegeta (Mauvais) – DBZ: Supersonic Warriors 2</h2>
+
+    <ul>
+      <li><strong>Dragon Power :</strong> Entre 5 et 6 DP</li>
+    </ul>
+
+    <h3>Contrôles de base</h3>
+    <table>
+      <thead>
+        <tr><th>Bouton</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Y</td><td>Coup faible</td></tr>
+        <tr><td>X</td><td>Coup fort</td></tr>
+        <tr><td>A</td><td>Projectile</td></tr>
+        <tr><td>B</td><td>Garde</td></tr>
+        <tr><td>R</td><td>Charge de Ki</td></tr>
+        <tr><td>L</td><td>État spécial (Kaioken)</td></tr>
+        <tr><td>Y + B</td><td>Projection</td></tr>
+        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Projection</h3>
+    <table>
+      <thead>
+        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Projection météore</td><td>Balance l'ennemi vers le sol</td><td>Y + B</td><td><img src="../image/vegeta_mauvais/projection.gif" alt="Projection"></td></tr>
+      </tbody>
+    </table>
+    
+    <h3>Coups spéciaux</h3>
+    <table>
+      <thead>
+        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Explosion atomique</td><td><img src="../image/vegeta_mauvais/spe.png" alt="Explosion atomique"></td><td>Explosion d'énergie qui se découpe en plusieurs lames de ki</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/vegeta_mauvais/spe.gif" alt="Explosion atomique"><img src="../image/vegeta_mauvais/spe2.gif" alt="Explosion atomique"></td></tr>
+        <tr><td>Explosion météore </td><td><img src="../image/vegeta_mauvais/spe_up.png" alt="Explosion météore"></td><td>Attaque puissante à longue portée vers le bas</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/vegeta_mauvais/spe_up.gif" alt="Explosion météore"></td></tr>
+        <tr><td>Blaster final  </td><td><img src="../image/vegeta_mauvais/spe_down.png" alt="Explosion planétaire"></td><td>Attaque plus puissante selon le temps de chargement</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/vegeta_mauvais/spe_down.gif" alt="Blaster final"></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Attaque Ultime</h3>
+    <table>
+      <thead>
+        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Explosion finale</td><td><img src="../image/vegeta_mauvais/ulti.png" alt="Explosion finale"></td><td>Barrière d'énergie </td><td>X + A (n'importe où) + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/vegeta_mauvais/ulti.gif" alt="Explosion finale"></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Capacité</h3>
+    <table>
+      <thead>
+        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Bats Carot !</td><td><img src="../image/vegeta_mauvais/capacite.png" alt="Bats Carot !"></td><td>Technique augmentant l'énergie lorsque l'adversaire est Goku</td><td>L</td><td>Energie à 150</td><td><img src="../image/vegeta_mauvais/capacite.gif" alt="Carot !"></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- BOUTON RETOUR -->
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+</body>
+</html>
