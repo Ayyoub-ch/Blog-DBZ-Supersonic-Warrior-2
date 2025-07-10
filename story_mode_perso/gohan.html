@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Fiche Gohan Ado — Supersonic Warriors 2</title>
-  <link rel="icon" type="image/png" href="../image/title.png">
+  <meta charset="UTF-8" />
+  <title>Mode Histoire de Son Gohan — Supersonic Warriors 2</title>
+  <link rel="icon" type="image/png" href="../image/title.png" />
   <style>
     body {
       margin: 0;
@@ -11,117 +11,184 @@
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 120px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,27 +196,39 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
-    
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Son Gohan</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,95 +238,275 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/gohan_ado/gohan_ado.png" alt="Goku Super Saiyan">
-    <h2>Gohan Ado – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 4 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial (Kaioken)</td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Projection au loin</td><td>Balance l'ennemi au loin</td><td>Y + B</td><td><img src="../image/gohan_ado/projection.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Gekiretsumasendan</td><td><img src="../image/gohan_ado/spe.png" alt="Gekiretsumasendan"></td><td>Kikoha classique</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/gohan_ado/spe.gif" alt="Gekiretsumasendan"></td></tr>
-        <tr><td>Gekiretsuhadan</td><td><img src="../image/gohan_ado/spe_up.png" alt="Gekiretsuhadan"></td><td>Kikohas multiples</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/gohan_ado/spe_up.gif" alt="Gekiretsuhadan"></td></tr>
-        <tr><td>Kamehameha </td><td><img src="../image/gohan_ado/spe_down.png" alt="Kamehameha"></td><td>Rayon classique</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/gohan_ado/spe_down.gif" alt="Kamehameha"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Super Kamehameha</td><td><img src="../image/gohan_ado/ulti.png" alt="Super Kamehameha"></td><td>Rayon </td><td>X + A (en face de l'ennemi) + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/gohan_ado/ulti.gif" alt="Super Kamehameha"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Kamehameha ultime</td><td><img src="../image/gohan_ado/team_attack_goku_ss.png" alt="Kamehameha ultime"></td><td>Nécessite d'être avec Goku (Super Saiyan) et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/gohan_ado/team_attack_goku_ss.gif" alt="Kamehameha ultime"></td></tr>
-        <tr><td>Double-entaille</td><td><img src="../image/gohan_ado/team_attack_trunks.png" alt="Double-entaille"></td><td>Nécessite d'être avec Trunks et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/gohan_ado/team_attack_trunks.gif" alt="Double-entaille"></td></tr>
-    </tbody>
-    </table>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Trio</h4>
-      <tbody>
-        <tr><td>Triple Kamehameha</td><td class="cartes-combo"><img class="carte-combo" src="../image/card/gohan_teen_card.png" alt="Carte Gohan Ado"><img class="carte-combo" src="../image/card/goku_ss_card.png" alt="Carte Goku SSJ"><img class="carte-combo" src="../image/card/gotenks_ss3_card.png" alt="Carte Gotenks SSJ3"></td><td>Nécessite d'être avec Goku SSJ et Gotenks SSJ3, tout en ayant 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Super Saiyan</td><td><img src="../image/gohan_ado/ssj.png" alt="Super Saiyan"></td><td>Technique augmentant l'attaque au détriment du ki qui baisse jusqu'à 50, ce qui met fin au boost</td><td>L</td><td>Energie à 100</td><td><img src="../image/gohan_ado/ssj.gif" alt="Super Saiyan"></td></tr>
-        <tr><td>Libération pouvoir (Ultimate Gohan)</td><td><img src="../image/gohan_ado/capacite.png" alt="Libération pouvoir"></td><td>Technique augmentant encore plus l'attaque</td><td>L</td><td>Energie à 200</td><td><img src="../image/gohan_ado/capacite.gif" alt="Libération pouvoir"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/goku/goku_icon.png" alt="Goku Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/goku/competence.png" alt="Compétences de Goku" style="width: 450px;">
   </div>
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/goku/histoire1.png" alt="Niveau 1"></h4>
+          <p>Gohan et Goku s'entraîne dans la Salle de l'Esprit et du Temps. Débloque la compétence "Super Saiyan".</p>
+          <img src="../image/mode/mode_histoire/goku/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gohan/gohan.png" alt="Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gohan/goku_ss.png" alt="Goku Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/goku/histoire2.png" alt="Niveau 2"></h4>
+          <p>Combat contre Cell lors du Cell Games. Débloque Gohan Super Saiyan 2 comme personnage jouable après le combat.</p>
+          <img src="../image/mode/mode_histoire/goku/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gohan/gohan_ss2.png" alt="Gohan Super Saiyan 2"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gohan/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Et si Gohan partait dans le futur avec Trunks pour défaire les cyborgs ? Affrontement face à C18. Débloque Broly comme personnage jouable.</p>
+          <img src="../image/mode/mode_histoire/goku/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Cell .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_vegeta_ss_trunks_ss.png" alt="Goku Super Saiyan et Vegeta Super Saiyan et Trunks Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/broly.png" alt="Broly"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>Goku affronte Cooler et son Escadron</p>
+          <img src="../image/mode/mode_histoire/goku/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre le Docteur Gero en faisant un Ultimate KO .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/cooler.png" alt="Cooler"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Goku affronte Metal Cooler. Débloque Goku Super Saiyan</p>
+          <img src="../image/mode/mode_histoire/goku/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_piccolo_vegeta_ss.png" alt="Goku Super Saiyan et Piccolo et Vegeta Super Saiyan"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/metal_coolers.png" alt="Metals Cooler"></p>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/goku/histoire3.png" alt="Niveau 2"></h4>
+          <p>Affrontez le Docteur Gero avec Trunks après la défaite contre Freezer. Débloque la compétence Ultime "Kaioken X20"</p>
+          <img src="../image/mode/mode_histoire/goku/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_trunks.png" alt="Goku et Trunks"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/gero.png" alt="Gero"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/goku/histoire4.png" alt="Niveau 4"></h4>
+          <p>Goku affronte Cell. Débloque la capacité "Transmission Instantanée".</p>
+          <img src="../image/mode/mode_histoire/goku/4.png" alt="Niveau 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Gero</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_gohan.png" alt="Goku Super Saiyan et Gohan"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif4.png" alt="Niveau 2"></h4>
+          <p>Goku part dans l'Autre Monde et participe au Tournoi de l'Autre Monde, il y rencontre Bardock et les deux Saiyans affrontent Cell et Mecha Freezer, le tout sans savoir que les deux sont père et fils. Débloque Bardock comme personnage support</p>
+          <img src="../image/mode/mode_histoire/goku/whatif4.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Cell, sans utiliser Gohan</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_bardock.png" alt="Goku Super Saiyan et Bardock"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/mecha_freezer_cell.png" alt="Mecha Freezer et Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+   <!-- Branche What If 5 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif5.png" alt="Niveau 2"></h4></h4>
+          <p>Goku apprend que Bardock et son père et discute avec lui. Après cela Goku entame un dur entraînement face à lui même.</p>
+          <img src="../image/mode/mode_histoire/goku/whatif5.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Mecha Freezer et Cell</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_histoire/goku/histoire5.png" alt="Niveau 2"></h4>
+          <p>Affrontez Vegeta controlé par Babidi et Boo.</p>
+          <img src="../image/mode/mode_histoire/goku/5.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Cell</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_gohan_ado.png" alt="Goku Super Saiyan et Gohan Ado "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/majin_vegeta_boo.png" alt="Majin Vegeta "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_histoire/goku/histoire6.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais). Débloque l’attaque combinée avec Vegeta (Super Saiyan) nommée "Super épée Bagit".</p>
+          <img src="../image/mode/mode_histoire/goku/6.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_vegeta_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/boo_mauvais.png" alt="Majin Boo "></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 7 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 7 — <img src="../image/mode/mode_histoire/goku/histoire7.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais) Pour sauver l'Univers. Débloque l’attaque combinée avec M Satan nommée "Super Genkidama".</p>
+          <img src="../image/mode/mode_histoire/goku/7.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_vegeta_ss_mr_satan.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/boo_mauvais.png" alt="Majin Boo "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 8 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 8 — <img src="../image/mode/mode_histoire/goku/histoire8.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais) Pour sauver l'Univers. Débloque l’attaque combinée avec M Satan nommée "Super Genkidama".</p>
+          <img src="../image/mode/mode_histoire/goku/8.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/piccolo.png" alt="Piccolo "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 9 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 9 — <img src="../image/mode/mode_histoire/goku/histoire9.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais) Pour sauver l'Univers. Débloque l’attaque combinée avec M Satan nommée "Super Genkidama".</p>
+          <img src="../image/mode/mode_histoire/goku/9.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/gohan_ado.png" alt="Gohan Ado "></p>
+        </div>
+      </div>
+    </div>
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
