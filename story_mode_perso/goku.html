@@ -203,6 +203,25 @@
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
   </style>
 </head>
 <body>
@@ -218,6 +237,13 @@
       <li><a href="../contact.html">Contact</a></li>
     </ul>
   </nav>
+
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/goku/goku_icon.png" alt="Goku Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/goku/competence.png" alt="Compétences de Goku" style="width: 450px;">
+  </div>
+
   <div class="frise">
     <!-- Niveau 1 -->
     <div class="evenement">
@@ -296,7 +322,7 @@
         <div class="description">
           <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif2.png" alt="Niveau 2"></h4>
           <p>Goku affronte Cooler et son Escadron</p>
-          <img src="../image/goku/whatif2.png" alt="What If 2">
+          <img src="../image/mode/mode_histoire/goku/whatif2.png" alt="What If 2">
           <h5>Condition</h5>
           <p>Terminer le combat contre le Docteur Gero en faisant un Ultimate KO .</p>
         </div>
@@ -316,13 +342,13 @@
         <div class="description">
           <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif3.png" alt="Niveau 2"></h4>
           <p>Goku affronte Metal Cooler. Débloque Goku Super Saiyan</p>
-          <img src="../image/goku/whatif3.png" alt="What If 3">
+          <img src="../image/mode/mode_histoire/goku/whatif3.png" alt="What If 3">
           <h5>Condition</h5>
           <p>Terminer le combat contre Cooler.</p>
         </div>
         <div class="personnages">
           <h5>Personnages</h5>
-          <p><img src="../image/mode/mode_histoire/goku/goku_ss_picollo_vegeta_ss.png" alt="Goku Super Saiyan et Piccolo et Vegeta Super Saiyan"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/metal_coolers.png" alt="Metals Cooler"></p>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_piccolo_vegeta_ss.png" alt="Goku Super Saiyan et Piccolo et Vegeta Super Saiyan"><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/metal_coolers.png" alt="Metals Cooler"></p>
         </div>
       </div>
     </div>
@@ -332,9 +358,9 @@
       <div class="point"></div>
       <div class="contenu">
         <div class="description">
-          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/goku/histoire_4.png" alt="Niveau 4"></h4>
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/goku/histoire4.png" alt="Niveau 4"></h4>
           <p>Goku affronte Cell. Débloque la capacité "Transmission Instantanée".</p>
-          <img src="../image/goku/histoire4.png" alt="Niveau 4">
+          <img src="../image/mode/mode_histoire/goku/4.png" alt="Niveau 4">
           <h5>Condition</h5>
             <p>Terminer le combat contre Gero</p>
         </div>
@@ -346,7 +372,7 @@
     </div>
 
 
-     <!-- Branche What If 5 -->
+    <!-- Branche What If 4 -->
     <div class="branche"></div>
     <div class="evenement branche-centre">
       <div class="point"></div>
@@ -354,7 +380,7 @@
         <div class="description">
           <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif4.png" alt="Niveau 2"></h4>
           <p>Goku part dans l'Autre Monde et participe au Tournoi de l'Autre Monde, il y rencontre Bardock et les deux Saiyans affrontent Cell et Mecha Freezer, le tout sans savoir que les deux sont père et fils. Débloque Bardock comme personnage support</p>
-          <img src="../image/goku/whatif4.png" alt="What If 4">
+          <img src="../image/mode/mode_histoire/goku/whatif4.png" alt="What If 4">
           <h5>Condition</h5>
             <p>Terminer le combat contre Cell, sans utiliser Gohan</p>
         </div>
@@ -364,39 +390,114 @@
         </div>
       </div>
     </div>
-  </div>
 
 
-   <!-- Branche What If 4 -->
+   <!-- Branche What If 5 -->
     <div class="branche"></div>
     <div class="evenement branche-centre">
       <div class="point"></div>
       <div class="contenu">
         <div class="description">
-          <h4>What If — Fin alternative</h4>
+          <h4>What If — <img src="../image/mode/mode_histoire/goku/histoire_whatif5.png" alt="Niveau 2"></h4></h4>
           <p>Goku apprend que Bardock et son père et discute avec lui. Après cela Goku entame un dur entraînement face à lui même.</p>
-          <img src="../image/goku/whatif4.png" alt="What If 4">
+          <img src="../image/mode/mode_histoire/goku/whatif5.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Mecha Freezer et Cell</p>
         </div>
         <div class="personnages">
           <h5>Personnages</h5>
-          <p>Goku et Vegeta vs Ennemi</p>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "></p>
         </div>
       </div>
     </div>
-  </div>
 
     <!-- Niveau 5 -->
     <div class="evenement">
       <div class="point"></div>
       <div class="contenu">
         <div class="description">
-          <h4>Niveau 5 — Majin Buu</h4>
-          <p>Affrontez Buu pour sauver l’univers. Débloque l’attaque ultime Kaioken X20.</p>
-          <img src="../image/goku/histoire5.png" alt="Niveau 5">
+          <h4>Niveau 5 — <img src="../image/mode/mode_histoire/goku/histoire5.png" alt="Niveau 2"></h4>
+          <p>Affrontez Vegeta controlé par Babidi et Boo.</p>
+          <img src="../image/mode/mode_histoire/goku/5.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Cell</p>
         </div>
         <div class="personnages">
           <h5>Personnages</h5>
-          <p>Goku vs Majin Buu</p>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_gohan_ado.png" alt="Goku Super Saiyan et Gohan Ado "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/majin_vegeta_boo.png" alt="Majin Vegeta "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_histoire/goku/histoire6.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais). Débloque l’attaque combinée avec Vegeta (Super Saiyan) nommée "Super épée Bagit".</p>
+          <img src="../image/mode/mode_histoire/goku/6.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_vegeta_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/boo_mauvais.png" alt="Majin Boo "></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 7 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 7 — <img src="../image/mode/mode_histoire/goku/histoire7.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais) Pour sauver l'Univers. Débloque l’attaque combinée avec M Satan nommée "Super Genkidama".</p>
+          <img src="../image/mode/mode_histoire/goku/7.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss_vegeta_ss_mr_satan.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/boo_mauvais.png" alt="Majin Boo "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 8 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 8 — <img src="../image/mode/mode_histoire/goku/histoire8.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais) Pour sauver l'Univers. Débloque l’attaque combinée avec M Satan nommée "Super Genkidama".</p>
+          <img src="../image/mode/mode_histoire/goku/8.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/piccolo.png" alt="Piccolo "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 9 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 9 — <img src="../image/mode/mode_histoire/goku/histoire9.png" alt="Niveau 2"></h4>
+          <p>Affrontez Buu (Mauvais) Pour sauver l'Univers. Débloque l’attaque combinée avec M Satan nommée "Super Genkidama".</p>
+          <img src="../image/mode/mode_histoire/goku/9.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/goku/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/goku/vs.png" alt="vs"><img src="../image/mode/mode_histoire/goku/gohan_ado.png" alt="Gohan Ado "></p>
         </div>
       </div>
     </div>
