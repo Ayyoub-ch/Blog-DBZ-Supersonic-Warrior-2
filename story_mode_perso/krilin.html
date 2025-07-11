@@ -4,124 +4,191 @@
   <meta charset="UTF-8">
   <title>Mode Histoire de Krilin — Supersonic Warriors 2</title>
   <link rel="icon" type="image/png" href="../image/title.png">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 80px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,27 +196,39 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
-    
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Krilin</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,89 +238,284 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/krilin/krilin.png" alt="Krilin">
-    <h2>Krilin – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 2 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial </td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Projection </td><td>Balance l'ennemi en dessous de soi</td><td>Y + B</td><td><img src="../image/krilin/projection.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Kamehameha</td><td><img src="../image/krilin/spe.png" alt="Kamehameha"></td><td>Rayon classique</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/krilin/spe.gif" alt="Kamehameha"></td></tr>
-        <tr><td>Sokidan</td><td><img src="../image/krilin/spe_up.png" alt="Sokidan"></td><td>Kikoha classique</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/krilin/spe_up.gif" alt="Sokidan"></td></tr>
-        <tr><td>Kienzan </td><td><img src="../image/krilin/spe_down.png" alt="Kienzan"></td><td>Projectiles multiples</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/krilin/spe_down.gif" alt="Kienzan"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Ryuusekikoudan</td><td><img src="../image/krilin/ulti.png" alt="Ryuusekikoudan"></td><td>Rayon</td><td>X + A (en face de l'ennemi) tout en étant proche + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/krilin/ulti.gif" alt="Ryuusekikoudan"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Libération d'énergie</td><td><img src="../image/krilin/team_attack_gohan.png" alt="Libération d'énergie"></td><td>Nécessite d'être avec Gohan et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/krilin/team_attack_gohan.gif" alt="Libération d'énergie"></td></tr>
-        <tr><td>Double-Kienzan</td><td><img src="../image/krilin/team_attack_c18.png" alt="Double-Kienzan"></td><td>Nécessite d'être avec C18 et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/krilin/team_attack_c18.gif" alt="Double-Kienzan"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Vrai potentiel</td><td><img src="../image/krilin/capacite.png" alt="Vrai potentiel"></td><td>Technique augmentant l'attaque au détriment du ki qui baisse jusqu'à 30, ce qui met fin au boost</td><td>L</td><td>Energie à 100</td><td><img src="../image/krilin/capacite.gif" alt="Vrai potentiel"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/krilin/krilin_icon.png" alt="Krilin Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/krilin/competence.png" alt="Compétences de Krilin" style="width: 450px;">
   </div>
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/krilin/histoire1.png" alt="Niveau 1"></h4>
+          <p>Lors de l'affrontement face à Freezer, tout le monde se fait vaincre un à un par le prince qui a eut les Dragon Balls. Goku et Piccolo affronte Vegeta surpuissant pour protéger la Terre. En essayant de protéger Gohan, Piccolo meurt de la main de Vegeta, afin de le faire revivre, nos héros vont sur Namek pour y trouver les Dragon Balls. </p> 
+          <p>Débloque la compétence "Kaioken" et l'attaque combineée avec Piccolo "Attaque Feintée".</p>
+          <img src="../image/mode/mode_histoire/krilin/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/krilin_gohan.png" alt="Krilin et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/freezer.png" alt="Freezer"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/krilin/histoire2.png" alt="Niveau 2"></h4>
+          <p>Après avoir massacré toute l'équipe de Goku, il ne restait que Gohan et Krilin, soudainement Freezer énervé de ne pas pouvoir être immortel, tue Krilin de sang froid. Accablé par la rage, Son Goku se transforma en Super Saiyan et s'en suit un combat contre Freezer sur une planète Namek sur le point d'exploser. </p>
+          <p>Débloque Freezer comme personnage jouable après le combat.</p>
+          <img src="../image/mode/mode_histoire/krilin/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss.png" alt="Goku Super Saiyan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/freezer.png" alt="Freezer"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/krilin/histoire3.png" alt="Niveau 2"></h4>
+          <p>Après la défaite contre Freezer, un jeune homme se prétend être le fils du prince Vegeta et venant du futur, arrive devant Goku et lui explique l'histoire des cyborgs qui ravageront la Terre dans les années à venir et qu'il mourra d'une maladie cardiaque pour cela il ramena un traitement pour le soigner, soudainement un cyborg s'apparentant au Docteur Gero se présenta à nos héros. Voyant que Goku s'affaiblissait et ne pouvant plus se transformer en Super Saiyan, il en profita, mais Goku avait encore le Kaioken X20 pour faire face au cyborg, accompagné de Trunks. Après cette bataille, le cyborg fut défait et la paix fut instaurée, mais pas pour une longue durée ... </p>
+          <p>Débloque la compétence Ultime "Kaioken X20"</p>
+          <img src="../image/mode/mode_histoire/krilin/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_trunks.png" alt="Goku et Trunks"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/gero.png" alt="Gero"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/krilin/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Après que la menace des cyborgs soit passée, un étrange vaisseau arrive sur Terre, il y avait un Saiyan nommé Paragus, qui signale à Vegeta qu'il peut devenir le roi des Saiyans sur la nouvelle plnaète Vegeta, sauf qu'il y a un Super Saiyan Légendaire qui bloque tout cela, Trunkset Goku se doutant de quelque chose suivirent Vegeta et Paragus. En arrivant sur les liens tous se rendirent compte que Broly le fils de paragus est le Super Saiyan Légendaire. Après un violent combat , Broly fut défait par Goku, en lui assenant un coup fatal, après avoir obtenu l'énergie de ses amis .</p>
+          <p>Débloque Broly comme personnage jouable.</p>
+          <img src="../image/mode/mode_histoire/krilin/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Terminer le combat contre le Docteur Gero en faisant un Ultimate KO .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss_vegeta_ss_trunks_ss.png" alt="Goku Super Saiyan et Vegeta Super Saiyan et Trunks Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/broly.png" alt="Broly"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/krilin/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>Après avoir vaincu les cyborgs et sauvé le monde, une nouvelle menace s'approche de la Terre. Le frère de Freezer, Cooler se présenta à nos héros pour venger l'honneur de sa famille, après avoir apprit que Freezer a été tué par un Super Saiyan, après avoir vaincu les amis de Goku, Son Goku part affronter Cooler et son Escadron.</p>
+          <img src="../image/mode/mode_histoire/krilin/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre le Docteur Gero en faisant un Ultimate KO .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss.png" alt="Goku Super Saiyan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/cooler.png" alt="Cooler"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/krilin/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>En allant sur Namek, Goku, Vegeta et Piccolo se rendent compte que la planète commence à être absorbé par une sorte de planète-machine, le Big Gete Star, en mettant les pieds sur la planète, nos héros rencontre Cooler qui était revenu à la vie grâce à l'étoile, ce qui lui a donné un corps métallique et une armée de clone de lui-même. Après un long affrontement face à Metal Cooler, Goku trouve la faille de Metal Cooler qui est la limite d'énergie, c'est alors qu'il envoit toute son énergie au noyau de Cooler qui surchauffe et explose, libérant Namek du jout de Metal Cooler.</p>
+          <img src="../image/mode/mode_histoire/krilin/whatif3.png" alt="What If 3">
+          <p>Débloque Goku Super Saiyan.</p>
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss_piccolo_vegeta_ss.png" alt="Goku Super Saiyan et Piccolo et Vegeta Super Saiyan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/metal_coolers.png" alt="Metals Cooler"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/krilin/histoire4.png" alt="Niveau 4"></h4>
+          <p>Grâce au remède de Trunks, Goku a put guerir de sa maladie cardiaque, mais un cyborg nommé Cell, création de l'ordinateur de Docteur Gero apparait devant Trunks, lors du combat face à Vegeta et ce dernier après absorbé C17 et C18, il compte organiser un tournoi à la manière du Tenkaichi Budokai, où il sera le seul et unique adversaire et si tout le monde perd, il ravagera le monde. De ce fait Goku s'entraîne avec Gohan pour pouvoir affronter Cell lors de ce tournoi. A la suite de ce combat Goku et Gohan gagne face à Cell et ne voulant accepter la défaite, la forme de vie décide de s'autodétruire pour emporter la Z-Team et la Terre avec lui. C'est alors que Goku utilisa la Transmission Instantanée pour emporter Cell et l'explosion avec lui, faisant qu'une seule victime : Goku.</p>
+          <p>Débloque la capacité "Transmission Instantanée".</p>
+          <img src="../image/mode/mode_histoire/krilin/4.png" alt="Niveau 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Gero</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss_gohan.png" alt="Goku Super Saiyan et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/krilin/histoire_whatif4.png" alt="Niveau 2"></h4>
+          <p>Goku part dans l'Autre Monde et participe au Tournoi de l'Autre Monde, il arrive sans difficulté à la finale et il y rencontre Bardock qui sera son adversaire, quand soudainement Kaio interrompt tout pour alerter que Cell et Freezer sont devenus fous et cassent tout en Enfer et c'est comme ça que les deux Saiyans partent affronter Cell et Mecha Freezer, le tout sans savoir que les deux sont père et fils. </p>
+          <p>Débloque Bardock comme personnage support.</p>
+          <img src="../image/mode/mode_histoire/krilin/whatif4.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Cell, sans utiliser Gohan</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss_bardock.png" alt="Goku Super Saiyan et Bardock"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/mecha_freezer_cell.png" alt="Mecha Freezer et Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+   <!-- Branche What If 5 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/krilin/histoire_whatif5.png" alt="Niveau 2"></h4></h4>
+          <p>Goku apprend que Bardock et son père et discute avec lui, on apprend que Bardock s'est inscrit au tournoi pour vaincre Freezer et qu'en voyant la puissance de son fils, Bardock lui propose un plan de conquête ce que Goku refuse poliment, lui disant qu'il est loin de tout ça et qu'il n'est pas mauvais à ce point. Après cela Goku entame un dur entraînement face à lui même pour pouvoir dépasser Cell seul.</p>
+          <p>Débloque l'Attaque Ultime "Super Saiyan 3" .</p>
+          <img src="../image/mode/mode_histoire/krilin/whatif5.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Mecha Freezer et Cell</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/goku_ss.png" alt="Goku Super Saiyan "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_histoire/krilin/histoire5.png" alt="Niveau 2"></h4>
+          <p>Après 7 ans de paix, Goku étant mort, a put revenir dans le monde des vivants grâce à Baba la Voyante, pour participer au Tenkaichi Budokai, le tout pendant 24h, seulement le sorcier Babidi était là pour faire revivre Boo et n'a pas hésité à corrompre Vegeta et prendre l'énergie de Gohan pour y parvenir. Babidi transporta tout le monde dans son vaisseau et Goku et Gohan durent affronter Vegeta controlé par Babidi et Boo. A la fin du combat Goku arriva à raisonner Vegeta, mais malheuresement Boo entre dans une colère noire et deviens Boo (Mauvais) .</p>
+          <img src="../image/mode/mode_histoire/krilin/5.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Cell</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss_gohan_ado.png" alt="Goku Super Saiyan et Gohan Ado "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/majin_vegeta_boo.png" alt="Majin Vegeta "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_histoire/krilin/histoire6.png" alt="Niveau 2"></h4>
+          <p>Après avoir battu Boo et Vegeta (Mauvais), Boo devint Boo (Mauvais). Goku et Vegeta qui est redevenu normal font alliance pour vaincre Boo </p>
+          <p>Débloque l’attaque combinée avec Vegeta (Super Saiyan) nommée "Super épée Bagit".</p>
+          <img src="../image/mode/mode_histoire/krilin/6.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Majin Vegeta et Boo </p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss_vegeta_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/boo_mauvais.png" alt="Majin Boo "></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 7 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 7 — <img src="../image/mode/mode_histoire/krilin/histoire7.png" alt="Niveau 2"></h4>
+          <p>Après le combat  Boo (Mauvais), ce dernier détruisit la Terre, nos deux héros purent s'échapper et arriver dans le monde des Kaioshins,Boo les a suivi et  un affrontement sans précédent avait lieu, le seul moyen de le battre et de faire un Genkidama, mais l'énergie n'était pas assez grande pour térrassée Boo, seulement Mr Satan était là, même si ce fut une gène au premier abord, il put servir à convaincre les terriens de donner leur énergie à Goku pour un Super Genkidama et par la suite vaincre Boo et sauver l'Univers.</p>
+          <p>Débloque l’attaque combinée avec M Satan nommée "Super Genkidama".</p>
+          <img src="../image/mode/mode_histoire/krilin/7.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Boo (Mauvais)</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss_vegeta_ss_mr_satan.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/boo_mauvais.png" alt="Majin Boo "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 8 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 8 — <img src="../image/mode/mode_histoire/krilin/histoire8.png" alt="Niveau 2"></h4>
+          <p>Après avoir vaincu Boo et sauver l'Univers, le Tenkaichi Budokai peut reprendre et Son Goku affronte Piccolo qui depuis a augmenté en terme de puissance. Après un bon combat, Goku gagne le duel et passe au prochain adversaire.</p>
+          <img src="../image/mode/mode_histoire/krilin/8.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Boo (Mauvais)</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/piccolo.png" alt="Piccolo "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 9 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 9 — <img src="../image/mode/mode_histoire/krilin/histoire9.png" alt="Niveau 2"></h4>
+          <p>Après plusieurs victoires lors du championnat, il accède à la finale, son adversaire n'est autre que son propre fils, Gohan qui depuis a bien augmenté en terme de puissance. Après un combat intense, Goku s'avoue vaincu et son Gohan gagne la finale. C'est alors que Kaio contacte Goku pour retourner dans l'Autre Monde, car il y a un adversaire terriblement fort qui sème le grabuge là haut. Goku retourne vers de nouveaux combats.</p>
+          <img src="../image/mode/mode_histoire/krilin/9.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Piccolo</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/krilin/goku_ss.png" alt="Goku Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/krilin/gohan_ado.png" alt="Gohan Ado "></p>
+        </div>
+      </div>
+    </div>
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
   </div>
-
 </body>
 </html>
