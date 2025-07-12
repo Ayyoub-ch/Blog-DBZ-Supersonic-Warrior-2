@@ -2,127 +2,193 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Fiche Piccolo — Supersonic Warriors 2</title>
+  <title>Mode Histoire de Piccolo — Supersonic Warriors 2</title>
   <link rel="icon" type="image/png" href="../image/title.png">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 120px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
+    }
+
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
     }
 
 
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -130,26 +196,39 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Piccolo</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,97 +238,200 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/piccolo/piccolo.png" alt="Goku">
-    <h2>Piccolo – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 3 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial (Kaioken)</td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Projection scindante</td><td>Balance l'ennemi devant soi tout en le tranchant</td><td>Y + B</td><td><img src="../image/piccolo/projection.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Makankosappo</td><td><img src="../image/piccolo/spe.png" alt="Makankosappo"></td><td>Rayon classique</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/piccolo/spe.gif" alt="Makankosappo"></td></tr>
-        <tr><td>Gekiretsukoudan</td><td><img src="../image/piccolo/spe_up.png" alt="Gekiretsukoudan"></td><td>Attaque puissante mais courte portée</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/piccolo/spe_up.gif" alt="Gekiretsukoudan"></td></tr>
-        <tr><td>Makankuuhouidan </td><td><img src="../image/piccolo/spe_down.png" alt="Makankuuhouidan"></td><td>Projectile classique</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/piccolo/spe_down.gif" alt="Makankuuhouidan"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Shinmafukumetsu</td><td><img src="../image/piccolo/ulti.png" alt="Shinmafukumetsu"></td><td>Charge</td><td>X + A (en dessous de l'ennemi) + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/piccolo/ulti.gif" alt="Shinmafukumetsu"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Attaque feintée</td><td><img src="../image/piccolo/team_attack_goku.png" alt="Attaque feintée"></td><td>Nécessite d'être avec Goku et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/piccolo/team_attack_goku.gif" alt="Attaque feintée"></td></tr>
-        <tr><td>Tir maléfique</td><td><img src="../image/piccolo/team_attack_gohan.png" alt="Tir maléfique"></td><td>Nécessite d'être avec Gohan et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/piccolo/team_attack_gohan.gif" alt="Tir maléfique"></td></tr>
-        <tr><td>Makankosappo</td><td><img src="../image/piccolo/team_attack_gohan_ss2.png" alt="Makankosappo"></td><td>Nécessite d'être avec Gohan (Super Saiyan 2) et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/piccolo/team_attack_gohan_ss2.gif" alt="Makankosappo"></td></tr>
-        <tr><td>Tir d'outsider </td><td><img src="../image/piccolo/team_attack_vegeta.png" alt="Tir d'outsider"></td><td>Nécessite d'être avec Vegeta et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/piccolo/team_attack_vegeta.gif" alt="Tir d'outsider"></td></tr>
-        <tr><td>Attaque volleyball </td><td><img src="../image/piccolo/team_attack_gotenks_ss3.png" alt="Attaque volleyball"></td><td>Nécessite d'être avec Gotenks (Super Saiyan 3) et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/piccolo/team_attack_gotenks_ss3.gif" alt="Attaque volleyball"></td></tr>
-    </tbody>
-    </table>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Trio</h4>
-      <tbody>
-        <tr><td>Triple Attaque</td><td class="cartes-combo"><img class="carte-combo" src="../image/card/piccolo_card.png" alt="Carte Piccolo"><img class="carte-combo" src="../image/card/goku_card.png" alt="Carte Goku"><img class="carte-combo" src="../image/card/vegeta_card.png" alt="Carte Vegeta"></td><td>Nécessite d'être avec Goku et Vegeta, tout en ayant 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/piccolo/triple_attack.gif" alt="Triple Attaque"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Régénération</td><td><img src="../image/piccolo/capacite.png" alt="Régénération"></td><td>Technique régénérant les PV au fur et à mesure du combat</td><td>L</td><td>Energie à 100</td><td><img src="../image/piccolo/capacite.gif" alt="Régénération"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/piccolo/krilin_icon.png" alt="Krilin Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/piccolo/competence.png" alt="Compétences de Krilin" style="width: 450px;">
   </div>
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/piccolo/histoire1.png" alt="Niveau 1"></h4>
+          <p>Vegeta attaque la Terre, Krilin et les terriens sont prêts à l'affronter, en apprenant la technique du Kienzan. il ne restait que Gohan et Krilin en vie face au prince des Saiyans. Goku arriva avec une nouvelle technique le Kaioken mais même avec ça Vegeta est trop fort. C'est alors que Goku a une idée, il compte utiliser une technique appelée Genkidama qui peut battre Vegeta, épuisé malgré tout, Gohan et Krilin ont la tâche désormais de retenir Vegeta le temps que Goku charge son Genkidama. Après quelques temps d'attente, Goku lance le Genkidama sur Vegeta, mais atterit sur Gohan et il le renvoit en l'air, Goku donna le reste à Krilin, ce dernier étant prêt à l'envoyer sur Vegeta, ce dernier n'ayant pas pu éviter, se fit terrasser et dût fuir dans sa capsule de secours. Afin de réssuciter Piccolo et les autres, Krilin emmène Gohan sur Namek.</p> 
+          <p>Débloque l'Attaque Ultime "Ryuusekikoudan".</p>
+          <img src="../image/mode/mode_histoire/piccolo/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/piccolo.png" alt="Krilin et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/gohan.png" alt="Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/piccolo/histoire2.png" alt="Niveau 2"></h4>
+          <p>Sur le chemin de la planète Namek, Gohan et Krilin font des entraînements virtuels en attendant qu'ils soient à destination. Après ce petit combat, les deux guerriers se rendent compte des progrès de l'un et de l'autre et envisage aussi de faire une technique à deux, jusqu'à que Bulma leur rappelle de nettoyer les dégâts de l'entrainement </p>
+          <p>Débloque l'attaque combineée avec Gohan "Libération d'énergie".</p>
+          <img src="../image/mode/mode_histoire/piccolo/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/piccolo.png" alt="Krilin"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/gohan.png" alt="Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/piccolo/histoire3.png" alt="Niveau 2"></h4>
+          <p>En arrivant sur la planète Namek, nos deux héros doivent affronter Vegeta et Freezer dans une grande chasse aux Dragon Balls ce qui en résultera du sort de la planète Namek et de l'Univers, alors que Vegeta fit alliance avec les héros pour combattre Freezer, l'empereur voyant que les terriens n'étaient pas encore morts, dût appelé les Forces Spéciales de Ginyu. Alors que les guerriers allaient affronter l'élite de Freezer Goku arriva détruisit quasiment tout le commando, mais tomba dans le piège de Ginyu et il se fit volé son corps. Ginyu confiant en son nouveau corps affronta Krilin et Gohan pensant qu'il a 180 000 unités de puissance. Après un combat assez violent, Ginyu se rendit compte que sa puissance n'était pas aussi haute que Goku car il ne maîtrisait pas ce corps. Etant aux portes de la mort, Ginyu voulu échanger de corps avec Vegeta, mais Goku s'interposa et put récupérer son corps</p>
+          <p>Débloque la compétence "Vrai potentiel"</p>
+          <img src="../image/mode/mode_histoire/piccolo/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin_gohan.png" alt="Krilin et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/goku.png" alt="Ginyu"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/piccolo/histoire4.png" alt="Niveau 4"></h4>
+          <p>Grâce au fait qu'il a vaincu les Forces Spéciales et qu'il a récupéré les Dragon Balls, Krilin a pu ramener à la vie Piccolo, ce qui ne plait ni à Vegeta ni à Freezer qui commence à attaquer les héros. Soudainement Vegeta eut l'idée de se mettre à 3 sur Freezer, le tyran enragé par cette annonce tordue, va montrer à nos héros son vrai pouvoir. C'est ainsi que Krilin, Piccolo et Vegeta se battent contre Freezer pour l'arrêter. Alors que le combat semblait bien aller, Freezer montre au trio sa véritable puissance, celle lorsqu'il est à fond, il terrasse Vegeta et écrase à nouveau Krilin, mais au climax de tout ceci Goku devient Super Saiyan et bat Freezer. La paix est de retour et Krilin et Vegeta sont réanimés grâce aux Dragon Balls.</p>
+          <img src="../image/mode/mode_histoire/piccolo/4.png" alt="Niveau 4">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin_piccolo_vegeta.png" alt="Krilin Piccolo et Vegeta"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/freezer.png" alt="Freezer"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_histoire/piccolo/histoire5.png" alt="Niveau 2"></h4>
+          <p>Après la défaite de Freezer de l'épée de Trunks, qui annonce l'arrivée des cyborgs et leur menace. 3 ans après cette annonce, Vegeta et Piccolo partent affronter les cyborgs, mais derrière tout ça il y a une autre ombre menaçant tout cela: Cell, qui est bien décidé à absorbé C17 et C18 pour devenir parfait, afin de contrer Cell, Bulma créer une télécommande pouvant désactiver les cyborgs C17 et C18. Krilin ayant eu un faible pour le cyborg après une intéraction avec elle, hésité à l'anéantir, il ne sait pas s'il doit fuir ou l'anéantir.</p>
+          <img src="../image/mode/mode_histoire/piccolo/5.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin.png" alt="Krilin "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/c18.png" alt="C18 "></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/piccolo/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Alors que Goku et Gohan s'entraînaient dans la Salle de l'Esprit et du Temps, Ginyu voulant faire revivre ses alliés se rendit sur Terre pour trouver les Dragon Balls grâce à son infiltration, quand soudain Krilin, Trunks, Yamcha et Ten Shin Han le trouva et l'affronta,  Ginyu les affronta, mais perdit, contraint par le fait que son plan tomba à l'eau car les Terriens étaient trop puissants, il prit la fuite, mais Krilin et les autres le poursuivit, sans Trunks qui alla dans la Salle de l'Esprit et du Temps pour devenir plus forts que les cyborgs.</p>
+          <p>Débloque Yamcha / Ten Shin Han comme personnage support.</p>
+          <img src="../image/mode/mode_histoire/piccolo/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Battre C-18 avant la fin du chrono .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin_trunks_yamcha_tien.png" alt="Krilin, Trunks et Yamcha / Ten Shin Han "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/ginyu.png" alt="Ginyu"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/piccolo/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>Après avoir vaincu le Commando Ginyu, Krilin et les guerriers de la Terre poursuivirent Ginyu jusque dans les terres de glace où un combat long fut entamé, les terriens ont réussi en combinant leurs attaques et les forces de Ginyu furent vaincues, au final les guerriers terriens ont pu prouvés que la Terre était en sécurité même en l'absence des Saiyans ou de Piccolo. Grâce à eux, Goku et Trunks ont pu avoir un entrainement tranquille pour défaire les cyborgs.</p>
+          <p>Débloque l'Attaque combinée "Guerriers terriens" avec Yamcha / Ten Shin Han.</p>
+          <img src="../image/mode/mode_histoire/piccolo/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre C-18 .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin_yamcha_tien.png" alt="Krilin et Yamcha / Ten Shin Han"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/ginyu.png" alt="Ginyu"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/piccolo/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Après la destruction de C18, Cell ne pouvant atteindre sa forme parfaite, disparait et laisse la Terre en paix, mais laissant Krilin rongé par les remords. Ne pouvant se résoudre à cet état de fait, il décide de rassembler les Dragon Balls pour la réssuciter, il réussit à les rassembler, mais la dernière boule de cristal était au palais du Tout-Puissant, là bas il rencontra Piccolo qui savait ce qui se tramait. Krilin lui demanda d'abord gentillement de la lui remettre, mais Piccolo refusa, alors un combat s'engagea.0 En plein combat, Piccolo remarqua que Krilin se battait sans retenue et malgré son manque d'expérience par rapport à Piccolo, il parvient à récupérer la boule de cristal en battant Piccolo.</p>
+          <img src="../image/mode/mode_histoire/piccolo/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Battre C-18 avant la fin du chrono.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin.png" alt="Goku Super Saiyan et Piccolo et Vegeta Super Saiyan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/piccolo.png" alt="Piccolo"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/piccolo/histoire_whatif4.png" alt="Niveau 2"></h4>
+          <p>A l'aide des Dragon Balls obtenues, suite au combat face à Piccolo., il ramena à la vie C18, ce qui n'avait pas échappé à Cell, ayant prévu que Krilin allait la réanimer, c'est alors qu'un combat se lança pour arrêter Cell. Alors que le combat allait en la faveur de Cell, un Kamehameha de Goku perturba Cell et les deux en profitèrent pour effectuer un Kienzan combiné qui mit fin à Cell et son ambition de devenir parfait. Goku apparut et fut étonné de voir le comportement de son ami, il décida donc de l'aider qu'importe son choix. </p>
+          <p>Débloque l'attaque combinée avec C18 "Double-Kienzan".</p>
+          <img src="../image/mode/mode_histoire/piccolo/whatif4.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre C-18.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin_c18.png" alt="Goku Super Saiyan et Bardock"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/cell_2e_forme.png" alt="Mecha Freezer et Cell"></p>
+        </div>
+      </div>
+    </div>
+
+  
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_histoire/piccolo/histoire6.png" alt="Niveau 2"></h4>
+          <p>A la fin du combat, Krilin décida de détruire la télécommande, en laissant la chance à C18 de s'enfuir, mais malheuresement Vegeta aveugler par son orgueil, aida Cell a abosrbé C18 et obtenir son corps parfait. Cell ayant son corps parfait est imbattable, ni Vegeta, ni Trunks ne pouvait faire quoi que ce soit, n'ayant plus de choix pour se racheter Krilin décide d'aider Trunks ayant son nouveau pouvoir, pour battre Cell Parfait. Après une lutte acharnée pour ne pas mourir, Cell n'a reçu aucun dégat et se moqua des deux guerriers et organisa un tournoi d'où l'issue fut déjà évoqué: la défaite de Cell et le mort de Goku. Mais C18 fut ramenée à la vie grâce aux Dragon Balls.</p>
+          <p>Débloque l’attaque combinée avec Vegeta (Super Saiyan) nommée "Super épée Bagit".</p>
+          <img src="../image/mode/mode_histoire/piccolo/6.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre C-18. </p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/piccolo/krilin_trunks_ss.png" alt="Krilin et Trunks Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/piccolo/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
