@@ -2,126 +2,193 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Fiche Ginyu — Supersonic Warriors 2</title>
+  <title>Mode Histoire de Ginyu — Supersonic Warriors 2</title>
   <link rel="icon" type="image/png" href="../image/title.png">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 80px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,29 +196,48 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
 
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
 
-    
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Piccolo</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -161,89 +247,216 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/ginyu/ginyu.png" alt="Ginyu">
-    <h2>Ginyu – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 1 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial </td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Projection Barta</td><td>Entraîne l'ennemi au sol, puis Barta le frappe vers l'avant</td><td>Y + B</td><td><img src="../image/ginyu/projection.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Boom Recoom</td><td><img src="../image/ginyu/spe.png" alt="Boom Recoom"></td><td>Kikoha</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/ginyu/spe.gif" alt="Boom Recoom"></td></tr>
-        <tr><td>Boule broyeuse</td><td><img src="../image/ginyu/spe_up.png" alt="Boule broyeuse"></td><td>Rayon classique</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/ginyu/spe_up.gif" alt="Boule broyeuse"></td></tr>
-        <tr><td>Triangle psychique </td><td><img src="../image/ginyu/spe_down.png" alt="Triangle psychique"></td><td>Multiples Kikohas</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/ginyu/spe_down.gif" alt="Triangle psychique"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Tempête Ginyu</td><td><img src="../image/ginyu/ulti.png" alt="Tempête Ginyu"></td><td>Projection</td><td>X + A (n'importe quelle direction)+ proche de l'ennemi  + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/ginyu/ulti.gif" alt="Tempête Ginyu"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Echange de corps Special</td><td><img src="../image/ginyu/team_attack_goku.png" alt="Echange de corps Special"></td><td>Nécessite d'être avec Goku et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/ginyu/team_attack_goku.gif" alt="Echange de corps Special"></td></tr>
-        <tr><td>Formation explosive</td><td><img src="../image/ginyu/team_attack_freezer.png" alt="Formation explosive"></td><td>Nécessite d'être avec Freezer et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/ginyu/team_attack_freezer.gif" alt="Formation explosive"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Pose spéciale</td><td><img src="../image/ginyu/capacite.png" alt="Pose spéciale"></td><td>Technique baissent le ki qui de 25 à chaque fois</td><td>L</td><td>Pas d'énergie requise</td><td><img src="../image/ginyu/capacite.gif" alt="Pose spéciale"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/ginyu/ginyu_icon.png" alt="Ginyu Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/ginyu/competence.png" alt="Compétences de Ginyu" style="width: 450px;">
   </div>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_histoire/ginyu/map.png" alt="Map de Ginyu" style="width: 900px;">
+  </div>
+
+
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/ginyu/histoire1.png" alt="Niveau 1"></h4>
+          <p>Alors que la Terre venait de se remettre de l'attaque de Raditz, Goku perdit la vie pour protéger Gohan, apprenant de la bouche du frère de Goku que les autres Saiyans viendront dans un an pour attaquer, Piccolo prit Gohan pour s'entraîner, après 6 mois d'entraînements intensifs, Piccolo teste les capacités de Gohan dans un combat singulier. Piccolo a su voir les progrès de Gohan suite à ce combat.</p> 
+          <p>Débloque l'attaque combineée avec Gohan "Tir maléfique".</p>
+          <img src="../image/mode/mode_histoire/ginyu/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo.png" alt="Piccolo "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/gohan.png" alt="Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/ginyu/histoire2.png" alt="Niveau 2"></h4>
+          <p>Lors de l'affrontement avec Vegeta, Piccolo perdit la vie pour protéger Gohan, mais en arrivant sur Namek, Gohan et Krilin ont pu ramener Piccolo sur Namek, sa planète, d'origine, sur place il trouva Nail, un Namek combattant qui étaiit aux portes de la mort, il décida de fusionner avec ce dernier pour pouvoir affronter Freezer. A la fin du combat, Goku arrive.</p>
+          <img src="../image/mode/mode_histoire/ginyu/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_gohan_krilin.png" alt="Krilin"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/freezer.png" alt="Freezer"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/ginyu/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Piccolo a fait en sorte que les cyborgs s'échappe de Cell, C18 fut vaincu et Cell ne put devenir parfait, c'est alors que Cell eut l'idée de faire revivre C18 avec les boules de cristal. Il rencontra Vegeta qui était avec son vaisseau et lui proposa de partir sur Namek avec lui, pour faire revenir C18, l'absorber et combattre sa forme parfait, ce que Vegeta accepta, c'est comme ça que Cell partit en direction de Namek. Piccolo voyant la bétise de Vegeta fut en colère c'est alors qu'un réglement de compte entre le Namek et le Saiyan a lieu. Malgré que Vegeta prit la fuite, ça n'empecha pas Piccolo d'attaquer son vaisseau.</p>
+          <img src="../image/mode/mode_histoire/ginyu/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Battre C-18 sans la mettre KO, à la fin du chrono .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo.png" alt="Piccolo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/vegeta.png" alt="Vegeta"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/ginyu/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>Piccolo part avec Gohan et Dendé sur Namek. Du côté de Vegeta, il arrive également sur Namek, à ce moment là une nouvelle menace apparaît C'était Cooler et ses hommes qui savent que d'autres personnes sont sur Namek pour chercher les boules de cristal, au moment où Doore allait éxecuter un namek pour ne pas avoir dit la position d'une dragon ball, Piccolo intervient, accompagné de Gohan pour barrer la route à Cooler. Alors que le combat semblait serrer, Piccolo ordonna à Gohan de se transformer en Super Saiyan 2 et de lancer une attaque combinée le Masenkossapo, pendant le combat une obre s'approche de Dendé, c'était Cell qui prit en otage le petit Namek et demande en échange des boules de cristal contre la libération de Dendé, ce que Piccolo accepta</p>
+          <p>Débloque l'Attaque combinée "Masenkossappo" avec Gohan Super Saiyan 2.</p>
+          <img src="../image/mode/mode_histoire/ginyu/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Vegeta .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_gohan.png" alt="Piccolo et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/cooler.png" alt="Cooler"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/ginyu/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Etant en quête des Dragon Balls, Cooler et Cell parviennent à un accord ensemble, même si dans le fond chacun d'entre eux compte trahir l'autre au moment opportun. Du côté de Vegeta il est arrivé et n'accepte pas le plan de Piccolo pour vaincre les deux adversaires, qui est de se mettre à plusieurs sur eux. Même si Vegeta ne sera pas d'une grande aude, Piccolo n'hésite pas à attaquer le vaisseau de Cooler. A la fin les sbires de Cooler sont défaits grâce à Gohan, mais Cell a rassemblé les boules de cristal, pire encore les Namek lui ont appris à invoquer Porunga, il formula son voeu qui est de ramener à la vie C18 et l'absorba, dés lors il était devenu parfait. Vegeta sentant l'énergie phénoménale de Cell, il tenta de le défier.</p>
+          <img src="../image/mode/mode_histoire/ginyu/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Cooler</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_gohan_dende.png" alt="Piccolo et Gohan et Dendé"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/cooler.png" alt="Cooler"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/ginyu/histoire_whatif4.png" alt="Niveau 2"></h4>
+          <p>Devenu trop fort sous sa forme parfaite, Cell ne craignait plus rien, alors qu'il allait anéantir Vegeta, il se fit sauver de justesse par Piccolo. Ne pouvant rien faire face à au cyborg ultime, les deux rivaux décident de s'allier pour vaincre Cell, le tout accompagné de Gohan. Après une attaque combinée de deux guerriers, Cell fut vaincu et la paix fut ramenée sur Namek</p>
+          <p>Débloque l'attaque combinée avec Vegeta "Tir d'outsider".</p>
+          <img src="../image/mode/mode_histoire/ginyu/whatif4.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_vegeta_gohan.png" alt="Piccolo, Vegeta et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 5 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/ginyu/histoire_whatif5.png" alt="Niveau 2"></h4>
+          <p>Devenu trop fort sous sa forme parfaite, Cell ne craignait plus rien, alors qu'il allait anéantir Vegeta, il se fit sauver de justesse par Piccolo. Ne pouvant rien faire face à au cyborg ultime, les deux rivaux décident de s'allier pour vaincre Cell, le tout accompagné de Gohan. Après une attaque combinée de deux guerriers, Cell fut vaincu et la paix fut ramenée sur Namek</p>
+          <p>Débloque l'attaque combinée avec Vegeta "Tir d'outsider".</p>
+          <img src="../image/mode/mode_histoire/ginyu/whatif5.png" alt="What If 5">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_vegeta_gohan.png" alt="Piccolo, Vegeta et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 6 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/ginyu/histoire_whatif6.png" alt="Niveau 6"></h4>
+          <p>Devenu trop fort sous sa forme parfaite, Cell ne craignait plus rien, alors qu'il allait anéantir Vegeta, il se fit sauver de justesse par Piccolo. Ne pouvant rien faire face à au cyborg ultime, les deux rivaux décident de s'allier pour vaincre Cell, le tout accompagné de Gohan. Après une attaque combinée de deux guerriers, Cell fut vaincu et la paix fut ramenée sur Namek</p>
+          <p>Débloque l'attaque combinée avec Vegeta "Tir d'outsider".</p>
+          <img src="../image/mode/mode_histoire/ginyu/whatif6.png" alt="What If 6">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_vegeta_gohan.png" alt="Piccolo, Vegeta et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 7 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/ginyu/histoire_whatif7.png" alt="Niveau 7"></h4>
+          <p>Devenu trop fort sous sa forme parfaite, Cell ne craignait plus rien, alors qu'il allait anéantir Vegeta, il se fit sauver de justesse par Piccolo. Ne pouvant rien faire face à au cyborg ultime, les deux rivaux décident de s'allier pour vaincre Cell, le tout accompagné de Gohan. Après une attaque combinée de deux guerriers, Cell fut vaincu et la paix fut ramenée sur Namek</p>
+          <p>Débloque l'attaque combinée avec Vegeta "Tir d'outsider".</p>
+          <img src="../image/mode/mode_histoire/ginyu/whatif7.png" alt="What If 7">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_vegeta_gohan.png" alt="Piccolo, Vegeta et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/cell.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+    
+
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/ginyu/histoire3.png" alt="Niveau 2"></h4>
+          <p>Grâce à Goku, Freezer fut vaincu, mais il revint sur Terre, avec un corps mécanique prêt à attaquer la Terre. Cependant un jeune homme venant du futur nommé Trunks annonce le danger que constituera les cyborgs à l'avenir, 3 ans plus tard les gueriers sont prêts, ils ne trouvent pas les cyborgs, mais tombe sur le Dr Gero, accompagné de Gohan, ils comptent l'affronter. Au final de ce combat, Piccolo se rend compte qu'il n'est pas à la hauteur, il doit devenir plus fort.</p>
+          <img src="../image/mode/mode_histoire/ginyu/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/ginyu/piccolo_gohan.png" alt="Piccolo et Gohan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/ginyu/gero.png" alt="Gero"></p>
+        </div>
+      </div>
+    </div>
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
   </div>
-
 </body>
 </html>
