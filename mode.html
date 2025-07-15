@@ -109,6 +109,51 @@
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
+
+    /* === Responsive === */
+@media screen and (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr 1fr; /* reste 2 colonnes mais flexibles */
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 30px 15px;
+  }
+
+  .button img {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav ul {
+    display: block;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .container {
+    grid-template-columns: 1fr; /* 1 colonne sur mobile */
+    padding: 20px 10px;
+  }
+
+  .button img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .button span {
+    font-size: 18px;
+  }
+
+  .bouton-retour img {
+    width: 80px;
+  }
+}
+
   </style>
 </head>
 <body>
