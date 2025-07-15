@@ -161,7 +161,55 @@
       margin: 0; /* pas d'espacement superflu */
     }
 
+    /* Ajout responsive */
+  @media (max-width: 1024px) {
+    header h1 {
+      font-size: 26px;
+    }
 
+    nav a {
+      margin: 0 10px;
+      font-size: 16px;
+    }
+
+    .container {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    aside {
+      flex: 1;
+      width: 100%;
+    }
+
+    .images-cote-a-cote {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    header img {
+      width: 150px;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    nav {
+      padding: 10px 0;
+    }
+
+    nav a {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .bouton-retour img {
+      width: 80px;
+    }
+  }
   </style>
 </head>
 

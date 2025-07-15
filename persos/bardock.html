@@ -157,6 +157,111 @@
     .bouton-retour img:hover {
       transform: scale(1.1);
     }
+
+    /* RESPONSIVE DESIGN */
+
+@media (max-width: 1200px) {
+  .fiche {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .fiche-image {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .fiche table img {
+    width: 100%;
+    height: auto;
+  }
+
+  .fiche th,
+  .fiche td {
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  h2, .fiche h2 {
+    font-size: 24px;
+  }
+
+  nav ul li {
+    margin: 0 10px;
+  }
+
+  nav ul li a {
+    font-size: 16px;
+  }
+
+  .fiche table {
+    font-size: 16px;
+  }
+
+  .fiche th,
+  .fiche td {
+    width: auto;
+    display: block;
+    text-align: left;
+    padding: 12px 10px;
+  }
+
+  .fiche table img {
+    width: 100%;
+    height: auto;
+  }
+
+  .cartes-combo {
+    flex-direction: column;
+  }
+
+  .cartes-combo img {
+    width: 80%;
+    max-width: 200px;
+  }
+
+  .bouton-retour img {
+    width: 150px;
+  }
+
+  .bouton-retour {
+    top: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  header img {
+    width: 150px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  nav ul {
+    display: block;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .fiche {
+    padding: 20px;
+  }
+
+  .fiche table {
+    font-size: 14px;
+  }
+}
+
   </style>
 </head>
 <body>
