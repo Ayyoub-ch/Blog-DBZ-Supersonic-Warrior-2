@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Fiche C18 — Supersonic Warriors 2</title>
-  <link rel="icon" type="image/png" href="../image/title.png">
+  <meta charset="UTF-8" />
+  <title>Mode Histoire de C-18 — Supersonic Warriors 2</title>
+  <link rel="icon" type="image/png" href="../image/title.png" />
   <style>
     body {
       margin: 0;
@@ -11,117 +11,184 @@
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 80px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,27 +196,47 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
-    
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de C-18</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,85 +246,193 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/c18/c18.png" alt="C18">
-    <h2>C18 – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 2 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial </td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Projection fatale</td><td>Balance l'ennemi vers l'avant après quelques coups de genou</td><td>Y + B</td><td><img src="../image/c18/projection.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Eclair de photons</td><td><img src="../image/c18/spe.png" alt="Eclair de photons"></td><td>Blast à courte portée</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/c18/spe.gif" alt="Eclair de photons"></td></tr>
-        <tr><td>Frappe de photons</td><td><img src="../image/c18/spe_up.png" alt="Frappe de photons"></td><td>Kikohas multiples</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/c18/spe_up.gif" alt="Frappe de photons"></td></tr>
-        <tr><td>Double-buster </td><td><img src="../image/c18/spe_down.png" alt="Double-buster"></td><td>Kikohas multiples</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/c18/spe_down.gif" alt="Double-buster"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Energie principale</td><td><img src="../image/c18/ulti.png" alt="Energie principale"></td><td>Charge</td><td>X + A (en face de l'ennemi) + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/c18/ulti.gif" alt="Energie principale"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Spirale infernale</td><td><img src="../image/c18/team_attack_c17_16.png" alt="Spirale infernale"></td><td>Nécessite d'être avec C17 / C16 et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/c18/team_attack_c17_16.gif" alt="Spirale infernale"></td></tr>
-        <tr><td>Double-Kienzan</td><td><img src="../image/c18/team_attack_krilin.png" alt="Double-Kienzan"></td><td>Nécessite d'être avec Krilin et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/c18/team_attack_krilin.gif" alt="Double-Kienzan"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Type énergie infinie </td><td><img src="../image/c18/capacite.png" alt="Type énergie infinie"></td><td>Technique qui permet de ne pas perdre d'énergie lors de déplacement ou d'attaque spéciale</td><td>L</td><td>Energie à 200</td><td><img src="../image/c18/capacite.gif" alt="Type énergie infinie"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/c18/c18_icon.png" alt="C-18 Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/c18/competence.png" alt="Compétences de C-18" style="width: 450px;">
   </div>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_histoire/c18/map.png" alt="Map de C-18" style="width: 900px;">
+  </div>
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/c18/histoire1.png" alt="Niveau 1"></h4>
+          <p>Gohan et Goku s'entraîne dans la Salle de l'Esprit et du Temps. </p>
+          <p>Débloque la compétence "Super Saiyan".</p>
+          <img src="../image/mode/mode_histoire/c18/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18.png" alt="Gohan Ado"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/gero.png" alt="Goku Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/c18/histoire2.png" alt="Niveau 2"></h4>
+          <p>Combat contre Cell lors du Cell Games.</p>
+          <p>Débloque l'Attaque Ultime "Enchaînement rageur" au début du combat et l'attaque combinée avec Goku "Kamehameha familial" et Gohan Super Saiyan 2 comme personnage jouable après le combat.</p>
+          <img src="../image/mode/mode_histoire/c18/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18.png" alt="Gohan Super Saiyan 2"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/vegeta_ss_trunks_ss.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/c18/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Et si Gohan partait dans le futur avec Trunks pour défaire les cyborgs ? Affrontement face à C18, C17 et C16. A la fin du combat, Cell intervient et absorbe C18, ce qui le mène à sa forme parfaite, par la suite. </p>
+          <img src="../image/mode/mode_histoire/c18/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Battre Vegeta et Trunks quand le chrono est en dessous de 800.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18_c17_c16.png" alt="Gohan et Trunks Super Saiyan "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/piccolo_vegeta_ss_yamcha_tien.png" alt="C18, C17 et C16"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/c18/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>Gohan accompagné de Trunks retrouve la trace de Cell qui est sous forme parfaite et compte l'affronter pour mettre fin à ses agissements. </p>
+          <p>Débloque la compétence "Frénésie"</p>
+          <img src="../image/mode/mode_histoire/c18/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre les cyborgs dans le futur .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18_c17_c16.png" alt="Gohan Super Saiyan 2 et Trunks Super Saiyan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/gohan_ado_trunks_ss.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/c18/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Après avoir vaincu Cell, grâce aux indications de Bulma, ils retrouvent le labo du Dr Gero pour le détruire afin qu'aucun cyborg ne renaisse. En entrant ils se retrouvent avec l'ordinateur du Docteur qui a assimilé l'esprit de Gero afin de recréer un nouveau corps avec les données des Saiyans. </p>
+          <p>Débloque le Docteur Gero comme personnage jouable à la fin du combat</p>
+          <img src="../image/mode/mode_histoire/c18/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Cell dans le futur.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18_c17_c16.png" alt="Gohan Super Saiyan 2 et Trunks Super Saiyan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/cell_2e_forme.png" alt="Geros"></p>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/c18/histoire3.png" alt="Niveau 2"></h4>
+          <p>Après avoir vaincu Cell, 7 ans de paix sont passées et Gohan est devenu ado, en allant au lycéen, il rencontre Cooler le frère de Freezer, qui attaque Videl. A la fin du combat, voyant Gohan en Super Saiyan, elle fait directement le lien entre le guerrier doré et lui, elle lui fit donc du chantage pour qu'il participe avec elle au Tenkaichi Budokai.</p>
+          <img src="../image/mode/mode_histoire/c18/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18.png" alt="Gohan Ado et Goku Super Saiyan et Piccolo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/piccolo.png" alt="Boo et Babidi"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/c18/histoire4.png" alt="Niveau 4"></h4>
+          <p>Lors du Tenkaichi Budokai, les combats se passaient bien, jusqu'à que le sorcier Babidi ayant le projet de revivre Boo. Après avoir prit son énergie, le sorcier fit revivre le démon et l'envoya combattre Gohan et ses amis.</p>
+          <img src="../image/mode/mode_histoire/c18/4.png" alt="Niveau 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Cooler</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18.png" alt="Gohan Ado et Goku Super Saiyan et Piccolo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/krilin.png" alt="Boo et Babidi"></p>
+        </div>
+      </div>
+    </div>
+
+
+   <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_histoire/c18/histoire5.png" alt="Niveau 2"></h4>
+          <p>Après avoir été vaincu par Boo, Kaio Shin récupère Gohan et l'emmène dans le Mondes des Kaioshins pour y suivre un entraînement afin de vaincre Boo, il consistait à retirer la Z-Sword de son socle, Gohan y arriva après être passé en Super Saiyan, cependant un vieux Kaioshin apparut et dit à Gohan qu'il peut faire augmenter son pouvoir encore plus qu'avec la Z-Sword, mais pour cela i faut qu'il engage un combat face à Goku son père, en donnant tout ce qu'il a.</p>
+          <p> Débloque la compétence "Libération pouvoir" .</p>
+          <img src="../image/mode/mode_histoire/c18/5.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Boo</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18.png" alt="Gohan Ado et Goku Super Saiyan et Piccolo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/krilin.png" alt="Boo et Babidi"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_histoire/c18/histoire6.png" alt="Niveau 2"></h4>
+          <p>Après avoir réveillé son véritable potentiel, Gohan revint sur Terre affronté Boo, qui était en train d'affronté Gotenks et Piccolo. Après un affrontement intense, Boo terrassa Boo grâce à son nouveau pouvoir et les choses redevinrent à la normale. Après quelques temps, un nouveau championnat fut organisé, Videl et Gohan allèrent s'inscrire et au premeir round Gohan affronta Vegeta, c'est ainsi que se termina l'histoire de Gohan . </p>
+          <img src="../image/mode/mode_histoire/c18/6.png" alt="Niveau 5">
+        <h5>Condition</h5>
+            <p>Terminer le combat contre Goku au Kaioshin Kai</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/c18/c18.png" alt="Gohan Ado et Goku Super Saiyan et Piccolo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/c18/gotenks.png" alt="Boo et Babidi"></p>
+        </div>
+      </div>
+    </div>
+
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
