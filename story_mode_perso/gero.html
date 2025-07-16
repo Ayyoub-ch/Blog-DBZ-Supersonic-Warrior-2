@@ -2,126 +2,193 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Fiche Dr Gero — Supersonic Warriors 2</title>
+  <title>Mode Histoire de Dr Gero — Supersonic Warriors 2</title>
   <link rel="icon" type="image/png" href="../image/title.png">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 80px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,27 +196,48 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
-    
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Dr Gero</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,84 +247,189 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/gero/gero.png" alt="Dr Gero">
-    <h2>Dr Gero – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 1 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial </td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Absorption d'énergie</td><td>Absorbe la vie de l'ennemi, la convertit en vie personnelle et le balance l'ennemi vers l'avant</td><td>Y + B</td><td><img src="../image/gero/projection.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Photons explosifs</td><td><img src="../image/gero/spe.png" alt="Photons explosifs"></td><td>Kikoha</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/gero/spe.gif" alt="Photons explosifs"></td></tr>
-        <tr><td>Rayon occulaire</td><td><img src="../image/gero/spe_up.png" alt="Frappe de photons"></td><td>Rayon occulaire visant l'ennemi en arc de cercle</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/gero/spe_up.gif" alt="Rayon occulaire"></td></tr>
-        <tr><td>Vague de photons </td><td><img src="../image/gero/spe_down.png" alt="Vague de photons"></td><td>Explosions multiples en arc de cercle </td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/gero/spe_down.gif" alt="Vague de photons"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Absorption d'énergie</td><td><img src="../image/gero/ulti.png" alt="Absorption d'énergie"></td><td>Absorption d'énergie</td><td>X + A (n'importe où) + proche de l'ennemi + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/gero/ulti.gif" alt="Absorption d'énergie"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Double-absorption</td><td><img src="../image/gero/team_attack_cell_2e_forme.png" alt="Double-absorption"></td><td>Nécessite d'être avec Cell 2e forme et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/gero/team_attack_cell_2e_forme.gif" alt="Double-absorption"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Barrière absorbante </td><td><img src="../image/gero/capacite.png" alt="Barrière absorbante"></td><td>Technique qui permet d'absorber les attaques d'énergies et les convertir en énergie personnelle lors des déplacements</td><td>L</td><td>pas d'énergie requise</td><td><img src="../image/gero/capacite.gif" alt="Barrière absorbante"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/gero/gero_icon.png" alt="Dr Gero Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/gero/competence.png" alt="Compétences de Dr Gero" style="width: 450px;">
   </div>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_histoire/gero/map.png" alt="Map de Dr Gero" style="width: 900px;">
+  </div>
+
+
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/gero/histoire1.png" alt="Niveau 1"></h4>
+          <p>Alors que les terriens et Vegeta sont en train de voler les Dragon Balls, bloquant directement l'objectif d'immortalité de Freezer, le seigneur tyrannique décida d'appeler son Commando d'Elite, le Commando Ginyu composé de Recoom, Guldo, Barta, Jeece et le Capitain Ginyu. Après être arrivés sur Namek, les hommes de Freezer attaquèrent immédiatement le groupe de Vegeta. Vu que la mission est de laisser Vegeta vivant, le Commando décida d'éliminer les deux terriens, mais au moment où Guldo immbolisa Gohan et Krilin pour les embrocher, Vegeta décapita Guldo et le tua sur le coup</p> 
+          <img src="../image/mode/mode_histoire/gero/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/ginyu.png" alt="Piccolo "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/vegeta_krilin_gohan.png" alt="Vegeta Krilin et Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/gero/histoire2.png" alt="Niveau 2"></h4>
+          <p>Alors que Guldo est vaincu, Ginyu est en colère car mise à part que la formation de pose du Commando est moins esthétique, l'un de ses hommes est mort à cause de Vegeta, alors que le Commando voyait ce que Vegeta a fait, Goku arriva avec l'intention de détruire tout le Commando s'ils ne déguerpissent pas, alors que Recoom et Barta sont vaincus, Ginyu ricane en pensant au corps incroyable qu'il a découvert en la personne de Goku. Alors un combat s'engage, le capitaine pense déjà au moment où il possédera le corps du Saiyan.</p>
+          <img src="../image/mode/mode_histoire/gero/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/ginyu.png" alt="Ginyu"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/goku2.png" alt="Goku"></p>
+        </div>
+      </div>
+    </div>
+
+  
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/gero/histoire3.png" alt="Niveau 2"></h4>
+          <p>Dans le corps de Goku, Ginyu part chercher Vegeta, mais même si c'est un nouveau corps, Ginyu n'a pas la maîtrise complète et Goku le ratrape, voyant son chef en difficulté, Jeece part l'aider mais est stoppé par Vegeta qui le tue en un seul coup, désormais seul dans cette bataille, il se retrouve face à Vegeta, Goku et Krilin. Alors que le combat semblait perdu, il décida de changer de corps avec Vegeta, mais Goku s'interposa et put récupérer son corps, mais voyant qu'il a récupérer son corps d'origine Ginyu refit sa technique et voyant une grenouille namekienne passée par là, il l'a balança sur Ginyu et le capitaine des forces de Freezer devint une simple grenouille. Vegeta a eut pitié de lui et le laissa dans cet état là. Ginyu désormais transformé en grenouille, bondissant loin de là, accablé par le chagrin...</p>
+          <img src="../image/mode/mode_histoire/gero/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/goku.png" alt="Ginyu"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/vegeta_ginyu_krilin.png" alt="Vegeta Goku Krilin"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/gero/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Voyant que Ginyu se bat à la loyale et ne préférant pas le tuer, Goku le fait plier et ce dernier prit la fuite. Alors que le bataille entre Goku et Freezer faisait trembler Namek, le capitaine Ginyu se retrouve sur Terre. En arrivant sur Terre, il décide de chercher les boules de cristal, afin de réssuciter les forces de Freezer. Il tombe sur Krilin et lui demande les boules de cristal, ce que le terrien refuse alors un combat s'engage. En battant Krilin, il tombe sur 3 boules de cristal et le Dragon Radar, désormais il ira à la chasse aux Dragon Balls.</p>
+          <img src="../image/mode/mode_histoire/gero/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Battre Goku sans le mettre KO, à la fin du chrono .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/ginyu.png" alt="Piccolo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/krilin.png" alt="Krilin"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/gero/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>En suivant le radar, il tombe sur la cachette secrète du laboratoire de Dr Gero. Ginyu voyant le Docteur lui exige de donner la Dragon Ball sauf que ce dernier refuse en expliquant qu'il en a besoin pour ses recherches, puisque personne n'est prêt à coopérer les deux individus en viennent au main. Ayant réussi à vaincre le Docteur, Ginyu le nargue et effectue une pose, ce qui est bien moins cool que s'il était avec ses compagnons, il poursuit donc sa route, toujours guidé par le radar.</p>
+          <p>Débloque la compétence "Pose Spéciale".</p>
+          <img src="../image/mode/mode_histoire/gero/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Krilin .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/ginyu_trunks_ss.png" alt="Ginyu et Trunks Super Saiyan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/gero.png" alt="Gero"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/gero/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Voyant que le radar donne un signal sur le sous-sol du laboratoire de Gero, sans faire attention il appuie sur un bouton activant les cyborgs et C18 en sort et demande où est le docteur Gero, avant même qu'il répond Trunks venant du futur apparaît et reconnait immédiatement la tenue des sbires de Freezer, même si cela n'enchante pas le Saiyan, il décide de s'allier à Ginyu pour vaincre C18. A la fin Trunks lui pose la question de s'il travaillait pour Freezer, voyant que sa couverture est fichue et Trunks est immensémment fort, il décide de rusé en faisant croire qu'il y avait Freezer derrière et s'en alla en courrant.</p>
+          <img src="../image/mode/mode_histoire/gero/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Gero</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/ginyu.png" alt="Piccolo et Gohan et Dendé"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/c18.png" alt="C18"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/gero/histoire_whatif4.png" alt="Niveau 2"></h4>
+          <p>Toujours en train de suivre le radar, cela l'a conduit au monde des glaces où étrangement à côté du signal du radar, il y a quelqu'un et ce quelqu'un est malheureusement Broly, le Super Saiyan Légendaire qui est de très mauvaise humeur, alors que Ginyu allait se faire massacrer Goku et Vegeta arrivent, ce qui frustre légèrement Ginyu, notamment de revoir Goku, mais le temps presse et même si Vegeta critique l'idée d'avoir Ginyu dans l'équipe, disant qu'il est un poids mort, lors du combat Ginyu fera un échange de corps temporel avec Son Goku et effectua un Kamehameha ejecttant Broly loin dans l'atmosphère. Maintenant qu'il a la boule de cristal, il prit la fuite en faisant la même ruse qu'à Trunks mais sur Vegeta.</p>
+          <p>Débloque l'attaque combinée avec Goku "Echange de corps spécial".</p>
+          <img src="../image/mode/mode_histoire/gero/whatif4.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre C18.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/ginyu_goku_vegeta.png" alt="Ginyu, Goku et Vegeta"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/broly.png" alt="Broly"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 5 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/gero/histoire_whatif5.png" alt="Niveau 2"></h4>
+          <p>A la recherche de la 7e boule de cristal, il se retrouva au sanctuaire de Karin où était Piccolo, sans plus attendre un combat pour la Dragon Ball commença. Surpris que Ginyu a augmenté en force, Piccolo lutte pour ne pas lâcher la boule de cristal, mais en vain, Ginyu avait les 7 Dragon Balls avec lui.</p>
+          <p>Débloque Cell comme personnage jouable.</p>
+          <img src="../image/mode/mode_histoire/gero/whatif5.png" alt="What If 5">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Broly.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/ginyu.png" alt="Ginyu"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/piccolo.png" alt="Piccolo"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/gero/histoire4.png" alt="Niveau 4"></h4>
+          <p>Dans le corps de Goku, Ginyu part chercher Vegeta, mais même si c'est un nouveau corps, Ginyu n'a pas la maîtrise complète et Goku le ratrape, voyant son chef en difficulté, Jeece part l'aider mais est stoppé par Vegeta qui le tue en un seul coup, désormais seul dans cette bataille, il se retrouve face à Vegeta, Goku et Krilin. Alors que le combat semblait perdu, il décida de changer de corps avec Vegeta, mais Goku s'interposa et put récupérer son corps, mais voyant qu'il a récupérer son corps d'origine Ginyu refit sa technique et voyant une grenouille namekienne passée par là, il l'a balança sur Ginyu et le capitaine des forces de Freezer devint une simple grenouille. Vegeta a eut pitié de lui et le laissa dans cet état là. Ginyu désormais transformé en grenouille, bondissant loin de là, accablé par le chagrin...</p>
+          <img src="../image/mode/mode_histoire/gero/4.png" alt="Niveau 4">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/gero/goku.png" alt="Ginyu"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/gero/vegeta_ginyu_krilin.png" alt="Vegeta Goku Krilin"></p>
+        </div>
+      </div>
+    </div>
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
