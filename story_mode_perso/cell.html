@@ -2,126 +2,193 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Fiche Cell Forme Parfaite — Supersonic Warriors 2</title>
+  <title>Mode Histoire de Cell — Supersonic Warriors 2</title>
   <link rel="icon" type="image/png" href="../image/title.png">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 80px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,27 +196,48 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
-    
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Cell</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,94 +247,202 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/cell/cell.png" alt="Cell Forme Parfaite">
-    <h2>Cell Forme Parfaite – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 4 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial </td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Projection parfaite</td><td>Balance l'ennemi vers l'avant après quelques coups</td><td>Y + B</td><td><img src="../image/cell/projection.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Eclair ultime</td><td><img src="../image/cell/spe.png" alt="Eclair ultime"></td><td>Blast à courte portée</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/cell/spe.gif" alt="Eclair ultime"></td></tr>
-        <tr><td>Vague ultime</td><td><img src="../image/cell/spe_up.png" alt="Vague ultime"></td><td>Attaque puissante mais courte portée</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/cell/spe_up.gif" alt="Vague ultime"></td></tr>
-        <tr><td>Kamehameha </td><td><img src="../image/cell/spe_down.png" alt="Kamehameha"></td><td>Rayon classique</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/cell/spe_down.gif" alt="Kamehameha"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Sprint pleine puissance</td><td><img src="../image/cell/ulti.png" alt="Sprint pleine puissance"></td><td>Charge</td><td>X + A (en bas de l'ennemi) + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/cell/ulti.gif" alt="Sprint pleine puissance"></td></tr>
-      </tbody>
-    </table>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Trio</h4>
-      <tbody>
-        <tr><td>Véritable Mal Absolu</td><td class="cartes-combo"><img class="carte-combo" src="../image/card/cell_card.png" alt="Carte Cell"><img class="carte-combo" src="../image/card/freezer_card.png" alt="Carte Freezer"><img class="carte-combo" src="../image/card/boo_mauvais_card.png" alt="Carte Buu (Mauvais)"></td><td>Nécessite d'être avec Cell et Buu (Mauvais), tout en ayant 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td></tr>
-      </tbody>
-    </table>
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Mal Absolu</td><td><img src="../image/cell/team_attack_freezer.png" alt="Mal Absolu"></td><td>Nécessite d'être avec Freezer et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/cell/team_attack_freezer.gif" alt="Mal Absolu"></td></tr>
-        <tr><td>Danse de Cell junior</td><td><img src="../image/cell/team_attack_cell_jr.png" alt="Danse de Cell junior"></td><td>Nécessite d'être avec Cell junior et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/cell/team_attack_cell_jr.gif" alt="Danse de Cell junior"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Fierté </td><td><img src="../image/cell/capacite.png" alt="Fierté"></td><td>Technique qui augmente l'attaque si les PV sont à 30% ou moins</td><td>L</td><td>Pas d'énergie requise</td><td><img src="../image/cell/capacite.gif" alt="Fierté"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/cell/cell_icon.png" alt="Cell Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/cell/competence.png" alt="Compétences de Cell" style="width: 450px;">
   </div>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_histoire/cell/map.png" alt="Map de Cell" style="width: 900px;">
+  </div>
+
+
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/cell/histoire1.png" alt="Niveau 1"></h4>
+          <p>Après la mort du Dr Gero, l'ordinateur, qui est resté actif, continuait de travailler sur la création de l'être ultime, nommé Cell. Celui-ci n'a qu'un seul but après sa création: évoluer pour devenir parfait. Pour cela l'ordinateur lui indique qu'il doit absorber les cyborgs C-17 et C-18. Dés son réveil, Cell partit à leur recherche, mais en vain ils ont déja été détruits par Trunks supposément. Cell le retrouva, le tua et s'empara de sa machine à voyager dans le temps afin de rvenir au moment où les cyborgs étaient encore fonctionnels, afin de les absorber. En arrivant dans le passé, Cell fit la rencontre de Piccolo, qui avait ressenti son aura, qui au passage possède en lui l'aura de Goku, Vegeta, Piccolo, Freezer et son père le Roi Cold, vu qu'il possède les cellules de ces 5 individus. Lorsque Piccolo ressentir cette énergie, ce fut comme ci ceux dont ils tenaient les gènes, étaient regroupés au même endroit en même temps. Le cyborg se présenta à Piccolo et s'en suit une discussion tendue pour savoir d'où venait Cell et ce qu'il voulait, mais Cell voulant absorber Piccolo afin d'augmenter sa puissance décida de directement passer à l'attaque.</p> 
+          <img src="../image/mode/mode_histoire/cell/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell_2e_forme.png" alt="Cell 2e Forme"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/piccolo.png" alt="Piccolo"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/cell/histoire2.png" alt="Niveau 2"></h4>
+          <p>Vegeta après sa défaite, part sur Namek et part en quête des boules de cristal, après avoir apprit que Freezer y allait aussi, en arrivant sur Namek, Vegeta trouva les sbires de Freezer et les détruisit. Irrité par les agissements du prince des Saiyans, Freezer fit venir le Commmando Ginyu, Vegeta est rejoint par Gohan et Krilin, prêts à affronter les forces de Freezer. Goku arriva également et se fit prendra son corps par Ginyu avec sa technique d'échange de corps. Après ce combat, grâce à Vegeta, Goku a récupéré son corps. Pendant que Goku récupère de son combat, Freezer n'est pas là. </p>
+          <p>Débloque Ginyu comme personnage jouable.</p>
+          <img src="../image/mode/mode_histoire/cell/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell_2e_forme.png" alt="Cell 2e Forme"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/piccolo_c17_c16.png" alt="Piccolo et C17 et C16"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/cell/histoire3.png" alt="Niveau 2"></h4>
+          <p>Grâce à Goku, Freezer fut vaincu, mais il revint sur Terre, avec un corps mécanique prêt à attaquer la Terre. Cependant un jeune homme venant du futur nommé Trunks annonce le danger que constituera les cyborgs à l'avenir, 3 ans plus tard les gueriers sont prêts, dont Vegeta qui a débloqué le Super Saiyan. Confiant dans ses capacités, il part à la rencontre des cyborgs et affronte C18.</p>
+          <p>Débloque Cell (Parfait) comme personnage jouable</p>
+          <img src="../image/mode/mode_histoire/cell/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell.png" alt="Cell"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/vegeta_ss_trunks_ss.png" alt="Vegeta Super Saiyan et Trunks Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/cell/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Vegeta a pu vaincre C17 et C18 après un long combat. Bulma créea une machine pour Trunks afin de pacifier son époque. Toutefois il alla voir Vegeta, pour se battre avec lui. Voyant qu'il était aussi fort que le "destructeur de la légende" dont on lui avait parlé, le jeune homme prit la fuite. Vegeta intrigué suivit Trunks, mais Goku l'interrompt et lui demanda au sujet de Trunks, il répondit que ce Trunks estime n'avoir jamais vu Vegeta, dés qu'il l'a vu, il voulait se battre.</p>
+          <p>Débloque Cell Junior comme personnage de support.</p>
+          <p>Débloque l'attaque combinée avec Cell Junior "Danse de Cell Junior"</p>
+          <img src="../image/mode/mode_histoire/cell/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Battre C-18 en faisant un Perfect .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell_cell_jr.png" alt="Cell et Cell Junior "><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/krilin_trunks_ss.png" alt="Krilin et Trunks Super Saiyan "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/cell/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>Troublé par ce que Vegeta a raconté au sujet de ce Trunks, Goku alla à sa rencontre. Etrangement face à Goku, Trunks ne montre aucune hostilité et raconta son histoire : il venait d'un autre futur, un futur où Vegeta met un terme à l'existence des cyborgs et ensuite vient à bout de Goku. Désormais sans ennemis, à l'image des cyborgs, il détruisait le monde et voyant qu'il n'avait plus aucun ennemi sur Terre, il est parti dans l'espace. Goku entend ceci fut choqué d'apprendre cette version de l'histoire et rassura Trunks en disant que ça ne ressemble pas à Vegeta, tout en rajoutant que pour que ce futur se concrétise il faut qu'il puisse le vaincre. Après avoir parlé tous deux s'en allèrent voir Vegeta et un nouveau combat reprit et les deux passèrent en Super Saiyan, Vegeta rajoute que s'il n'y avait point d'ennemi il s'ennuierait, de son côté Goku tenta de les arrêter car ils détruiraient tout, c'est à ce moment que Vegeta décida d'affronter Goku à la place de Trunks. Après un combat assez violent, Bulma arrive voulant assister au combat, mais dans le feu de l'action, elle a failli se prendre une attaque énergétique et contre toute attente, Vegeta la bloqua et put protéger Bulma. Trunks choqué par l'action de Vegeta, apprit de la bouche de Goku que Vegeta n'était nul autre que son père, la Bulma du futur sa mère ne voulait pas faire de la peine à son fils, lui cacha l'identité de son père, Trunks décida directement de retourner dans le futur et d'essayer de faire confiance à son père. C'est ainsi que cet autre Trunks retourna dans son autre futur. Que se passera t-il ? Nul ne le sait. </p>
+          <img src="../image/mode/mode_histoire/cell/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Trunks .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell.png" alt="Cell"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/cell2.png" alt="Cell"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/cell/histoire4.png" alt="Niveau 2"></h4>
+          <p>A la fin du combat face à C18, il était impuissant et dut s'entraîner d'arrache-pied pour réussir à surmonter cette humiliation. Alors que pendant que Vegeta et Trunks sont dans la Salle de l'Esprit et du Temps, Piccolo combattait les cyborgs, Cell fit son apparition et absorba C17. C'est alors que Vegeta fraîchement ressorti de la Salle spatio-temporelle, était confiant à l'idée de battre Cell.</p>
+          <p>Débloque l'Attaque Ultime "Big Bang Explosif"</p>
+          <img src="../image/mode/mode_histoire/cell/4.png" alt="Niveau 4">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell.png" alt="Cell"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/goku_ss.png" alt="Goku Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/cell/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Après la défaite explosive de Cell face à Vegeta, le prince des Saiyans décida de se reposer sur ses lauriers, le monde est en paix et Vegeta s'y fait. En allant en ville avec sa famille, il rencontra Goku et Gohan qui lui feront remarqué qu'il n'est pas au top de sa forme, Vegeta énervé par cette remarque décide de montrer à Gohan maintenant ado, via un combat, s'il est vraiment aussi mal en point qu'il le prétend. Durant le combat, Gohan dit ouvertement devant Vegeta qu'il n'est plus aussi fort qu'avant, alors sous la remarque de Gohan, Vegeta essaya de se transformer en Super Saiyan, à sa grande surprise, Vegeta n'arrivait plus à se transformer en Super Saiyan.</p>
+          <img src="../image/mode/mode_histoire/cell/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Battre Cell 2e Forme en lui infligeant un Ultimate Ko.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell.png" alt="Cell"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/freezer_dabra.png" alt="Freezer et Dabra"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/cell/histoire_whatif4.png" alt="Niveau 2"></h4>
+          <p>Furieux de voir que depuis que le monde était en paix, il s'était laissé aller, Vegeta décide de s'entraîner pour reprendre sa force d'antan. Quand il se sentit prêt, il alla chez Goku pour lui proposer un combat, Goku lui fit remarquer qu'après si peu de temps son énergie est incroyable, Vegeta répond en disant qu'il s'était juste reposé, dés lors un grand combat se lança entre les deux rivaux. Après ce combat, Vegeta retrouva le joie du combat en fit de même avec son fils Trunks.</p>
+          <p>Débloque la compétence "Conscience rivale".</p>
+          <img src="../image/mode/mode_histoire/cell/whatif4.png" alt="What If 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre C-18.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell_freezer.png" alt="Cell et Freezer"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/boo.png" alt="Boo"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_histoire/cell/histoire5.png" alt="Niveau 4"></h4>
+          <p>Aveuglé par son orgueil, Vegeta laissa absorbé C18 pour mettre à Cell d'avoir sa forme parfaite et d'avoir selon Vegeta "un bon combat", qui finalement se résolut par une humiliation pour le prince, mais heuresement il aida Gohan à vaincre Cell, lors du Kamehameha père-fils. 7 ans de paix étaient passées et Vegeta apprit que Goku reviendrait pour 24h pour participer au Tenkaichi Budokai, c'est alors que lui aussivoulait particper pour affronter Goku dans le tournoi, mais tout ne se passa pas comme prévu, le sorcier Babidi avait volé l'énergie de Gohan pour faire revivre Boo et en plus il avait manipulé le coeur prince des Saiyans en ravivant les ténèbres au fond de lui. Animé uniquement par le combat contre Goku, il força son rival de toujours à l'affronter. Après ce combat, Vegeta décida de se sacrifier en s'explosant pour vaincre Boo, mais en vain. Adieu Fier Guerrier ...</p>
+          <p>Débloque l'Attaque Ultime de Vegeta (Mauvais) "Explosion finale" et Babidi comme personnage de support.</p>
+          <p>Débloque Babidi comme personnage de support.</p>
+          <img src="../image/mode/mode_histoire/cell/5.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell.png" alt="Cell"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/gohan.png" alt="Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_histoire/cell/histoire6.png" alt="Niveau 2"></h4>
+          <p>Alors que la bataille face à Boo battait son plein, Gohan et Gotenks avaient perdu face à Boo et se firent absorbé, il est devenu trop puissant, vegeta fut ramené pour 24h sur Terre et Goku reçut l'énergie du Vieux Kaioshin et partent combattre Boo, mais même eux n'étaient pas assez forts à deux pour vaincre le Majin .Après avoir retirer les enfants du corps de Boo, le démon détruisit la Terre. Vegeta et les autres se téléportèrent dans le monde des Kaioshins et demanda à Goku de faire un Genkidama, le temps Vegeta que rettient Boo du mieux qu'il peut, mais il y avait également Boo et Mr Satan pour aider à convaincre les terriens et retenir Boo .En combattant Boo et voyant le mpal que Goku se donne pour réussir, il se rendit compte que lui il se bat pour sa fierté alors que Goku se bat pour l'avenir de l'Univers. Après que Goku demanda avec Mr Satan aux terriens de donner leur énergie, le Super Genkidama fut prêt et éradiqua Boo complètement. Ce combat fit comprendre à Vegeta le vrai sens de la force et continua son entraînement pour un jour surpasser Kakarot. </p>
+          <img src="../image/mode/mode_histoire/cell/6.png" alt="Niveau 6">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/cell/cell_2e_forme.png" alt="Cell 2e Forme"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/cell/gohan_ss2.png" alt="Gohan Super Saiyan 2"></p>
+        </div>
+      </div>
+    </div>
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
