@@ -2,126 +2,193 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Fiche Majin Boo — Supersonic Warriors 2</title>
+  <title>Mode Histoire de Boo — Supersonic Warriors 2</title>
   <link rel="icon" type="image/png" href="../image/title.png">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 80px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,27 +196,48 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
-    
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Boo</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,86 +247,197 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/boo/boo.png" alt="Majin Boo">
-    <h2>Majin Boo – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 6 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial </td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-         <tr><td>Projection innocente du majin</td><td>Balance l'ennemi vers l'avant après quelques coups</td><td>Y + B</td><td><img src="../image/boo/projection.gif" alt="Projection"></td></tr>
-        <tr><td>Projection cruel du majin</td><td>Balance l'ennemi vers l'avant après quelques coups</td><td>Y + B + L (plusieurs fois)</td><td><img src="../image/boo/projection2.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Canoninnocence</td><td><img src="../image/boo/spe.png" alt="Canoninnocence"></td><td>Attaque puissante mais courte portée</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/boo/spe.gif" alt="Canoninnocence"></td></tr>
-        <tr><td>Bénédiction du mal</td><td><img src="../image/boo/spe_up.png" alt="Bénédiction du mal"></td><td>Explosions multiples en arc de cercle</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/boo/spe_up.gif" alt="Bénédiction du mal"></td></tr>
-        <tr><td>Explosion de colère </td><td><img src="../image/boo/spe_down.png" alt="Explosion de colère"></td><td>Barrière énergétique</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/boo/spe_down.gif" alt="Explosion de colère"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Sucreries</td><td><img src="../image/boo/ulti.png" alt="Sprint pleine puissance"></td><td>Projection</td><td>X + A (en bas de l'ennemi) + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/boo/ulti.gif" alt="Sprint pleine puissance"></td></tr>
-      </tbody>
-    </table>
-
-
-    <h3>Team Specials Attacks </h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <h4>Duo</h4>
-      <tbody>
-        <tr><td>Attaque Mr. Satan</td><td><img src="../image/boo/team_attack_mr_satan.png" alt="Attaque Mr. Satan"></td><td>Nécessite d'être avec Mr. Satan et d'avoir 200 de ki</td><td><img src="../image/tag_team.png" alt="Touche Attaque Spéciale"> </td><td><img src="../image/boo/team_attack_mr_satan.gif" alt="Attaque Mr. Satan"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Régénération</td><td><img src="../image/piccolo/capacite.png" alt="Régénération"></td><td>Technique régénérant les PV au fur et à mesure du combat</td><td>L</td><td>Energie à 100</td><td><img src="../image/boo/capacite.gif" alt="Régénération"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/boo/boo_icon.png" alt="Boo Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/boo/competence.png" alt="Compétences de Boo" style="width: 450px;">
   </div>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_histoire/boo/map.png" alt="Map de Boo" style="width: 900px;">
+  </div>
+
+
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/boo/histoire1.png" alt="Niveau 1"></h4>
+          <p>Il était une fois un sorcier maléfique nommé Babidi qui n'avait qu'un seul but: redonner vie à Boo qui a été scellé des milliers d'années auparavant. Pour réussir Babidi décida d'amplifier le mal pour contrôler des guerriers pour qu'ils récoltent de l'énergie pour faire renaître le démon. Un beau jour où il y avait le Tenkaichi Budokai, il jeta son dévolu sur Vegeta et amplifie le mal en lui le faisant devenir Majin Vegeta. Ce dernier alla combattre Goku et leur combat fut tellement intense en énergie que le démon Boo apparut au monde. Vegeta savait que c'était lui qu'il l'a fait renaître, de ce fait il décida que ça soit à lui la tâche de le détruire, mais il savait également que le combat sera très difficile. Boo apparut et tout le monde fut choqué de son apparance: un grand bonhomme rose, rond et gros ressemblant à un grand enfant. Mais en vérité il cache une terrible puissance derrière cette apparence enfantine, et son premier combat après être revenu sera contre Vegeta. Comme on le pensait en vue de la puissance de Boo, Vegeta se fit écrasé et dut se sacrifier en s'explosant, pensant avoir emporté Boo dans la tombe, mais malheuresement la seule victime ne fut que lui-même: Vegeta. Boo s'étant régénéré et recomposé. </p> 
+          <p>Débloque la compétence "Régénération".</p>
+          <img src="../image/mode/mode_histoire/boo/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo.png" alt="Boo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/majin_vegeta.png" alt="Majin Vegeta"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/boo/histoire2.png" alt="Niveau 2"></h4>
+          <p>Boo guidé par Babidi, passe à l'action. Obéissant à ses ordres, il change les gens en sucreries et fait régner la terreur sur Terre. D'un simple souffle, Boo détruit une ville entière, alors que tout ce carnage se passait à merveille, Goku apparut sous les yeux de Babidi et Dabra. Goku déclare qu'il est beaucoup plus fort que ce que lui et vegeta pensaient et directement Goku décide d'affronter Boo. Alors que le combat se déroulait bien, Goku et Boo se rendaient coup pour coup et aucun des deux ne semblaient véritablement faiblir, mais Goku décide d'arrêter au grand étonnement de Boo, malheuresement Goku est pressé et doit y aller, alors il s'éclipsa grâce à la transmission instantanée, mais avant il demanda à Boo de pourquoi il écoutait un moins que rien alors qu'il est si fort. Ces paroles firent germer dans la tête de Boo, une idée de rebéllion. Alors que Babidi réprimander Boo pour avoir laisser Goku s'enfuir, Boo fatigué des ordres du sorcier, eut une idée, il prit Babidi et le tua d'un coup. Boo est maintenant libre !!! </p>
+          <img src="../image/mode/mode_histoire/boo/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo.png" alt="Boo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/goku_ss.png" alt="Goku Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/boo/histoire3.png" alt="Niveau 2"></h4>
+          <p>N'ayant plus Babidi sur le dos, Boo faisait ce qu'il souhaitait: il détruisait des villes à souhait pour s'amuser et transformer les humains en bonbon pour les manger. Pendant ce temps il construisit une maison pour avoir un endroit fixe et un beau jour, un homme seul vient lui rendre visite, il s'agissait de Mr Satan, le champion du monde de lutte. Ce dernier voulait affronter Boo, mais lorsqu'il a vu le démon, il prit peur et décida de jouer la ruse en le servant, mais au fil du temps, les deux deviennent amis. Soudainement Gotenks arrive pour affronter Boo et un combat commença entre les deux guerriers. Alors que le combat se poursuivait, Boo devint en colère, le mal qui l'habite et sa rage se matérialisèrent sous la forme de Boo (Mauvais) qui en plus d'être purement maléfique, avait prit la majorité de la puissance de Boo. Ce nouveau Boo contrairement à l'original qui est devenu gentil et bon avec le temps, est prêt à répandre le mal partout dans le monde entier et sur Terre</p>
+          <p>Débloque Boo (mauvais) comme personnage jouable.</p>
+
+          <p>Débloque Mr Satan comme personnage de support.</p>
+          <p>Débloque l'attaque combinée avec Mr Satan "Attaque Mr Satan".</p>
+          <h5>Condition pour obtenir Mr Satan et Attaque Mr Satan</h5>
+          <p>Battre Gotenks avec un Perfect .</p>
+          <img src="../image/mode/mode_histoire/boo/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo.png" alt="Boo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/gotenks.png" alt="Gotenks"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/boo/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Alors que le combat contre Gotenks se poursuivait Mr Satan intervient et frappe le guerrier mais sans effet, alors qu'un coup allait venir sur le champion, Boo évita cela en frappant Gotenks qui prit la fuite. Après avoir vaincu Gotenks sans trop de difficulté, il continuait de jouer avec Mr Satan comme si de rien n'était, mais Gotenks revient Boo pour un noveau combat, mais sans le vouloir la cuisine de Mr Satan a été touchée, Boo en colère enclencha le combat contre le petit guerrier. Boo gagna le combat et transforma Gotenks en bonbon. Alors que Boo s'apprêtait à le manger et à changer d'autres personnes en sucreries pour calmer sa faim, Mr Satan l'arrêta et lui ordonna calmement de ne pas faire ça car n'étant pas bien et aussitôt Boo arrêta et retransforma Gotenks dans son état initial. Boo et Mr Satan coulaient des jours heureux ensemble, sans le moindre soucis. Sous l'influence de Mr Satan, Boo devint plus doux et gentil au fil du temps, mais il ne suffirait que d'un instant, que d'une étincelle de colère pour que toute cette gentillesse s'efface</p>
+          <p>Débloque l'Attaque Ultime "Sucreries"</p>
+          <img src="../image/mode/mode_histoire/boo/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Battre Gotenks avec un Perfect .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo.png" alt="Boo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/gotenks.png" alt="Gotenks"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_histoire/boo/histoire4.png" alt="Niveau 2"></h4>
+          <p>A la suite de l'apparition du Boo (Mauvais), les deux Boo se battèrent pour savoir qui est le véritable Boo et malheuresement le mal gagna contre le bien et Boo (Mauvais) mangea le gentil Boo et devint encore plus fort. Maintenant capable de sentir l'énergie, il arriva à pister les guerriers Z dont Piccolo et surtout Gotenks, et toute de suite il se dirige vers le palais de Dendé pour l'affronter. Boo n'étant pas du genre patient, exigea de suite qu'on lui ramène Gotenks, ce que fit Piccolo en essayant de faire gagner du temps aux garçons pour que tout soit prêt. Après l'avoir guidé jusqu'à la Salle de l'Esprit et du Temps, Boo affronta le nouveau Gotenks qui maintenant peut se transformer en Super Saiyan et est bien plus fort, ce qui de toute manière ne faisait rien à Boo dans sa manière de penser qui était de simplement d'affronter des adversaires forts puis de les tuer s'ils étaient trop forts. Voyant que le combat s'éternisait, Piccolo décida de détruire la porte de sortie de la salle, afin que personne ne puisse s'échapper. Boo pensant que c'était la fin pour lui et ses bonbons, dans un hurlement de rage, cria tellement fort qu'il ouvrit une brêche reliant les deux dimensions et donc a put s'échapper.</p>
+          <img src="../image/mode/mode_histoire/boo/4.png" alt="Niveau 4">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo_mauvais.png" alt="Boo mauvais"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/piccolo_gotenks.png" alt="Piccolo et Gotenks"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/boo/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>En criant encore plus intensément, Boo ouvra une faille menant directement sur l'Autre Monde, le monde des morts. Là-bas Vegeta et Dabra allaient s'affronter pour combler l'ennui de ce monde, alors que le combat allaient commencer, Boo se joignit à eux.  Les deux guerriers morts furent surpris de voir Boo, ironiquement c'était les deux adversaires que Boo avait tué. C'est alors qu'un comabt à 1 contre 2 commença: Boo contre Vegeta et Dabra. Après avoir gagné, Boo demanda à Dabra de l'emmener voir des adversaires plus forts, ce que Dabra accepta. Boo suivit Dabra pour combattre des adversaires à sa mesure.</p>
+          <p>Débloque Dabra comme personnage de support.</p>
+          <img src="../image/mode/mode_histoire/boo/whatif2.png" alt="What If 2">
+          <h5>Condition</h5>
+          <p>Battre Gotenks avant Piccolo .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo_mauvais.png" alt="Boo mauvais"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/vegeta_ss_dabra.png" alt="Vegeta Super Saiyan et Dabra"></p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/boo/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Après avoir gagné face à Vegeta et Dabra, Boo suivant Dabra, l'emmène pour combattre de nouveaux guerriers et à chaque fois, les combattants ne sont pas assez puissants pour tenir tête à Boo, mais le souverain de ce monde ressenti les sombres desseins dans l'esprit de Boo et intervient donc en amenant Cell et Freezer afin de combattre, voyant que les mots ne sont pas d'effets, les poings prendront le relais, on apprend que Cell a prit les rènes des lieux de par sa puissance écrasante, alors que le combat allait commencer, Boo exigea que Dabra se bat également, sans demander son avis, c'est alors qu'un gigantesque combat se mit en place. A la fin du combat aussi bref soit il, Boo en sort épuisé et finit par s'endormir, Cell reporte son attention sur Dabra qui ne mène pas large, finalement Boo trouve ce combat ennuyeux et décide de couper Cell en morceaux avec une seule attaque, ce qui permit à Dabra d'en profiter. Cell fut anéanti par les attaques conjointes de Boo et Dabra. Boo commence à s'ennuyer décide finalement de rentrer chez lui, en ouvrant une nouvelle faille dimensionnelle. la question maintenant est: est ce qu'il arrivera à rentrer chez lui ?</p>
+          <p>Débloque l'attaque combinée avec Dabra "Entaille obscure".</p>
+          <p>Débloque l'Attaque Ultime "Brise-coeur"</p>
+          <img src="../image/mode/mode_histoire/boo/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Vegeta et Dabra .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo_mauvais_dabra.png" alt="Boo (Mauvais) et Dabra"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/cell_freezer.png" alt="Cell et Freezer"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_histoire/boo/histoire5.png" alt="Niveau 4"></h4>
+          <p>Alors que le combat face à Gotenks poursuivait son cours, Boo sentit l'énergie incroyable de Gohan qui venait de sortir de son entraînement au Kaioshin Kai, il se dirige vers les lieux de l'affrontement pour défaire Boo. Pour faire face à Gohan, Boo décida d'absorber Gotenks et Piccolo, ayant maintenant les deux sont sous contrôle, Boo est confiant face à Gohan et un combat dentesque se lança. Boo avait clairement l'avantage sur Gohan lors du combat et en profita pour absorber un Gohan à bout de souffle qui vient alimenter la puissance démesurée de Boo. Qui peut encore lui faire face à présent ?</p>
+          <p>Débloque l'attaque combinée avec Gotenks Super Saiyan 3 "Beignets Galactiques"</p>
+          <p>Débloque la compétence "Tir puissant".</p>
+          <img src="../image/mode/mode_histoire/boo/5.png" alt="Niveau 5">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Gotenks et Piccolo.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo_mauvais_gotenks_ss3_piccolo.png" alt="Boo mauvais, Gotenks Super Saiyan 3 et Piccolo"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/gohan_ado.png" alt="Gohan Ado"></p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_histoire/boo/histoire6.png" alt="Niveau 2"></h4>
+          <p>Malgré que Boo ait acquis une puissance incommensurable, il fut ridiculisé par Goku et Vegeta ayant fusionné pour donner Vegetto. Fou de rage Boo mobilise tout sa bestialité et finit par détruire la Terre en un instant. Mais conscient que Goku s'est échappé grâce au déplacement instantané, il le poursuivit jusque dans le monde des Kaioshins. Le seul moyen qu'a trouvé Vegeta et les autres fut pour vaincre Boo était le Genkidama. Vegeta, Boo et Mr Satan permirent à Goku de gagner du temps pour la formation de son Genkidama et après une féroce bataille, avant de l'achever Goku fit le voeu que Boo soit réincarné en une bonne personne afin qu'elle combatte contre Goku. Finalement Boo fut désintégré par le Genkidama . Désormais l'Univers est en paix grâce à Goku, Vegeta, Boo et les terriens. Mais l'esprit de Boo revient sur Terre, dans le corps d'un nouveau guerrier nommé Oob qui participera au prochain Budokai Tenkaichi, là où Goku y sera également...</p>
+          <img src="../image/mode/mode_histoire/boo/6.png" alt="Niveau 6">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/boo/boo_mauvais.png" alt="Boo mauvais"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/boo/vegeta_boo_mr_satan.png" alt="Vegeta Boo et Mr Satan"></p>
+        </div>
+      </div>
+    </div>
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
