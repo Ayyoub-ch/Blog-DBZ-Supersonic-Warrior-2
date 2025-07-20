@@ -2,126 +2,193 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Fiche Broly — Supersonic Warriors 2</title>
+  <title>Mode Histoire de Broly — Supersonic Warriors 2</title>
   <link rel="icon" type="image/png" href="../image/title.png">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #222;
       color: #f2f2f2;
     }
-
     header {
       background-color: #222;
       color: #fff;
       padding: 40px 0 20px 0;
       text-align: center;
     }
-
     header img {
       width: 200px;
       height: auto;
     }
-
     header h1 {
       margin: 20px 0 30px 0;
       font-size: 32px;
     }
-
-    .fiche {
-      max-width: 1200px;
-      margin: 40px auto 60px auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .fiche h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .fiche ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .fiche ul li {
-      margin-bottom: 8px;
-    }
-
-    .fiche table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .fiche th,
-    .fiche td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .fiche th {
-      background: #333;
-    }
-
-    .fiche img {
-      width: 100%;
-      height: auto;
-      display: block; /* enlève l'espace sous l'image */
-      border-radius: 10px 10px 0 0; /* coins arrondis haut si tu veux qu'ils s'alignent avec la fiche */
-    }
-
-
-    /* Menu */
     nav {
       background-color: #333;
       padding: 15px 0;
       text-align: center;
     }
-
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
-      display: inline-block; /* rend le UL compact */
+      display: inline-block;
     }
-
     nav ul li {
       display: inline-block;
       margin: 0 20px;
     }
-
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #ffcc00;
     }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-    .cartes-combo {
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
       display: flex;
-      gap: 8px; /* espace entre les images */
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
     }
 
-    .cartes-combo img {
-      width: 80px; /* ajuste selon ton besoin */
-      height: auto;
-      align-items: center;
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
     }
 
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -129,27 +196,48 @@
       left: 20px;
       cursor: pointer;
     }
-
     .bouton-retour img {
       width: 120px;
       transition: transform 0.2s;
     }
-
     .bouton-retour img:hover {
       transform: scale(1.05);
     }
-    
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="../image/title.png" alt="Logo Dragon Ball Z">
-    <h1>Dragon Ball Z: Supersonic Warriors 2</h1>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Broly</h1>
   </header>
-
-  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="../accueil.html">Accueil</a></li>
@@ -159,74 +247,232 @@
     </ul>
   </nav>
 
-  <div class="fiche">
-    <img src="../image/broly/broly.png" alt="Broly">
-    <h2>Broly – DBZ: Supersonic Warriors 2</h2>
-
-    <ul>
-      <li><strong>Dragon Power :</strong> 6 DP</li>
-    </ul>
-
-    <h3>Contrôles de base</h3>
-    <table>
-      <thead>
-        <tr><th>Bouton</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Y</td><td>Coup faible</td></tr>
-        <tr><td>X</td><td>Coup fort</td></tr>
-        <tr><td>A</td><td>Projectile</td></tr>
-        <tr><td>B</td><td>Garde</td></tr>
-        <tr><td>R</td><td>Charge de Ki</td></tr>
-        <tr><td>L</td><td>État spécial </td></tr>
-        <tr><td>Y + B</td><td>Projection</td></tr>
-        <tr><td>X + A</td><td>Coups spéciaux</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Projection</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Projection légéndaire</td><td>Balance l'ennemi devant soi</td><td>Y + B</td><td><img src="../image/broly/projection.gif" alt="Projection"></td></tr>
-        <tr><td>Projection du Berserker</td><td>Balance l'ennemi vers le sol puis le rattrape et l'explose avec une explosion le projettant vers l'avant</td><td>Y + B + L (plusieurs fois)</td><td><img src="../image/broly/projection2.gif" alt="Projection"></td></tr>
-      </tbody>
-    </table>
-    
-    <h3>Coups spéciaux</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Coque explosive</td><td><img src="../image/broly/spe.png" alt="Coque explosive"></td><td>Kikoha gigantesque</td><td>X + A (en face de l'ennemi)</td><td><img src="../image/broly/spe.gif" alt="Coque explosive"></td></tr>
-        <tr><td>Geyser Planétaire</td><td><img src="../image/broly/spe_up.png" alt="Geyser Planétaire"></td><td>Faisceau d'énergie gigantesque</td><td>X + A (au dessus de l'ennemi)</td><td><img src="../image/broly/spe_up.gif" alt="Geyser Planétaire"></td></tr>
-        <tr><td>Pic géant </td><td><img src="../image/broly/spe_down.png" alt="Pic géant"></td><td>Charge</td><td>X + A (en dessous de l'ennemi)</td><td><img src="../image/broly/spe_down.gif" alt="Pic géant"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Attaque Ultime</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Météore blaster</td><td><img src="../image/broly/ulti.png" alt="Météore blaster"></td><td>Multitude de Kikohas</td><td>X + A (en face de l'ennemi) + nécessite HP faible & Ki ≥ 150</td><td><img src="../image/broly/ulti.gif" alt="Météore blaster"></td></tr>
-      </tbody>
-    </table>
-
-    <h3>Capacité</h3>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Infos</th><th>Détails</th><th>Commande</th><th>Condition</th><th>Visuel</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Bats Carot !</td><td><img src="../image/broly/capacite.png" alt="Bats Carot !"></td><td>Technique augmentant l'attaque si l'ennemi est Goku</td><td>L</td><td>Energie à 150</td><td><img src="../image/broly/capacite.gif" alt="Bats Carot !"></td></tr>
-      </tbody>
-    </table>
+  <div class="images-separees">
+    <img src="../image/mode/mode_histoire/broly/broly_icon.png" alt="Broly Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_histoire/broly/competence.png" alt="Compétences de Broly" style="width: 450px;">
   </div>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_histoire/broly/map.png" alt="Map de Broly" style="width: 900px;">
+  </div>
+
+
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_histoire/broly/histoire1.png" alt="Niveau 1"></h4>
+          <p>En tuant Freezer, Goku a également bafoué l'honneur de sa famille, c'est là que le grand frère de Freezer intervient pour venger l'honneur familial: Cooler. Il arriva sur Terre et met une ville à feu et à sang afin d'attirer le saiyan, ce qu'il arriva à faire. Gohan et Piccolo n'avaient pas tardé à se montrer face au tyran. Les soldats de Cooler et Cooler lui même demandèrent où se trouve le Super Saiyan qui a vaincu Freezer mais Piccolo refusant de parler, Cooler passa à l'offensive. Piccolo et Gohan tombèrent face à Cooler et ses hommes.</p> 
+          <img src="../image/mode/mode_histoire/broly/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly.png" alt="Broly"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/gohan_piccolo.png" alt="Piccolo et Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 1 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/broly/histoire_whatif1.png" alt="Niveau 2"></h4>
+          <p>Alors que Cooler gagnait du terrain dans l'affrontement, il nargua Goku en lui dmandant si c'est tout ce que peut faire un Super Saiyan. Voyant que la chance est de son côté, il balaya sans problème les armées de la Terre et faisait régner la terreur. Alors que Vegeta perdit la vie face à Cooler, la Terre perdit son dernier guerrier capable de résister à Cooler. La statégie de Cooler était assez bonne pour conquérir toute la planète, il détruisait méthodiquement chaque ville. Un beau jour Mecha Freezer arriva sur Terre, les terriens n'avaient nul autre chose que de se soumettre. 10 ans plus tard, les hommes de Cooler sont à la recherche des derniers survivants Saiyans, mais personne ne fut trouvé, car ils sont capables d'échapper à leur surveillance. Voyant l'incompétence de ses hommes, Cooler décide de s'en charger lui-même, il emmena Freezer avec lui pour dénicher les saiyans. on apprend que Gohan avait survécu et entraînait en cachette, Trunks le fils de Vegeta. La résistance face à Cooler continuait nuit et jour. Un beau jour Cooler trouva Gohan et Trunks grâce à ses hommes malgré leur incompétence et un combat s'engagea entres les deux tyrans et les deux survivants. Alors que les conquérants ont gagnés, Cooler demande comment ils arrivent à trouver les points faibles de la surveillance, Gohan encore en train de résister, dit à Trunks de fuir et ne compte rien dire. Trunks prit la fuite et Gohan perdit la vie à son tour face à l'envahisseur.</p>
+          <p>Débloque l'attaque combinée avec Mecha Freezer "Tempête gelée"</p>
+          <img src="../image/mode/mode_histoire/broly/whatif1.png" alt="What If 1">
+          <!-- Section Condition -->
+          <h5>Condition</h5>
+          <p>Battre Goku.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly.png" alt="Broly"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/gohan_ado_trunks.png" alt="Gohan Ado et Trunks"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 2 -->
+    <div class="branche"></div>
+    <div class="evenement branche-droite">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/broly/histoire_whatif2.png" alt="Niveau 2"></h4>
+          <p>Quelques temps après, les espions de Cooler l'informèrent que Trunks est devenu un Super Saiyan et est devenu plus puissant que Gohan. Actuellement il détruit les unités militaires de Cooler. Cooler voulant s'en charger, demanda d'abord à Freezer s'il peut le vaincre, mais ce dernier répond que vu qu'il s'est fait vaincre une première fois par Goku, ne pourra pas vaincre un Super Saiyan aussi fort ou si ce n'est plus que lui. Voyant le manque d'assurance de Freezer, Cooler se voit lui-même dans l'obligation de le vaincre, étant le seul pouvant le faire. Cooler alla à la recontre de Trunks qui s'entraîné et apprit à Cooler qu'à la mort de Gohan, la fureur réveilla le Super Saiyan qu'il est et maintenant il souhaite se venger de Cooler. Un match retour entre le Saiyan et le conquérant froid est en place et malheureusement Trunks se fait abattre par Cooler et Freezer qui n'ont désormais aucune résistance face à eux. Cooler remarque le comportement étrange de Freezer et lui posa la question en lui disant que les Super Saiyans qui l'ont rendu ce qu'il est, sont désormais tous vaincus, il devrait être content pourtant. Freezer répondit avec un "Oui" assez spécial.</p>
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Gohan et Trunks .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly.png" alt="Broly"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/trunks_ss.png" alt="Trunks Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 3 -->
+    <div class="branche"></div>
+    <div class="evenement branche-gauche">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/broly/histoire_whatif3.png" alt="Niveau 2"></h4>
+          <p>Désormais sur Terre, il n'existe plus aucun guerrier capable de résister à Cooler, mais ce dernier reste sur ses gardes. Avec Sauzer, Cooler remarque que Freezer agit bizarrement et compte désormais lui régler son compte, Neizu hésite, mais Cooler est formel, les ordres ne sont pas discutables et Freezer doit payer de sa trahison. Le jour suivant alors que les deux frères partaient en expédition, Cooler annonce qu'ils vont attaquer la capitale de l'Ouest et que toute résistance sera anéanti. Freezer prit de court pensait qu'aujourd'hui, ils devaient attaquer la capital de l'Est. Cooler avait changé d'avis sans le consulter, remarquant que Freezer ne semble pas satisfait. C'est alors que Sauzer arrive et annonce à Cooler que la capitale de l'Est est belle et bien déserte comme l'ont vérifié ses hommes. Prouvant la trahison de Freezer, par ce fait là, Cooler demande des explications à son frère, mais son frère ne voulant pas répondre, préfère un combat. C'est alors qu'un combat à mort se déroula entre les deux frères. Cooler vaincut Freezer qui termina au sol et lui dit que s'il avait obéit sagement, il l'aurait surement laissé la vie sauve. Sauzer demanda ce qu'on doit faire de Freezer et Cooler lui répondit qu'étant son frère, il lui réserve sa technique la plus puissante, mais le plus inquiétant est le fait que leur père le Roi Cold aura vent de sa trahison. Cooler prit donc la décision d'attaquer ouvertement son père afin d'être tranquille, la bataille qui s'en suit fut d'une intensité rarement atteinte que nul terrrien ne peut la contempler </p>
+          <p>Débloque l'Attaque Ultime "Arc Explosif"</p>
+          <img src="../image/mode/mode_histoire/broly/whatif3.png" alt="What If 3">
+          <h5>Condition</h5>
+          <p>Terminer le combat contre Trunks</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/ginyu.png" alt="Broly"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/c18.png" alt="C18"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_histoire/broly/histoire2.png" alt="Niveau 2"></h4>
+          <p>Les hommes de Cooler ont signalés la position de Goku et directement Goku confond Cooler avec Freezer, ce qui me en colère Cooler qui ne tolère pas qu'on le mette dans le même panier que son frère. Cooler lui demande s'il est le Super Saiyan ayant vaincu Freezer, ce que Goku confirma. C'est alors qu'un combat démarre entre le bafoueur de la plus grande lignée de l'Univers et le dernier de sa lignée. Alors que le combat semblait terminé pour Goku, Cooler voyant qu'au final le Super Saiyan n'est qu'une légende, il décida de détruire la Terre, mais sous le coup de la colère, Goku devient Super Saiyan et repousse la Supernova de Cooler, jusqu'au soleil, ce qui fin à la vie de Cooler.</p>
+          <p>Débloque la compétence "Honneur sauf".</p>
+          <img src="../image/mode/mode_histoire/broly/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly.png" alt="Broly"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/goku.png" alt="Goku"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/broly/histoire3.png" alt="Niveau 2"></h4>
+          <p>Alors que Cooler était mort et vaincu, malheureusement il n'en était rien, il avait survécu. La cause de sa résurrection était une planète-machine appelée Big Gete Star, qui avait la capacité d'absorbé des planètes pour se développer, Cooler se lia à elle et en prit le contrôle. Il jetta son dévolu sur la nouvelle planète Namek pour en faire le coeur de sa base. Les guerriers Z invités pour voir la nouvelle Namek, arrivèrent et virent que tout à changé. Il y avait des robots qui envahissaient la planète, prenaient en otage la population mais surtout que Cooler était en vie et avait changé, il était devenu Metal Cooler. Piccolo fut son premier adversaire, qui fut choqué de le voir en vie et s'en suit un combat que Piccolo ne pouvait gagner face à l'armée de Metal Cooler. Metal Cooler content d'avoir vaincu le Namek, annonce que ce sera bientôt au tour de la Terre et qu'il viendra se venger des Super Saiyans.</p>
+          <p>Débloque Metal Cooler</p>
+
+          <h5>Condition pour débloquer Metal Cooler</h5>
+            <p>Terminer le combat contre Piccolo en perdant 2 Metal Cooler.</p>
+          <img src="../image/mode/mode_histoire/broly/3.png" alt="Niveau 3">
+          <h5>Condition</h5>
+          <p>Battre Goku avec un Ultimate KO .</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly.png" alt="Broly"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/piccolo.png" alt="Piccolo"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Branche What If 4 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/broly/histoire_whatif4.png" alt="Niveau 2"></h4>
+          <p>Après avoir vaincu Piccolo, Metal Cooler se dirige vers la Terre avec le Big Gete Star, avec l'intention de faire payer aux Saiyans et tous ceux qui ont contribué à sa défaite. En arrivant sur Terre, Metal Cooler se rappela que le Terre renferme des boules de cristal et commence à réfléchir à comment les utiliser. C'est alors que Goku accompagné de Vegeta tous deux en Super Saiyan apparaîssent, prêts à se battre contre Metal Cooler. Metal Cooler écrasa les Super Saiyans avec tous ses corps et absorba leur énergie. Maintenant, cap sur les boules de cristal.</p>
+          <p>Débloque l'Attaque Ultime "Pluie machine"</p>
+          <img src="../image/mode/mode_histoire/broly/whatif4.png" alt="What If 4">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly.png" alt="Broly"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/goku_ss_vegeta_ss.png" alt="Vegeta Goku Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 5 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/broly/histoire_whatif5.png" alt="Niveau 2"></h4>
+          <p>Metal Cooler rassemble les 7 boules de cristal et ramène à la vie le Commando Ginyu, Zarbon et Dodoria. Le commando Ginyu comme à son habitude fait une pose en groupe pour célébrer leur renaissance, ce qui laisse Cooler de marbre. Le capitain propose même à leur seigneur de se joindre, ce qui comiquement fait déjà regretter Cooler de les avori rappelé. Zarbon et Dodoria viennent et avertissent qu'il y a de grandes puissances dans les alentours, Cooler en profite pour voir la vraie puissance de ses soldats. En allant sur place, on voit le Dr Gero avec les cyborgs en train de rechercher Son Goku, alors qu'ils détruisaient tout sur leur passage, Metal Cooler arriva et fut étonné de voir que les terriens ont créer des corps cybernétiques. Les cyborgs furent étonnés de voir l'armée de Cooler et ce dernier déclara qu'ils alimenteront la puissance des Metal Coolers. Metal Cooler et son armée écrasa les cyborgs impuissants qui viendront alimenter la puissance de Metal Cooler.</p>
+          <img src="../image/mode/mode_histoire/broly/whatif5.png" alt="What If 5">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Goku et Vegeta.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly_mr_satan.png" alt="Broly et Mr Satan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/gero_c18_c17_c16.png" alt="les cyborgs"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branche What If 6 -->
+    <div class="branche"></div>
+    <div class="evenement branche-centre">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>What If — <img src="../image/mode/mode_histoire/broly/histoire_whatif6.png" alt="Niveau 6"></h4>
+          <p>Après avoir absorbé les cyborgs, l'Etoile du Grand Guedester gagna en puissance. Cependant un problème survient, pendant que Ginyu et son groupe réfléchissait à une pose groupée où Cooler pourrait être intégré, Dodoria signala qu'un mosntre se nourrit de la force vitale des troupes dans la capitale de l'Ouest, aussitôt Cooler et les autres se préparèrent au combat. Etant désormais sur palce, le monstre en question était Cell qui cherchait sa forme parfaite et voyant Cooler qui ne peut être absorbé, mais en revanche Metal Cooler voit un être comme Cell intéressant a absorbé et un combat s'en suit entre les deux. Après avoir vaincu Cell, l'étoile Big Gete Star absorba le cyborg. Mais cet ordre aura de lourdes conséquences innatendues par la suite, Cell encore conscient, vit C-17 et C-18 dans le même endroit, prêts à être absorbés, maintenant il est parfait .</p>
+          <img src="../image/mode/mode_histoire/broly/whatif6.png" alt="What If 6">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre les Cyborgs.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/broly_mr_satan.png" alt="Broly et Mr Satan"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/cell_2e_forme.png" alt="Cell 2e Forme"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/broly/histoire4.png" alt="Niveau 2"></h4>
+          <p>Metal Cooler écrasa Piccolo et la Nouvelle Namek avec lui. Piccolo informa Goku du danger et arriva directement pour confronter Cooler. Alors que Cooler se réjouissait de retrouver le Super Saiyan et de savoir qui sera le plus puissant de l'Univers, Vegeta intervient et se transforme en Super Saiyan. Cooler surpris de l'apparition de 2 Super Saiyan, se résolut à se dire qu'un singe ou deux ne changera pas sa victoire. Il s'en suit alors un combat intense entre Metal Cooler et les deux Super Saiyan. Alors qu'il semblait avoir gagné, Metal Cooler absorba l'énergie des deux Super Saiyans, pensant avoir tout absorbé il déclara être l'être le plus puissant de l'Univers, mais contre toute attente les deux Super Saiyans n'avaient pas tout donné et lorsqu'il donnèrent tout, l'ordinateur commença à surchauffer et tout explosa, laissant la planète-machine comme un tas de feraille cosmique. Cependant un corps de Metal Cooler était toujours là, malgré que les saiyans avaient réussi à détruire l'enveloppe physique.</p>
+          <p>Débloque la compétence "Résurrection".</p>
+          <img src="../image/mode/mode_histoire/broly/4.png" alt="Niveau 4">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Piccolo en perdant 2 Metal Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/metal_cooler.png" alt="Metal Cooler"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/goku_ss_vegeta_ss.png" alt="Vegeta Goku Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_histoire/broly/histoire5.png" alt="Niveau 2"></h4>
+          <p>Metal Cooler écrasa Piccolo et la Nouvelle Namek avec lui. Piccolo informa Goku du danger et arriva directement pour confronter Cooler. Alors que Cooler se réjouissait de retrouver le Super Saiyan et de savoir qui sera le plus puissant de l'Univers, Vegeta intervient et se transforme en Super Saiyan. Cooler surpris de l'apparition de 2 Super Saiyan, se résolut à se dire qu'un singe ou deux ne changera pas sa victoire. Il s'en suit alors un combat intense entre Metal Cooler et les deux Super Saiyan. Alors qu'il semblait avoir gagné, Metal Cooler absorba l'énergie des deux Super Saiyans, pensant avoir tout absorbé il déclara être l'être le plus puissant de l'Univers, mais contre toute attente les deux Super Saiyans n'avaient pas tout donné et lorsqu'il donnèrent tout, l'ordinateur commença à surchauffer et tout explosa, laissant la planète-machine comme un tas de feraille cosmique. Cependant un corps de Metal Cooler était toujours là, malgré que les saiyans avaient réussi à détruire l'enveloppe physique.</p>
+          <p>Débloque la compétence "Résurrection".</p>
+          <img src="../image/mode/mode_histoire/broly/5.png" alt="Niveau 5">
+          <h5>Condition</h5>
+            <p>Terminer le combat contre Piccolo en perdant 2 Metal Cooler.</p>
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_histoire/broly/metal_cooler.png" alt="Metal Cooler"><img src="../image/mode/mode_histoire/vs.png" alt="vs"><img src="../image/mode/mode_histoire/broly/goku_ss_vegeta_ss.png" alt="Vegeta Goku Super Saiyan"></p>
+        </div>
+      </div>
+    </div>
+
+   
   <!-- BOUTON RETOUR -->
   <div class="bouton-retour" onclick="history.back()">
     <img src="../image/retour.png" alt="Bouton retour">
