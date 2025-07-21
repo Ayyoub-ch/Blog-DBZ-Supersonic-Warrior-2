@@ -129,36 +129,140 @@
       transform: scale(1.05);
     }
 
-    .images-cote-a-cote {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 20px 0;
-    }
-
-    .images-cote-a-cote figure {
-      margin: 0;
-      text-align: center;
-    }
-
-    .images-cote-a-cote img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .images-cote-a-cote figcaption {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #ccc; /* couleur claire pour rester lisible sur fond sombre */
-    }
-
     .ds {
       width: 20px;   /* taille fixe */
       height: auto;
       display: inline; /* pas block, pour rester à la ligne */
       border-radius: 0; /* si tu ne veux pas d'arrondi */
       margin: 0; /* pas d'espacement superflu */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
+    }
+
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
+    }
+
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
     }
 
     /* Ajout responsive */
@@ -187,6 +291,16 @@
       gap: 20px;
     }
   }
+
+  .ds {
+      width: 20px;   /* taille fixe */
+      height: auto;
+      display: inline; /* pas block, pour rester à la ligne */
+      border-radius: 0; /* si tu ne veux pas d'arrondi */
+      margin: 0; /* pas d'espacement superflu */
+    }
+
+
 
   @media (max-width: 600px) {
     header img {
@@ -231,110 +345,277 @@
     <aside>
       <h3>Sommaire</h3>
       <a href="#intro">Introduction</a>
-      <a href="#gameplay">Gameplay</a>
-      <div style="margin-left: 20px;">
-        <a href="#points-communs">• Points communs</a>
-        <a href="#differences">• Différences</a>
-     </div>
-     <a href="#mode">Modes de Jeu</a>
-     <a href="#persos">Personnages</a>
+      <a href="#etapes">Etapes</a>
     </aside>
 
     <main>
       <h2 id="intro">Introduction</h2>
-      <p><strong>Dragon Ball Z Supersonic Warriors 2</strong> est un jeu de combat basé sur l’univers Dragon Ball Z, sorti sur Nintendo DS en 2006, il est la suite du jeu Dragon Ball Z Supersonic Warriors sorti sur GameBoy Advance</p>
-      
-      <div class="images-cote-a-cote">
+      <p>Le Mode Entrainement est un mode de jeu tutoriel visant à apprendre les bases du jeu. On y incarne Gotenks qui s'entraîne avec Piccolo, pour qu'il devienne plus fort. Au fil des leçons, Gotenks apprendra de nouveaux mouvements et rencontra d'autres personnages pouvant lui apprendre des choses. A la fin de ce mode de jeu, on aura un DP supplémentaire poru nos personnages de supports.
+        Il comporte en tout 20 niveaux, on y apprendra les déplacements de bases, les attaques spéciales et toutes les spécificités. Egalement à chaque niveau de débloqué, il y a un nouvelle leçon à apprendre.
+      </p>
+     
+
+      <h2 id="etapes">Etapes</h2>
+
+      <div class="map-container">
         <figure>
-          <img src="image/ssw.png" alt="Présentation du jeu" style="width: 500px;">
-          <figcaption><strong>Dragon Ball Z Supersonic Warriors (GBA)</strong></figcaption>
+          <img src="../image/mode/mode_training/map1.png" alt="Map n°1 de Gotenks" style="width: 500px;">
+          <figcaption><strong>Map n°1 du Mode Entrainement</strong></figcaption>
         </figure>
         <figure>
-          <img src="image/ssw2.png" alt="Présentation du jeu" style="width: 950px;">
-          <figcaption><strong>Dragon Ball Z Supersonic Warriors 2 (DS)</strong></figcaption>
-        </figure>
-      </div>
-
-      <h2 id="gameplay">Gameplay</h2>
-      <p>Le gameplay reste fidèle au premier opus , il propose toujours des combats en 2D aériens ou au sol, possibilités de faire des combos simples avec des attaques spéciales propres à chaque personnage sur un terrain propre à l'univers. Le tout av 
-        Les joueurs peuvent enchaîner coups de poings, coups de pieds, attaques spéciales en fonction de la position du perosnnage, enclencher des capacités lors du combat, des transformations et même des attaques ultimes, le tout fidèle à l’univers de la série.</p>
-
-      <h3 id="points-communs">Points communs avec le premier jeu</h3>
-        <ul>
-            <li>Même style de combat : affrontements aériens en 2D.</li>
-            <li>Commandes simples et accessibles pour déclencher des combos et attaques spéciales.</li>
-            <li>Système de combats en équipe (3v3) : possibilité de changer de personnage en temps réel.</li>
-            <li>Mode Histoire reprenant les arcs principaux (Saiyan, Freezer, Cell, Buu) avec des scénarios alternatifs « Et si… ».</li>
-            <li>Modes de jeu variés : Histoire, Combat Libre, Multijoueur local.</li>
-            <li>Développé par le même studio, Arc System Works.</li>
-        </ul>
-
-        <h3 id="differences">Différences avec son prédécesseur</h3>
-        <ul>
-            <li>Grâce au support DS, le jeu est plus beau graphiquement : sprites plus détaillés et effets spéciaux améliorés.</li>
-            <li>Possibilité de faire des attaques combinées en fonction des personnages joués.</li>
-            <li>Les personnages sont classés par une variable appelé Dragon Power ou Destruction Power, appelé sobrement DP, ce qui permet de faire des combinaisons de personnages plus stratégiques</li>
-            <li>Utilisation de l’écran tactile pour gérer les changements de personnages ou déclencher certaines actions spéciales.</li>
-            <li>Les attaques spéciales sont plus simples à sortir que sur GBA et elles sont plus variées</li>
-            <li>Plus de personnages jouables, dont certains issus de la fin de Dragon Ball Z comme Boo ou Gotenks ou bien des films comme Cooler ou Broly.</li>
-            <li>Possibilité de faire appel à des personnages supports tout au long du combat</li>
-            <li>Un scénario plus riche avec encore plus d’histoires alternatives.</li>
-            <li>Meilleure qualité sonore grâce au hardware DS.</li>
-            <li>Le jeu utilise le double écran pour afficher les barres de vie, les portraits et certaines commandes, tout en gardant l’action principale sur l’écran du haut.</li>
-            <li>Mode de jeu difficile appelé Mode Maximum pour tester ses capacités face à des boss durs et notamment des boss finaux plus compliqué que le mode Challenge de Supersonic Warriors.</li>
-        </ul>
-
-        <br><div class="images-cote-a-cote">
-        <figure>
-          <video controls style="width: 500px; border-radius: 8px;">
-            <source src="image/video/supersonic_warriors.mp4" type="video/mp4">
-          </video>
-          <figcaption><strong>Gameplay de Dragon Ball Z Supersonic Warriors (GBA)</strong></figcaption>
-        </figure>
-
-        <figure>
-          <video controls style="width: 440px; border-radius: 8px;">
-            <source src="image/video/supersonic_warriors2.mp4" type="video/mp4">
-          </video>
-          <figcaption><strong>Gameplay de Dragon Ball Z Supersonic Warriors 2 (DS)</strong></figcaption>
+          <img src="../image/mode/mode_training/map.png" alt="Map n°2 de Gotenks" style="width: 500px;">
+          <figcaption><strong>Map n°2 du Mode Entrainement</strong></figcaption>
         </figure>
       </div>
 
-      <h2 id="mode">Modes de Jeu</h2>
-      <p>Comme dans les jeux de combat en général ou simplement dans les jeux Dragon Ball Z, on a les modes classiques:</p>
-      <li>Mode Histoire : mode permettant de découvrir ou rédecouvrir l'histoire de Dragon Ball à travers une vintaine de personnages, avec la particularité de pouvoir jouer des scénarios alternatifs. Le jeu reprend les arcs principaux de Dragon Ball Z (Saiyan, Freezer, Cell, Buu) mais propose aussi des histoires alternatives « Et si... » du point de vue de chaque personnage
-        ce qui permet d'avoir un aperçu de ce qui se passerait si les protagonistes ou les antagonistes de l'histoire avaient fait un choix différent de celui de l'histoire de base. C'est avec l'histoire que vous pourrez débloquer les personnages et leurs compétences. </p>
-        
-        <p>Pour voir en détail l'histoire de chaque personnage du jeu, vous pouvez aller ici <a href="story.html"><img class="ds" src="image/ici2.png" alt="ici" style="width: 50px;"></a></p></li>
 
-      <br><li>Mode Entraînement: mode offrant deux choix au joueur ➡️ S'entraîner seul face à un pantin ou bien de suivre un tutoriel en incarnant Gotenks, qui uivra les enseignements de Piccolo et du reste de la Z Team. 
-        <p>Pour voir en détail le tutoriel avec Gotenks, vous pouvez aller ici <a href="training.html"><img class="ds" src="image/ici.png" alt="ici" style="width: 50px;"></a></p></li>
 
-      <br><li>Mode Libre: mode qui permet de simplement faire un combat avec les personnages de son choix contre les personnages de son choix</li>
 
-      <br><li>Mode Combat Z: mode qui permet de simplement faire des combats avec les personnages de son choix contre une série d'adversaire</li>
-
-      <br><li>Mode Maximum: mode qui remplace le mode Challenge, il permet de faire des combats avec les personnages de son choix plusieurs séries de personnages réparties en plusieurs niveaux: novice, difficile et mania. 
-        <p>Pour voir en détail le mode Maximum, vous pouvez aller ici <a href="maximum.html"><img class="ds" src="image/ici4.png" alt="ici" style="width: 50px;"></a></p></li>
-      
-
-      <h2 id="persos">Personnages</h2>
-      <p>Pour les personnages, à la grande différence de son prédécesseur, il y a bien plus de personnages dont ceux déjà vu dans le premier jeu, mais décliner sous plusieurs formes, comme Trunks ou Gohan qui possède une forme de base, ou bien même Cell 2e forme qui apparait
-        aussi on peut faire appel à des personnages supports pour nous aider lors du combat, avec des effets différents</p>
-
-        <div class="images-cote-a-cote">
-        <figure>
-          <img src="image/personnage.png" alt="Personnages jouables" style="width: 500px;">
-          <figcaption><strong>Personnages jouables</strong></figcaption>
-        </figure>
-        <figure>
-          <img src="image/support.png" alt="Personnages supports" style="width: 550px;">
-          <figcaption><strong>Personnages supports</strong></figcaption>
-        </figure>
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_training/training1.png" alt="Entrainement 1"></h4>
+          <p>Après avoir fusionné, Goten et Trunks commencent leur entrainement, malgré que Gotenks soit puissant, il manque cruellement de maîtrise sur les bases, Piccolo lui explique comment se déplacer soit avec le bouton <img class="ds"  src="image/ds.png" alt="Personnages jouables" style="width: 20px;"> . Pour le déplacement dit rapide, il faut appuyer plusieurs fois sur le bouton <img class="ds"  src="image/ds.png" alt="Personnages jouables" style="width: 20px;">, ça s'appelle le sprint.</p> 
+          <img src="../image/mode/mode_training/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+          <h5>Objectif</h5>
+          <p><img src="../image/mode/mode_training/objectif1.png" alt="objectif1"></p>
+        </div>
       </div>
-      
-      <p>Bien évidemment il manque des personnages et c'est normal, lorsqu'on sélectionne en appuyant sur <img class="ds"  src="image/ds.png" alt="Personnages jouables" style="width: 20px;"> on peut découvrir d'autres personnages cachés.</p>
-      <p>Pour voir en détail les personnages vous pouvez aller ici <a href="persos.html"><img class="ds" src="image/ici3.png" alt="ici" style="width: 50px;"></a></p>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+        <div class="point"></div>
+        <div class="contenu">
+            <div class="description">
+                <h4>Niveau 2 — <img src="../image/mode/mode_training/training2.png" alt="Entrainement 2"></h4>
+                <p>Maintenant que Gotenks sait se déplacer intelligemment, Piccolo passe aux bases de l'attaque, il y a deux types d'attaques: les coups légers avec le bouton Y et les coups puissants avec le bouton X. Après avoir réussi son cours, Piccolo explique qu'il peut frapper après un sprint, cela s'appelle une attaque plongeante. Et s'il attaque pendant un sprint vers l'arrière cela s'appelle une feinte.</p>
+                <img src="../image/mode/mode_training/2.png" alt="Niveau 2">
+              </div>
+        <div class="personnages">
+            <h5>Personnages</h5>
+            <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+            <h5>Objectif</h5>
+            <p><img src="../image/mode/mode_training/objectif2.png" alt="objectif2"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 3 — <img src="../image/mode/mode_training/training3.png" alt="Entrainement 3"></h4>
+        <p>Malgré les recommandations de Piccolo, Gotenks s'élance seul à la recherche de Boo. Il se rend compte que sa confiance peut lui jouer des tours.</p>
+        <img src="../image/mode/mode_training/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/boo.png" alt="Boo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif3.png" alt="objectif3"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 4 — <img src="../image/mode/mode_training/training4.png" alt="Niveau 4"></h4>
+        <p>Après sa défaite contre Boo, Gotenks décide de s’entraîner plus sérieusement dans la Salle de l’Esprit et du Temps, sous la supervision de Piccolo.</p>
+        <img src="../image/mode/mode_training/4.png" alt="Niveau 4">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif4.png" alt="objectif4"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 5 — <img src="../image/mode/mode_training/training5.png" alt="Entrainement 5"></h4>
+        <p>Après un entraînement intense, Gotenks débloque la transformation Super Saiyan 3. La puissance dégagée est impressionnante.</p>
+        <img src="../image/mode/mode_training/5.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks SSJ3"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 6 — <img src="../image/mode/mode_training/training6.png" alt="Niveau 6"></h4>
+        <p>Dans la Salle de l’Esprit et du Temps, Gotenks teste sa nouvelle forme contre Piccolo. Malgré sa puissance, il peine à contrôler son énergie.</p>
+        <img src="../image/mode/mode_training/6.png" alt="Niveau 6">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks SSJ3"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 7 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 7 — <img src="../image/mode/mode_training/training7.png" alt="Niveau 7"></h4>
+        <p>Gotenks et Piccolo se retrouvent piégés dans la Salle de l’Esprit et du Temps par Boo. Une stratégie s’impose pour sortir à temps.</p>
+        <img src="../image/mode/mode_training/7.png" alt="Niveau 7">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/boo.png" alt="Boo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 8 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 8 — <img src="../image/mode/mode_training/training8.png" alt="Niveau 8"></h4>
+        <p>En utilisant un hurlement d’énergie, Gotenks parvient à briser la dimension de la Salle et revenir au monde réel avec Piccolo.</p>
+        <img src="../image/mode/mode_training/8.png" alt="Niveau 8">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 9 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 9 — <img src="../image/mode/mode_training/training9.png" alt="Niveau 9"></h4>
+        <p>De retour à la surface, Gotenks affronte Boo avec une puissance déchaînée. Il prend l'avantage un moment, mais sa fusion finit par s’estomper.</p>
+        <img src="../image/mode/mode_training/9.png" alt="Niveau 9">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 10 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 10 — <img src="../image/mode/mode_training/training10.png" alt="Niveau 10"></h4>
+        <p>Sans la fusion, Goten et Trunks se retrouvent impuissants. Boo prend le dessus et absorbe Piccolo, rendant la situation critique.</p>
+        <img src="../image/mode/mode_training/10.png" alt="Niveau 10">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 11 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 11 — <img src="../image/mode/mode_training/training11.png" alt="Niveau 11"></h4>
+        <p>Sans la fusion, Goten et Trunks se retrouvent impuissants. Boo prend le dessus et absorbe Piccolo, rendant la situation critique.</p>
+        <img src="../image/mode/mode_training/11.png" alt="Niveau 11">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 12 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 12 — <img src="../image/mode/mode_training/training12.png" alt="Niveau 12"></h4>
+        <p>Sans la fusion, Goten et Trunks se retrouvent impuissants. Boo prend le dessus et absorbe Piccolo, rendant la situation critique.</p>
+        <img src="../image/mode/mode_training/12.png" alt="Niveau 12">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
     </main>
   </div>
 
