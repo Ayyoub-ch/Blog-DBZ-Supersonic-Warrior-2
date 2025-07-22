@@ -185,35 +185,70 @@
       right: auto; /* on enlève right sinon ça clash */
     }
 
-    .evenement .contenu {
-      background: #333;
-      padding: 20px; /* un peu plus de padding */
-      border-radius: 8px;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start; /* mieux aligner le haut */
-      max-width: 100%; /* plus large qu’avant */
-    }
+.evenement .contenu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  padding: 30px;
+  background-color: #2c2c2c;
+  border-radius: 12px;
+  width: 120%;
+  height: auto;         /* ✅ Hauteur agrandie */
+  box-sizing: border-box;
+  color: #fff;
+}
 
-    .evenement .contenu .description {
-      flex: 2; /* prend plus de place */
-      font-size: 18px; /* texte un peu plus gros */
-    }
+/* Description à gauche */
+.evenement .description {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  font-size: 18px;
+}
 
-    .evenement .description h5 {
-      margin-top: 10px;
-      color: #ffcc00; /* ou une couleur vive */
-    }
+/* Personnages en haut à droite */
+.evenement .personnages {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  padding: 0;
+}
+
+/* Objectif en bas à droite */
+.evenement .objectif {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  padding: 0;
+}
+
+.evenement .objectif h5 {
+  font-size: 18px;
+  color: #ffcc00;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.evenement .objectif p {
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+/* ✅ Image agrandie */
+.evenement .objectif img {
+  max-width: 150%;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
 
 
-    .evenement .contenu .personnages {
-      flex: 1; /* prend moins de place que la description */
-      margin-left: 40px; /* espace plus large entre description et perso */
-      width: auto; /* largeur auto */
-    }
+
+
+
+
 
     .evenement img {
-      width: 100%;
+      width: 350%;
       margin-top: 10px;
       border-radius: 5px;
     }
@@ -361,12 +396,12 @@
 
       <div class="map-container">
         <figure>
-          <img src="../image/mode/mode_training/map1.png" alt="Map n°1 de Gotenks" style="width: 500px;">
-          <figcaption><strong>Map n°1 du Mode Entrainement</strong></figcaption>
+          <img src="../image/mode/mode_training/map1.png" alt="Map n°1 de Gotenks" style="width: 900px;">
+          <figcaption><strong>Map du début du Mode Entrainement</strong></figcaption>
         </figure>
         <figure>
-          <img src="../image/mode/mode_training/map.png" alt="Map n°2 de Gotenks" style="width: 500px;">
-          <figcaption><strong>Map n°2 du Mode Entrainement</strong></figcaption>
+          <img src="../image/mode/mode_training/map2.png" alt="Map n°2 de Gotenks" style="width: 900px;">
+          <figcaption><strong>Map de fin du Mode Entrainement</strong></figcaption>
         </figure>
       </div>
 
@@ -489,7 +524,7 @@
         </div>
         <div class="objectif">
         <h5>Objectif</h5>
-        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        <p><img src="../image/mode/mode_training/objectif6.png" alt="objectif6"></p>
         </div>
     </div>
     </div>
@@ -500,16 +535,16 @@
     <div class="contenu">
         <div class="description">
         <h4>Niveau 7 — <img src="../image/mode/mode_training/training7.png" alt="Niveau 7"></h4>
-        <p>Gotenks et Piccolo se retrouvent piégés dans la Salle de l’Esprit et du Temps par Boo. Une stratégie s’impose pour sortir à temps.</p>
+        <p>Gohan arrive au sanctuaire pour rendre visite à nos amis, la raison de sa visite est qu'il a apprit que Piccolo et les deux petits s'entrainent, suite à ça Goten pose la question à son grand frère, sur comment voler plus vite. Gohan demande si Piccolo ne lui a pas encore enseigné, Trunks répond que Piccolo passe son temps à les disputer et au final ils apprennent rien. Gohan voyant la situation, décide de prendre les choses en main et de leur apprendre. D'abord il demande s'ils savent sprinter, les garçons répondent que oui, puis il leur demande s'ils savent faire un sprint éclair, ce que les enfants ne savent pas. Gohan leur explique qu'un sprint éclair est un sprint où on utilise du ki pour aller encore plus vite. Il faut utiliser le bon R tout en se déplaçant. Après avoir réussi l'exercice, Gohan précise qu'il peut s'orienter tout en faisant le sprint éclair avec le bouton <img class="ds"  src="image/ds.png" alt="Personnages jouables" style="width: 20px;"> .</p>
         <img src="../image/mode/mode_training/7.png" alt="Niveau 7">
         </div>
         <div class="personnages">
         <h5>Personnages</h5>
-            <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+            <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/gohan_ado.png" alt="Gohan Ado"></p>
         </div>
         <div class="objectif">
         <h5>Objectif</h5>
-        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        <p><img src="../image/mode/mode_training/objectif7.png" alt="objectif7"></p>
         </div>
     </div>
     </div>
@@ -520,16 +555,16 @@
     <div class="contenu">
         <div class="description">
         <h4>Niveau 8 — <img src="../image/mode/mode_training/training8.png" alt="Niveau 8"></h4>
-        <p>En utilisant un hurlement d’énergie, Gotenks parvient à briser la dimension de la Salle et revenir au monde réel avec Piccolo.</p>
+        <p>Pour la leçon d'aujourd'hui, Krilin sera le professeur. Gotenks etonné, se demande ce que ce dernier peut leur apprendre, Krilin prit un peu dans son ego, va lui montrer comment il se défend. A ce moment C-18 appraît surprise de voir Krilin aussi vantard. Après ça Krilin explique que la meilleur défense est la barrière défensive. Gotenks explique qu'il faut appuyer sur B tout en maintenant R et qu'avec on peut parer n'importe quelle attaque. Voyant que Gotenks savait déjà tout ça, Krilin décide de lui montrer une démonstration pratique. Après avoir réussi à parer les attaques avec sa barrière, Krilin explique à Gotenks que la barrière consomme du ki et que plus elle est maintenu plus elle en consommera, également elle peut infliger des dégats, elle frappe directement l'ennemi.</p>
         <img src="../image/mode/mode_training/8.png" alt="Niveau 8">
         </div>
         <div class="personnages">
         <h5>Personnages</h5>
-        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/krilin.png" alt="Krilin"></p>
         </div>
         <div class="objectif">
         <h5>Objectif</h5>
-        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        <p><img src="../image/mode/mode_training/objectif8.png" alt="objectif8"></p>
         </div>
     </div>
     </div>
@@ -540,16 +575,16 @@
     <div class="contenu">
         <div class="description">
         <h4>Niveau 9 — <img src="../image/mode/mode_training/training9.png" alt="Niveau 9"></h4>
-        <p>De retour à la surface, Gotenks affronte Boo avec une puissance déchaînée. Il prend l'avantage un moment, mais sa fusion finit par s’estomper.</p>
+        <p>Ayant entendu que Piccolo s'entraine avec Goten et Trunks, Vegeta est parti voir l'entraînement de son fils. Ils leur demandent s'ils ne sont entraînés qu'aux coups de base, ce que Trunks ne comprend pas trop. Vegeta explique que l'attaque ne se limite pas à frapper son adversaire. Il poursuit en disant que Si on appuie sur le bouton Y + le bouton B à proximité de l'ennemi, qu'ils soient en garde ou non, cette attaque le touchera, cela s'appelle une projection. Le but de l'exercice sera de projeter Vegeta. Trunks voyant ça appelle Goten pour voir ça. Après l'exercice, Vegeta est etonné de la force de Gotenks, le petit guerrier fusionné demande comment était sa projection, ce que Vegeta approuva et décide maintenant de lui montrer ce qu'est une véritable attaque.</p>
         <img src="../image/mode/mode_training/9.png" alt="Niveau 9">
         </div>
         <div class="personnages">
         <h5>Personnages</h5>
-        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/vegeta.png" alt="Vegeta"></p>
         </div>
         <div class="objectif">
         <h5>Objectif</h5>
-        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        <p><img src="../image/mode/mode_training/objectif9.png" alt="objectif9"></p>
         </div>
     </div>
     </div>
@@ -560,16 +595,16 @@
     <div class="contenu">
         <div class="description">
         <h4>Niveau 10 — <img src="../image/mode/mode_training/training10.png" alt="Niveau 10"></h4>
-        <p>Sans la fusion, Goten et Trunks se retrouvent impuissants. Boo prend le dessus et absorbe Piccolo, rendant la situation critique.</p>
+        <p>Vegeta poursuit son cours en expliquant ce qu'est les attaques d'énergies, celles avec laquelle on utilise le ki. Il faut appuyer sur A pour des attaques de ki légères et le bouton A + le bouton R pour les attaques de ki puissantes. Après les expliquations, Vegeta passe à la pratique. Vegete explique non seulement qu'être vantard ne sert à rien, mais également que s'il abuse des attaques d'énergies, il sera à court d'énergie.</p>
         <img src="../image/mode/mode_training/10.png" alt="Niveau 10">
         </div>
         <div class="personnages">
         <h5>Personnages</h5>
-        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/vegeta.png" alt="Vegeta"></p>
         </div>
         <div class="objectif">
         <h5>Objectif</h5>
-        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        <p><img src="../image/mode/mode_training/objectif10.png" alt="objectif10"></p>
         </div>
     </div>
     </div>
@@ -580,16 +615,16 @@
     <div class="contenu">
         <div class="description">
         <h4>Niveau 11 — <img src="../image/mode/mode_training/training11.png" alt="Niveau 11"></h4>
-        <p>Sans la fusion, Goten et Trunks se retrouvent impuissants. Boo prend le dessus et absorbe Piccolo, rendant la situation critique.</p>
+        <p>Vegeta apprend maintenant à Gotenks à dévier les Kikohas. Pour cela il faut appuyer sur X au bon moment pour dévier les tirs. Le but de l'exercice sera de dévier un kikoha. Epuisé par l'exercice, Gotenks demande une pause car la fusion va également s'estompée, ce que Vegeta refuse en le traitant de tire-au-flanc</p>
         <img src="../image/mode/mode_training/11.png" alt="Niveau 11">
         </div>
         <div class="personnages">
         <h5>Personnages</h5>
-        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/vegeta.png" alt="Vegeta"></p>
         </div>
         <div class="objectif">
         <h5>Objectif</h5>
-        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        <p><img src="../image/mode/mode_training/objectif11.png" alt="objectif11"></p>
         </div>
     </div>
     </div>
@@ -600,8 +635,28 @@
     <div class="contenu">
         <div class="description">
         <h4>Niveau 12 — <img src="../image/mode/mode_training/training12.png" alt="Niveau 12"></h4>
-        <p>Sans la fusion, Goten et Trunks se retrouvent impuissants. Boo prend le dessus et absorbe Piccolo, rendant la situation critique.</p>
+        <p>C'est au tour de Goku d'arriver, saluant les enfants, Goten est surpris de voir son père ici. Goku explique qu'il se faisait de maubais sang et voulais savoir comment se passe leur entraînement. Trunks déclare qu'ils ont déjà maîtrisé la fusion, Goku impressioné demande s'il peut voir ça. Alors que les deux petits allaient fusionnés, Goku les interrompt en leur demandant pourquoi ils ne fusionnent pas après s'être transformés en Super Saiyan. Déjà fusionné Gotenks déclare qu'il peut toujours se tranformé en appuyant sur le bouton L. Goku surpris à son tour et souhaite voir ça. Après ça Goku est satisfait de voir que les deux petits peuvent devenir Super Saiyan tout en étant sous la forme de Gotenks.</p>
         <img src="../image/mode/mode_training/12.png" alt="Niveau 12">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/goku.png" alt="Goku"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif12.png" alt="objectif12"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Niveau 13-->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 13 — <img src="../image/mode/mode_training/training13.png" alt="Niveau 13"></h4>
+        <p>Gotenks revient voir Piccolo en lui demandant de lui apprendre les super attaques, ce que Piccolo accepte à la condition qu'il a maîtrisé l'énergie, ce qu'il a réussi à faire dans la leçon n°6. Il explique ensuite que pour effectuer une super attaque, il faut avoir au minimum 50% de ton ki pour en lancer une. Il faut appuyer sur le bouton X + le bouton A, mais Piccolo précise qu'il faut faire attention à ta position par rapport à l'ennemi, cela peut changer l'attaque spéciale. Après cela Piccolo demande à Gotenks d'arrêter les gestes superflues durant ses attaques comme les piaillements ou les poses, Gotenks accepte même si ça aura moins de gueule. Piccolo explique une dernière, lorsqu'on a moins de 30% de sa vie et qu'on lance une super attaque, elle devient encore plus puissante ce qui s'appelle une attaque ultime. Elle ne peut être utilisée qu'une seule fois par combat.</p>
+        <img src="../image/mode/mode_training/13.png" alt="Niveau 13">
         </div>
         <div class="personnages">
         <h5>Personnages</h5>
@@ -609,17 +664,59 @@
         </div>
         <div class="objectif">
         <h5>Objectif</h5>
-        <p><img src="../image/mode/mode_training/objectif5.png" alt="objectif5"></p>
+        <p><img src="../image/mode/mode_training/objectif13.png" alt="objectif13"></p>
         </div>
     </div>
     </div>
 
 
+    <!-- Niveau 14 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 14 — <img src="../image/mode/mode_training/training14.png" alt="Niveau 14"></h4>
+        <p>Gotenks revient vers Piccolo et lui envoie une super attaque que Piccolo esquive, ce dernier ne comprenant par pourquoi il envoit ceci. Gotenks dit à Piccolo de ne pas esquiver et de faire un bras de fer avec les super attaques, un clash en somme. Quand deux super attaques s'enclenchent au même moment, il faut marteler le bouton X + le bouton A pour gagner le clash. Voyant que Gotenks en fait trop, Piccolo lui dit d'arrêter.</p>
+        <img src="../image/mode/mode_training/14.png" alt="Niveau 14">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training/gotenks.png" alt="Gotenks"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/piccolo.png" alt="Piccolo"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif14.png" alt="objectif14"></p>
+        </div>
+    </div>
+    </div>
 
-
+    <!-- Niveau 15 -->
+    <div class="evenement">
+    <div class="point"></div>
+    <div class="contenu">
+        <div class="description">
+        <h4>Niveau 15 — <img src="../image/mode/mode_training/training15.png" alt="Niveau 15"></h4>
+        <p>C'est l'heure de la leçon ultime de Gotenks, cela portera sur les attaques en équipe. Piccolo explique que quand ils sont équipe en l'occurence lui et Gotenks et que s'ils sont en bonne condition soit avec 200% de ki et en appuyant sur le bouton d'attaque en duo, on enclenchera une super attaque en duo, du moins si on arrive à s'y prendre bien. Krilin sera l'adversaire aujourd'hui, qui n'est pas trop serein à se prendre une attaque en duo. Aussitôt Gotenks se transforme en Super Saiyan 3 étant prêt pour l'attaque en duo. Après avoir réussi Piccolo félicite Gotenks, Krilin tant qu'à lui a vu sa vie défilée devant ses yeux, ce qui fait rire Gotenks. Piccolo explique que pour faire cette attaque en duo, il faut impérativement que Gotenks soit en Super Saiyan 3 et que Piccolo soit son partenaire, mais il y a de nombreuses combinaisons d'attaques en duo différentes. Maintenant que Gotenks a assimilié les bases du combat, il pourra s'entraîner pour vaincre Boo. Et l'entraînement de Goten et Trunks se poursuit...</p>
+        <img src="../image/mode/mode_training/15.png" alt="Niveau 15">
+        </div>
+        <div class="personnages">
+        <h5>Personnages</h5>
+        <p><img src="../image/mode/mode_training/gotenks_ss3_piccolo.png" alt="Gotenks Super Saiyan 3 et Piccolo"><img src="../image/mode/mode_training/vs.png" alt="vs"><img src="../image/mode/mode_training/krilin.png" alt="Krilin"></p>
+        </div>
+        <div class="objectif">
+        <h5>Objectif</h5>
+        <p><img src="../image/mode/mode_training/objectif15.png" alt="objectif15"></p>
+        </div>
+    </div>
+    </div>
 
     </main>
+
   </div>
+
+      <div class="map-container">
+      <img src="../image/mode/mode_training/end.png" alt="Ecran de fin" style="width: 800px;">
+    </div>
 
   <div class="bouton-retour" onclick="history.back()">
     <img src="image/retour.png" alt="Bouton retour">
