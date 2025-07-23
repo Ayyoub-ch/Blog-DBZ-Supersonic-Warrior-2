@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mode Maximum : Difficulté Difficile</title>
+  <link rel="icon" type="image/png" href="../image/title.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #f2f2f2;
+    }
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
+    header img {
+      width: 200px;
+      height: auto;
+    }
+    header h1 {
+      margin: 20px 0 30px 0;
+      font-size: 32px;
+    }
+    nav {
+      background-color: #333;
+      padding: 15px 0;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+    }
+    nav ul li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
+    }
+
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
+    }
+
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
+    /* BOUTON RETOUR */
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Maximum : Difficulté Difficile</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../accueil.html">Accueil</a></li>
+      <li><a href="soluce.html">Solutions</a></li>
+      <li><a href="../persos.html">Personnages</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_maximum/mode_difficile/map.png" alt="Map de Goku" style="width: 900px;">
+  </div>
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_maximum/mode_difficile/niveau1.png" alt="Entrainement 1"> - Thème: Les Frères mécanisés </h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/metal_cooler_mecha_freezer.png" alt="Metal Cooler et Mecha Freezer"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_maximum/mode_difficile/niveau2.png" alt="Entrainement 1"> - Thème: Les personnages liés aux Dragon Balls </h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/goku_gohan_shenron.png" alt="Les personnages liés aux Dragon Balls"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_maximum/mode_difficile/niveau3.png" alt="Entrainement 1"> - Thème: Les Nameks 2 </h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/piccolo_piccolo_piccolo.png" alt="Les Nameks 2"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_maximum/mode_difficile/niveau4.png" alt="Entrainement 1"> - Thème: La Fin de la Bataille sur Namek </h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/4.png" alt="Niveau 4">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/krilin_freezer_goku_ss.png" alt="La Fin de la Bataille sur Namek"></p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_maximum/mode_difficile/niveau5.png" alt="Entrainement 1"> - Thème: La création de Cell à travers le temps</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/5.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/cell_2e_forme_gero_cell_2e_forme.png" alt="La création de Cell à travers le temps"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_maximum/mode_difficile/niveau6.png" alt="Entrainement 1"> - Thème: Les cyborgs lors de l'apparition de Cell</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/6.png" alt="Niveau 6">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/c18_c17_c16_cell_2e_forme.png" alt="Les cyborgs lors de l'apparition de Cell"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 7 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 7 — <img src="../image/mode/mode_maximum/mode_difficile/niveau7.png" alt="Entrainement 1"> - Thème: Guerriers Z à la poursuite du Dr Gero Partie 2</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/7.png" alt="Niveau 7">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/vegeta_ss_piccolo_yamcha_tien.png" alt="Guerriers Z à la poursuite du Dr Gero Partie 2"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 8 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 8 — <img src="../image/mode/mode_maximum/mode_difficile/niveau8.png" alt="Entrainement 1"> - Thème: Les Guerriers Mécanisés</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/8.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/gero_mecha_freezer_metal_cooler.png" alt="Les Guerriers Mécanisés "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 9 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 9 — <img src="../image/mode/mode_maximum/mode_difficile/niveau9.png" alt="Entrainement 1"> - Thème: L'Elève et le Maître à travers le temps</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/9.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/gohan_ado_trunks_piccolo.png" alt="L'Elève et le Maître à travers le temps"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 10 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 10 — <img src="../image/mode/mode_maximum/mode_difficile/niveau10.png" alt="Entrainement 1"> - Thème: Evolution de Freezer avec Cooler</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/10.png" alt="Niveau 10">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/freezer_cooler_mecha_freezer.png" alt="Evolution de Freezer avec Cooler"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 11 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 11 — <img src="../image/mode/mode_maximum/mode_difficile/niveau11.png" alt="Entrainement 1"> - Thème: Les 3 Saiyans de l'Arc Boo</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/11.png" alt="Niveau 11">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/goku_gohan_vegeta.png" alt="Les 3 Saiyans de l'Arc Boo"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 12 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 12 — <img src="../image/mode/mode_maximum/mode_difficile/niveau12.png" alt="Entrainement 1"> - Thème: 2 Manipulateurs et l'Être Ultime</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/12.png" alt="Niveau 12">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/gero_cell_babidi.png" alt="2 Manipulateurs et l'Être Ultime"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 13 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 13 — <img src="../image/mode/mode_maximum/mode_difficile/niveau13.png" alt="Entrainement 1"> - Thème: Les Itérations de Trunks</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/13.png" alt="Niveau 11">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/trunks_trunks_ss_gotenks.png" alt="Les Itérations de Trunks"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 14 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 14 — <img src="../image/mode/mode_maximum/mode_difficile/niveau14.png" alt="Entrainement 1"> - Thème: Un futur où le silence reigne</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/14.png" alt="Niveau 14">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/vegeta_ss_freezer_cell_2e_forme.png" alt="Un futur où le silence reigne"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 15 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 15 — <img src="../image/mode/mode_maximum/mode_difficile/niveau15.png" alt="Entrainement 1"> - Thème: Obstacle avant le grand final</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/15.png" alt="Niveau 15">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/ginyu_cell_2e_forme_boo.png" alt="Obstacle avant le grand final"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 16 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 16 — <img src="../image/mode/mode_maximum/mode_difficile/niveau16.png" alt="Entrainement 1"> - Thème: Les sauveurs de l'Univers</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/16.png" alt="Niveau 16">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/goku_ss_vegeta_ss_satan.png" alt="Les sauveurs de l'Univers"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 17 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 17 — <img src="../image/mode/mode_maximum/mode_difficile/niveau17.png" alt="Entrainement 1"> - Thème: Les Saiyans de Sang melés</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/17.png" alt="Niveau 17">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/gohan_ado_trunks_gotenks.png" alt="Les Saiyans de Sang melés"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 18 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 18 — <img src="../image/mode/mode_maximum/mode_difficile/niveau18.png" alt="Entrainement 1"> - Thème: L'évolution de Gohan</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/18.png" alt="Niveau 18">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/gohan_gohan_ss2_gohan_ado" alt="L'évolution de Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 19 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 19 — <img src="../image/mode/mode_maximum/mode_difficile/niveau19.png" alt="Entrainement 1"> - Thème: Cell et Cell Jr</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/19.png" alt="Niveau 19">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/cell_2e_forme_cell_cell_jr.png.png" alt="Cell et Cell Jr"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 20 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 20 — <img src="../image/mode/mode_maximum/mode_difficile/niveau20.png" alt="Entrainement 1"> - Thème: Majin Boo</h4>
+          <img src="../image/mode/mode_maximum/mode_difficile/20.png" alt="Niveau 20">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_difficile/boo_boo_mauvais.png" alt="Majin Boo"></p>
+        </div>
+      </div>
+    </div>
+
+   
+  <!-- BOUTON RETOUR -->
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+</body>
+</html>
