@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mode Histoire de Son Goku — Supersonic Warriors 2</title>
+  <link rel="icon" type="image/png" href="../image/title.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #f2f2f2;
+    }
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
+    header img {
+      width: 200px;
+      height: auto;
+    }
+    header h1 {
+      margin: 20px 0 30px 0;
+      font-size: 32px;
+    }
+    nav {
+      background-color: #333;
+      padding: 15px 0;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+    }
+    nav ul li {
+      display: inline-block;
+      margin: 0 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+    /* Frise Chronologique */
+    .frise {
+      position: relative;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 20px 0;
+    }
+    .frise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffcc00;
+      transform: translateX(-50%);
+    }
+    .evenement {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .evenement .point {
+      position: absolute;
+      top: 30px;
+      right: -10px; /* par défaut pour côté gauche */
+      width: 20px;
+      height: 20px;
+      background: #ffcc00;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .evenement:nth-child(even) .point {
+      left: -10px; /* pour les événements côté droit */
+      right: auto; /* on enlève right sinon ça clash */
+    }
+
+    .evenement .contenu {
+      background: #333;
+      padding: 20px; /* un peu plus de padding */
+      border-radius: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start; /* mieux aligner le haut */
+      max-width: 100%; /* plus large qu’avant */
+    }
+
+    .evenement .contenu .description {
+      flex: 2; /* prend plus de place */
+      font-size: 18px; /* texte un peu plus gros */
+    }
+
+    .evenement .description h5 {
+      margin-top: 10px;
+      color: #ffcc00; /* ou une couleur vive */
+    }
+
+
+    .evenement .contenu .personnages {
+      flex: 1; /* prend moins de place que la description */
+      margin-left: 40px; /* espace plus large entre description et perso */
+      width: auto; /* largeur auto */
+    }
+
+    .evenement img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .evenement:nth-child(odd) {
+      left: 0;
+    }
+    .evenement:nth-child(even) {
+      left: 50%;
+    }
+    .branche {
+      position: relative;
+      height: 40px;
+    }
+    .branche::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #ffcc00;
+    }
+    .branche-gauche, .branche-droite, .branche-centre {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .branche-gauche {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-gauche .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-droite {
+      left: 60%; /* +10% vers la droite */
+    }
+
+    .branche-droite .point {
+      left: auto;
+      right: 100%;
+    }
+
+    .branche-centre {
+      left: 25%;
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      .evenement, .branche-gauche, .branche-droite, .branche-centre {
+        left: 0 !important;
+        width: 100%;
+        padding-left: 60px;
+      }
+      .frise::before {
+        left: 20px;
+      }
+      .evenement .point {
+        right: auto;
+        left: 10px;
+      }
+      .evenement .contenu {
+        flex-direction: column;
+      }
+      .evenement .contenu .personnages {
+        margin-left: 0;
+        margin-top: 10px;
+        width: auto;
+      }
+    }
+    /* BOUTON RETOUR */
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+
+    .images-separees {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 100px; /* Espace horizontal autour du séparateur */
+    }
+
+    .images-separees img {
+      width: 300px; /* ou une taille qui te convient */
+      height: auto;
+    }
+
+    .images-separees .separateur {
+      width: 2px;
+      height: 300px; /* adapte à la taille des images */
+      background-color: #ffcc00; /* ou #fff, ou ce que tu veux */
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px; /* ajuste comme tu veux */
+      margin-bottom: 100px; /* ajuste comme tu veux */
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../image/title.png" alt="Logo Dragon Ball Z" />
+    <h1>Mode Histoire de Son Goku</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../accueil.html">Accueil</a></li>
+      <li><a href="soluce.html">Solutions</a></li>
+      <li><a href="../persos.html">Personnages</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="images-separees">
+    <img src="../image/mode/mode_maximum/mode_novice/goku_icon.png" alt="Goku Icône">
+    <div class="separateur"></div>
+    <img src="../image/mode/mode_maximum/mode_novice/competence.png" alt="Compétences de Goku" style="width: 450px;">
+  </div>
+
+  <div class="map-container">
+    <img src="../image/mode/mode_maximum/mode_novice/map.png" alt="Map de Goku" style="width: 900px;">
+  </div>
+
+  <div class="frise">
+    <!-- Niveau 1 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 1 — <img src="../image/mode/mode_maximum/mode_novice/niveau1.png" alt="Entrainement 1"> - Thème: Les personnages les plus faibles du jeu </h4>
+          <img src="../image/mode/mode_maximum/mode_novice/1.png" alt="Niveau 1">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/ginyu_gero_yamcha_tien.png" alt="Ginyu Gero Yamcha Tien "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 2 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 2 — <img src="../image/mode/mode_maximum/mode_novice/niveau2.png" alt="Entrainement 1"> - Thème: Les personnages importants de chaque arc </h4>
+          <img src="../image/mode/mode_maximum/mode_novice/2.png" alt="Niveau 2">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/vegeta_gero_satan.png" alt="Vegeta Gero Mr Satan "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 3 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 3 — <img src="../image/mode/mode_maximum/mode_novice/niveau3.png" alt="Entrainement 1"> - Thème: Les Forces de Freezer </h4>
+          <img src="../image/mode/mode_maximum/mode_novice/3.png" alt="Niveau 3">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/freezer_ginyu_zarbon_dodoria.png" alt="Freezer Zarbon Dodoria "></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 4 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 4 — <img src="../image/mode/mode_maximum/mode_novice/niveau4.png" alt="Entrainement 1"> - Thème: Les cyborgs </h4>
+          <img src="../image/mode/mode_maximum/mode_novice/4.png" alt="Niveau 4">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gero_c18_c17_c16.png" alt="Gero et les cyborgs "></p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Niveau 5 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 5 — <img src="../image/mode/mode_maximum/mode_novice/niveau5.png" alt="Entrainement 1"> - Thème: Les cyborgs 2e Partie</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/5.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/c18_cell_2e_forme.png" alt="cyborg 2 "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 6 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 6 — <img src="../image/mode/mode_maximum/mode_novice/niveau6.png" alt="Entrainement 1"> - Thème: Les guerriers Z sur Namek</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/6.png" alt="Niveau 6">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/goku_gohan_krilin.png" alt="z team on namek "></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Niveau 7 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 7 — <img src="../image/mode/mode_maximum/mode_novice/niveau7.png" alt="Entrainement 1"> - Thème: Les Guerriers du Futur</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/7.png" alt="Niveau 7">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gohan_ado_trunks.png" alt="Gohan Ado et Trunks"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 8 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 8 — <img src="../image/mode/mode_maximum/mode_novice/niveau8.png" alt="Entrainement 1"> - Thème: Les Guerriers Défenseurs de la Terre</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/8.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/piccolo_krilin_yamcha_tien.png" alt="Les Guerriers Défenseurs de la Terre "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 9 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 9 — <img src="../image/mode/mode_maximum/mode_novice/niveau9.png" alt="Entrainement 1"> - Thème: Les Nameks</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/9.png" alt="Niveau 5">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/piccolo_dende.png" alt="Les Nameks "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 10 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 10 — <img src="../image/mode/mode_maximum/mode_novice/niveau10.png" alt="Entrainement 1"> - Thème: Arc Namek Partie 2</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/10.png" alt="Niveau 10">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/goku_vegeta_krilin.png" alt="Gohan Ado "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 11 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 11 — <img src="../image/mode/mode_maximum/mode_novice/niveau11.png" alt="Entrainement 1"> - Thème: Potentiel eveillé par le Doyen Namek</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/11.png" alt="Niveau 11">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gohan_krilin_dende.png" alt="Potentiel eveillé par le Doyen Namek "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 12 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 12 — <img src="../image/mode/mode_maximum/mode_novice/niveau12.png" alt="Entrainement 1"> - Thème: Famille de Goku</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/12.png" alt="Niveau 12">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/goku_gohan_bardock.png" alt="Famille de Goku"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 13 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 13 — <img src="../image/mode/mode_maximum/mode_novice/niveau13.png" alt="Entrainement 1"> - Thème: Les Soldats de Freezer</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/13.png" alt="Niveau 11">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/vegeta_ginyu_zarbon_dodoria.png" alt="Les Soldats de Freezer"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 14 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 14 — <img src="../image/mode/mode_maximum/mode_novice/niveau14.png" alt="Entrainement 1"> - Thème: Les cyborgs Partie 3</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/14.png" alt="Niveau 14">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gero_c18_cell_2e_forme.png" alt="Les cyborgs Partie 3"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 15 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 15 — <img src="../image/mode/mode_maximum/mode_novice/niveau15.png" alt="Entrainement 1"> - Thème: Entraînement de Gohan</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/15.png" alt="Niveau 15">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/goku_gohan_piccolo.png" alt="Entraînement de Gohan"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 16 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 16 — <img src="../image/mode/mode_maximum/mode_novice/niveau16.png" alt="Entrainement 1"> - Thème: </h4>
+          <p>Après plusieurs victoires lors du championnat, il accède à la finale, son adversaire n'est autre que son propre fils, Gohan qui depuis a bien augmenté en terme de puissance. Après un combat intense, Goku s'avoue vaincu et son Gohan gagne la finale. C'est alors que Kaio contacte Goku pour retourner dans l'Autre Monde, car il y a un adversaire terriblement fort qui sème le grabuge là haut. Goku retourne vers de nouveaux combats.</p>
+          <img src="../image/mode/mode_maximum/mode_novice/16.png" alt="Niveau 16">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gohan_ado.png" alt="Gohan Ado "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 17 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 17 — <img src="../image/mode/mode_maximum/mode_novice/niveau17.png" alt="Entrainement 1"> - Thème: </h4>
+          <img src="../image/mode/mode_maximum/mode_novice/17.png" alt="Niveau 17">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gohan_ado.png" alt="Gohan Ado "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 18 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 18 — <img src="../image/mode/mode_maximum/mode_novice/niveau18.png" alt="Entrainement 1"> - Thème: </h4>
+          <img src="../image/mode/mode_maximum/mode_novice/18.png" alt="Niveau 18">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gohan_ado.png" alt="Gohan Ado "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 19 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 19 — <img src="../image/mode/mode_maximum/mode_novice/niveau19.png" alt="Entrainement 1"> - Thème: </h4>
+          <img src="../image/mode/mode_maximum/mode_novice/19.png" alt="Niveau 19">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/gohan_ado.png" alt="Gohan Ado "></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Niveau 20 -->
+    <div class="evenement">
+      <div class="point"></div>
+      <div class="contenu">
+        <div class="description">
+          <h4>Niveau 20 — <img src="../image/mode/mode_maximum/mode_novice/niveau20.png" alt="Entrainement 1"> - Thème: Les Saiyans de Sang Pur</h4>
+          <img src="../image/mode/mode_maximum/mode_novice/20.png" alt="Niveau 20">
+        </div>
+        <div class="personnages">
+          <h5>Personnages</h5>
+          <p><img src="../image/mode/mode_maximum/vs.png" alt="vs"><img src="../image/mode/mode_maximum/mode_novice/goku_vegeta_bardock.png" alt="Les Saiyans de Sang Pur "></p>
+        </div>
+      </div>
+    </div>
+
+   
+  <!-- BOUTON RETOUR -->
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+</body>
+</html>
