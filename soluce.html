@@ -79,27 +79,36 @@
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
-      display: block;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
-    }
-
-    .character:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      height: 100%; /* Pour que tous les blocs aient une hauteur égale */
     }
 
     .character img {
       width: 100%;
+      height: 350px; /* Fixe la hauteur des images */
+      object-fit: cover; /* Coupe ou ajuste l’image pour qu’elle remplisse sans distorsion */
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
       display: block;
     }
 
     .character span {
-      display: block;
+      flex-grow: 1; /* pour remplir l'espace vide si le texte est court */
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 20px;
       font-size: 22px;
       font-weight: bold;
+      text-align: center;
+    }
+
+
+    .character:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
 
@@ -153,13 +162,13 @@
 
 
     <a href="soluce/character.html" class="character">
-      <img src="image/soluce/character.png" alt="Goku">
+      <img src="image/soluce/character.png" alt="Goku" ">
       <span>Comment débloquer les Personnages ?</span>
     </a>
 
 
-    <a href="soluce/solution_z.html" class="character">
-      <img src="image/soluce/solution_z.png" alt="Goku">
+    <a href="soluce/solution_z.html" class="character" >
+      <img src="image/soluce/solution_z.png" alt="Goku" >
       <span>Réussir le Mode Combat Z</span>
     </a>
 
@@ -170,17 +179,19 @@
     </a>
 
 
-    <a href="soluce/solution_max.html" class="character">
+    <a href="soluce/solution_max.html" class="character" >
       <img src="image/soluce/solution_max.png" alt="Goku">
       <span>Réussir le Mode Maximum</span>
     </a>
 
 
-    <a href="soluce/solutions_mania.html" class="character">
-      <img src="image/soluce/solutions_mania.png" alt="Goku">
+    <a href="soluce/solution_mania.html" class="character">
+      <img src="image/soluce/solution_mania.png" alt="Goku" style="width: 100%; height: 350px; object-fit: cover; display: block;">
       <span>Vaincre les 3 Super Boss du Mode Maximum : Rang Mania</span>
     </a>
- 
+
+
+
 
   </div>
 
