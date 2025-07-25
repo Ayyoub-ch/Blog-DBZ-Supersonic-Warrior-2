@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solution: Apprendre à jouer  </title>
+  <link rel="icon" href="../image/title.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #222;
+      color: #f2f2f2;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #222;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
+
+    header img {
+      width: 200px;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 20px 0 0 0;
+      font-size: 32px;
+    }
+
+    nav {
+      background: #333;
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 18px;
+    }
+
+    nav a:hover {
+      color: #ffcc00;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      display: flex;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    aside {
+      flex: 0 0 250px;
+      background: #333;
+      padding: 20px;
+      border-radius: 8px;
+      height: fit-content;
+    }
+
+    aside h3 {
+      margin-top: 0;
+      font-size: 24px;
+      text-align: center;
+      color: #ffcc00;
+    }
+
+    aside a {
+      display: block;
+      margin: 10px 0;
+      color: #f2f2f2;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    aside a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    main h2 {
+      font-size: 28px;
+      border-bottom: 2px solid #555;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+
+    main p {
+      margin: 20px 0;
+    }
+
+    main img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    main h3 {
+    font-size: 22px;
+    margin-top: 30px;
+    color: #ffcc00;
+    border-bottom: 1px solid #555;
+    padding-bottom: 4px;
+    }
+
+    .bouton-retour {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    .bouton-retour img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+
+    .bouton-retour img:hover {
+      transform: scale(1.05);
+    }
+
+    .images-cote-a-cote {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 20px 0;
+    }
+
+    .images-cote-a-cote figure {
+      margin: 0;
+      text-align: center;
+    }
+
+    .images-cote-a-cote img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .images-cote-a-cote figcaption {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #ccc; /* couleur claire pour rester lisible sur fond sombre */
+    }
+
+    .ds {
+      width: 20px;   /* taille fixe */
+      height: auto;
+      display: inline; /* pas block, pour rester à la ligne */
+      border-radius: 0; /* si tu ne veux pas d'arrondi */
+      margin: 0; /* pas d'espacement superflu */
+    }
+
+    .ou-entre {
+        font-size: 15px;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        margin: 0 10px;
+        text-align: center;
+        transform: translateY(-45px); /* Monte de 50px */
+    }
+
+
+    /* Ajout responsive */
+  @media (max-width: 1024px) {
+    header h1 {
+      font-size: 26px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      font-size: 16px;
+    }
+
+    .container {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    aside {
+      flex: 1;
+      width: 100%;
+    }
+
+    .images-cote-a-cote {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    header img {
+      width: 150px;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    nav {
+      padding: 10px 0;
+    }
+
+    nav a {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .bouton-retour img {
+      width: 80px;
+    }
+  }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <img src="../image/title.png" alt="Logo DBZ">
+    <h1>Solution pour apprendre à bien jouer</h1>
+  </header>
+
+  <nav>
+    <a href="../accueil.html">Accueil</a>
+    <a href="../soluce.html">Solutions</a>
+    <a href="../persos.html">Personnages</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+
+  <div class="container">
+    <aside>
+      <h3>Sommaire</h3>
+      <a href="#intro">Introduction</a>
+      <a href="#etape1">Etape n°1: Apprendre les commandes et les fonctionnalités des combats</a>
+      <div style="margin-left: 20px;">
+        <a href="#choix1">• Choix n°1: Faire l'Entrainement Solo</a>
+        <a href="#choix2">• Choix n°2: Faire le Tutoriel</a>
+      </div>
+      <a href="#etape2">Etape n°2: Débloquer les personnages</a>
+      <a href="#etape3">Etape n°3: Apprendre à choisir son équipe</a>
+      <a href="#etape4">Etape n°4: Affronter les modes de jeux</a>
+      <a href="#etape5">Etape n°5: Se perfectionner</a>
+      <a href="#infos">Pour plus d'infos</a>
+    </aside>
+
+    <main>
+      <h2 id="intro">Introduction</h2>
+      <p>Quand on commence un jeu de combat c'est toujours un peu compliqué de savoir par où commencer, on a deux choix qui s'offre à nous:</p>
+      <p>Soit jouer tranquillement en suivant le tutoriel puis le reste dans l'ordre ou soit on part directement se battre contre tout ce qui bouge en mode combat</p>
+
+      <br><p>Dans Dragon Ball Z Supersonic Warriors 2, on a le même principe:</p>
+      <p>Soit jouer tranquillement en suivant le tutoriel, puis faire le mode histoire et apprendre à jouer librement ou soit on part directement se battre contre le Mode Combat Z ou pour les plus fous le Mode Maximum</p>
+
+      <p>Mais ici on s'adressera à ceux qui débutent et qui souhaitent faire les choses bien. Cela se déroulera en 5 étapes</p>
+
+      <h2 id="etape1">Etape n°1: Apprendre les commandes et les fonctionnalités des combats</h2>
+
+      <p>Pour cela il faut aller sur le Mode Exercice du jeu et regarder ce qu'on peut y faire:</p>
+
+      <div class="images-cote-a-cote">
+        <figure>
+          <img src="../image/mode_exo_icon.png" alt="Mode de Selection" style="width: 650px;">
+          <figcaption><strong>Mode Exercice</strong></figcaption>
+        </figure>
+        <figure>
+          <img src="../image/mode_exo_desc.png" alt="Mode de Selection" style="width: 500px;">
+          <figcaption><strong>Description du Mode Exercice</strong></figcaption>
+        </figure>
+      </div>
+
+      <br><p>A partir de là on se retrouve avec un choix qui est le suivant:</p>
+      <div class="images-cote-a-cote">
+        <figure>
+          <img src="../image/mode_exo1.png" alt="Mode de Selection" style="width: 650px;">
+          <figcaption><strong>Seul</strong></figcaption>
+        </figure>
+        <figure>
+          <img src="../image/mode_exo2.png" alt="Mode de Selection" style="width: 650px;">
+          <figcaption><strong>Accompagné</strong></figcaption>
+        </figure>
+      </div><div class="ou-entre">ou</div> <!-- ICI ton "ou" s'affiche bien au milieu -->
+      
+
+      <h3 id="choix1">Choix n°1: Faire l'Entrainement Solo</h3>
+      <p>Pour s'entraîner, rien de mieux que de pratiquer, on peut prendre un personnage dit classique comme : Goku, Vegeta, Piccolo, Krilin ou Gotenks 
+        et s'exercer dessus, d'ailleurs je vous conseille personnellement de vous entraîner au début avec ces 4 personnages là car ils sont assez simples à appréhender au début, notamment Goku, Krilin et Piccolo.
+      </p>
+      <p>Autrement, vous apprendrez sur le tas, les coups forts et faibles, les attaques spéciales et tout ce qui compose le personnage.</p> 
+      <p>Egalement pour ne pas être trop brouillon sur l'essai du personnage je vous invite à regarder ses données ici <a href="../persos.html"><img class="ds" src="../image/ici3.png" alt="ici" title="Les personnages du jeu" style="width: 50px;"></a></p>
+
+      <p>Après ça normalement vous pourrez déjà commencer à vous frotter aux autres modes de jeux.</p>
+
+      <p>Pour en savoir plus sur comment les personnages peuvent se jouer vous pouvez aller ici </p>
+
+
+      <h3 id="choix2">Choix n°2: Faire le Tutoriel</h3>
+      <p>En soit pour apprendre tranquillement les touches et pouvoir les mettre en pratique, il n'y a rien de plus simple que le tutoriel du jeu, géré par Piccolo.
+        On se met dans le contexte du combat contre Boo, en incarnant Goten et Trunks, (Gotenks en combat) qui doivent s'entraîner et apprendre les bases pour être prêts à se battre.
+        Tout au long on apprendra les bases des bases, comme les déplacements, puis les attaques en passant par tout ce qui tourne autour du combat, le tout supervisé par Piccolo qui nous guidera à chaque fois.
+      </p>
+      <p>Tout au long de l'entraînement, on aura certes Piccolo en guise de maître mais également les membres de la Z Team qui seront là pour nous épauler lors de l'apprentissage et ce de manière ludique comme on peut s'y attendre d'eux dans l'animé. </p>
+
+      <p>On en dira pas plus, vaut mieux aller voir comment se passe le tutoriel comme ça ce sera bien plus évident, passez ici <a href="training.html"><img class="ds" src="../image/ici.png" alt="ici" title="Mode Entrainement" style="width: 50px;"></a></p>
+
+
+      <h2 id="etape2">Etape n°2: Débloquer les personnages</h2>
+
+
+      <h2 id="etape3">Etape n°3: Apprendre à choisir son équipe</h2>
+
+
+      <h2 id="etape4">Etape n°4: Affronter les modes de jeux</h2>
+
+
+      <h2 id="etape5">Etape n°5: Se perfectionner</h2>
+
+    
+
+        <div class="images-cote-a-cote">
+            <figure>
+            <img src="../image/personnage.png" alt="Personnages jouables" style="width: 500px;">
+            <figcaption><strong>Ecran de sélection des personnages jouables</strong></figcaption>
+            </figure>
+            <figure>
+            <img src="../image/support.png" alt="Personnages supports" style="width: 600px;">
+            <figcaption><strong>Ecran de sélection des personnages supports</strong></figcaption>
+            </figure>
+        </div>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+  </div>
+
+  <div class="bouton-retour" onclick="history.back()">
+    <img src="../image/retour.png" alt="Bouton retour">
+  </div>
+
+</body>
+</html>
