@@ -9,10 +9,21 @@ gohan ss2/broly, bardock
 
 12 DP
 goku ss, vegeta ss, bardock
-metal cooler, mecha freezer, zarbon et dodoria
 gohan ss2, cell
 broly, boo
 gohan ss2, broly
 cell, broly
 goku ss/vegeta ss, gotenks ss3
 metal cooler, broly
+
+17 DP
+goku ss, vegeta ss, trunks ss
+goku ss, vegeta ss, broly
+freezer, cell, boo(mauvais)
+cell, cooler, broly
+cell/broly, boo(mauvais)
+broly,gotenks ss3/boo(mauvais)
+gotenks ss3, boo(mauvais)
+
+
+
