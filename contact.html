@@ -98,6 +98,68 @@
       color: #fff;
     }
 
+
+    /* Conteneur qui centre le formulaire */
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 240px); /* prend tout l’espace dispo sous le header+menu */
+    }
+    
+    /* Bloc du formulaire */
+    form {
+      background-color: #2b2b2b;   /* fond gris foncé */
+      padding: 30px;
+      border-radius: 12px;         /* coins arrondis */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* petite ombre */
+      width: 100%;
+      max-width: 400px;            /* largeur max */
+      text-align: left;
+    }
+    
+    /* Labels */
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    
+    /* Champs texte et email */
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    
+    /* Zone de texte (motif/message) */
+    form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    /* Bouton envoyer */
+    form button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    form button:hover {
+      background-color: #e6b800;
+    }
+
+
     /* BOUTON RETOUR */
     .bouton-retour {
       position: fixed;
@@ -174,4 +236,15 @@
     </ul>
   </nav>
 
-  <form action=""></form>
+  <div class="form-container">
+    <form action="mailto:dbzsupersonicwarriors2@gmail.com" method="post" enctype="text/plain">
+      <label for="email">Votre email :</label>
+      <input type="email" id="email" name="email" placeholder="exemple@mail.com" required>
+
+      <label for="motif">Motif :</label>
+      <textarea id="motif" name="motif" placeholder="Écrivez votre message ici..." required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+</body>
